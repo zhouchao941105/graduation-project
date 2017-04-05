@@ -1,0 +1,48 @@
+<!-- 顶部导航与logo begin {-->
+<div class="navbar-fixed-top navbar">
+    <div class="container">
+        <div class="navbar-header">
+            <!--<img ng-src="{{::logo }}">-->
+        </div>
+        <div class="navbar-nav navbar-right">
+            <ul class="navbar-nav-left">
+                <li class="navbar-nav-item" ng-show="hasEas">
+                    <a ui-sref="easrole" ui-sref-active="active" ui-sref-opts="{reload: true}">EAS角色</a>
+                </li>
+                <li class="navbar-nav-item" ng-show="hasCrm">
+                    <a ui-sref="crmrole" ui-sref-active="active" ui-sref-opts="{reload: true}">CRM角色</a>
+                </li>
+                <li class="navbar-nav-item" ng-show="hasCourse">
+                    <a ui-sref="courserole" ui-sref-active="active" ui-sref-opts="{reload: true}">1Course角色</a>
+                </li>
+                <li class="navbar-nav-item" ng-show="hasCourse">
+                    <a ui-sref="stuaccount.list" ui-sref-active="active" ui-sref-opts="{reload: true}">学员账号管理</a>
+                </li>
+                <li class="navbar-nav-item" ng-show="hasCourse||hasCrm">
+                    <a ui-sref="account.list" ui-sref-active="active" ui-sref-opts="{reload: true}">员工账号管理</a>
+                </li>
+                <li class="navbar-nav-item" ng-show="hasEas">
+                    <a ui-sref="organization" ui-sref-active="active" ui-sref-opts="{reload: true}">组织结构</a>
+                </li>
+                <li class="navbar-nav-item" ng-show="hasEas">
+                    <a ui-sref="easparameter" ui-sref-active="active" ui-sref-opts="{reload: true}">EAS系统参数</a>
+                </li>
+                <li class="navbar-nav-item" ng-show="hasCrm">
+                    <a ui-sref="crmparameter" ui-sref-active="active" ui-sref-opts="{reload: true}">CRM系统参数</a>
+                </li>
+                <li class="navbar-current"></li>
+            </ul>
+            <div class="navbar-nav-right">
+                <div class="navbar-account">
+                    <span class="navbar-account-head"><img ng-src="{{headImgUrl}}" class="face-radius"></span>
+                    <ul class="navbar-dropdown-menu">
+                        <li class="navbar-dropitem"><a href="javascript:void(0)" style="cursor: default;background-color: rgba(0,0,0,.1);" title='{{userName}}'><span ng-bind="userName"></span></a></li>
+                        <li class="navbar-dropitem"><a href="javascript:void(0)" ng-click='openDialog()'>个人设置</a></li>
+                        <li class="navbar-dropitem"><a href="javascript:;" ng-click='logout()'>注销</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<set-dialog is-show="isShow" change-img-action='changeImgAction(url)'></set-dialog>

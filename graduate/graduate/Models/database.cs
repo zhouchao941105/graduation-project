@@ -22,6 +22,7 @@
 
         public virtual DbSet<teacher> teacher { get; set; }
         public virtual DbSet<banji> banji { get; set; }
+
     }
 
     //public class MyEntity

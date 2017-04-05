@@ -1,6 +1,22 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    Layout = null;
 }
-
-<h2>Index</h2>
-
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @*<link rel="stylesheet" type="text/css" href="/content/css/.css" />*@
+    <link rel="stylesheet" type="text/css" href="/content/css/module.css" />
+    <link rel="stylesheet" type="text/css" href="/content/css/style.css" />
+    
+</head>
+<body class="body-template" ng-cloak ng-controller="CommonController">
+    <div class="body-layout">
+        <!--导航栏-->
+        <gint-nav></gint-nav>
+        <div ui-view></div>
+    </div>
+    <script src="/Scripts/app/libs/requirejs/require.js" data-main="/Scripts/app/main"></script>
+</body>
+</html>

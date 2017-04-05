@@ -1,0 +1,37 @@
+<div class="modal">
+    <div class="popups-position">
+        <div class="popups-title">
+            <span class="pop-name">学员报名</span>
+        </div>
+        <div class="popups-body">
+            <div class="pop-nav">
+                <span class="item-nav current">报名班级</span>
+            </div>
+            <div class="select-detail scroll-height copyScroll">
+                <table class="popup-detail-table">
+                    <tbody>
+                        <tr>
+                            <td width="90">
+                                <span class="t_overflow" style="width:80px;display: inline-block;" gint-title="{{period.course}}">{{period.course}}</span>
+                            </td>
+                            <td width="130">
+                                <span>总课时：</span>
+                                <span>{{period.total}}</span>
+                            </td>
+                            <td width="250">
+                                <span class="drop-control"><i class="text2">报名课时</i><input type="text" class="normal-input short" maxlength="9" ng-model="period.lesson" ng-change="period.lesson=pressNum(period.lesson); "><i class="text1">课时</i></span>
+                            </td>
+                            <td>
+                                <button type="button" class="normal-btn cancel" ng-click="cancel()">重选</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="popups-btnBox clearFix">
+            <button type="button" class="normal-btn cancel fl" ng-click="cancel()">取消</button>
+            <button type="button" class="normal-btn next fr" ng-click="confirm()">确定</button>
+        </div>
+    </div>
+</div>

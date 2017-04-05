@@ -1,0 +1,33 @@
+ {
+     "files": [
+        "jquery",
+        "angular",
+        "angularResource",
+        "angularMock",
+        "uiRouter",
+        "highcharts-ng",
+        "highcharts",
+        "highcharts-more",
+	    "ckeditor",
+	    "ngCkeditor",
+        "underscore",
+        "ngDialog",
+        "sortable",
+        "cropper",
+        "fullCalendar",
+        "moment",
+        "newMoment",
+        "fullCalendarLang",
+        "fullCalendarCustom",
+        "jqueryUI",
+        "datePicker",
+        "nicescroll",
+        "autosize",
+        "angularElastic",
+        "zeroClipboard",
+        "angularTranslate",
+        "angularTranslateLoaderPartial",
+        "angularTranslateLoaderStaticFiles"
+     ]
+ }
+

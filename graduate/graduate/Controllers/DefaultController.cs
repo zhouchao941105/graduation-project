@@ -19,6 +19,7 @@ namespace graduate.Controllers
         {
             teacher t = new teacher();
             var q = db.teacher.Select(p => p.teacherId).ToList();
+            var b = db.banji.Select(k => k.classId).ToList();
             return View();
         }
     }

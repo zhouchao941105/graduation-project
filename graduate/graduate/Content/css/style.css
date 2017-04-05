@@ -1,0 +1,172 @@
+﻿@charset "UTF-8";
+@import "module.css";
+
+/**
+ * Created by WenJun.Wang on 2017/3/6
+*/
+/* basic css begin {*/
+body, div, ul, ol, li, dl, dt, dd, input, button, a,p, img, h1, h2, h3, h4, h5, h6, form,pre{margin: 0;}
+ul, ol, li, dl, dt, dd, input, button{padding: 0;}
+*{-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}
+body{font-family: "Microsoft Yahei","Helvetica Neue","Heiti SC",Helvetica,Arial,sans-serif; font-size: 12px; color: #404040;}
+ul,li{list-style: none;}
+a{text-decoration: none;}
+img{border: 0;}
+button{background-color: transparent;cursor: pointer;}
+textarea{resize: none;}
+input,button,textarea{border: 0;outline: none; font-size:12px; font-family: "Microsoft Yahei","Helvetica Neue",Helvetica,Arial,sans-serif;}
+
+.clearFix:before, .clearFix:after{content: " "; display: table;}
+.clearFix:after{clear: both;}
+.fl{float: left;}
+.fr{float: right;}
+.face-radius{border-radius:50%;}
+.search-text,.list-pageBox a,.small-btn{border-radius:3px;}
+
+/*模拟 滚动条 begin {*/
+.copyScroll{overflow-y:auto;}
+.copyScroll::-webkit-scrollbar {width:12px; height:12px;}
+.copyScroll::-webkit-scrollbar-thumb{border-radius:3px; background-color:rgba(0,0,0,0.3);}
+.copyScroll::-webkit-scrollbar-thumb:hover,.copyScroll::-webkit-scrollbar-thumb:active{background-color:rgba(0,0,0,0.7);}
+.copyScroll::-webkit-scrollbar-button{width: 0;height: 0;display: none;}
+.copyScroll::-webkit-scrollbar-corner{background-color:transparent;}
+/*}模拟 滚动条 end */
+/*模拟 复选框 {*/
+.checkboxStyle{width:16px; height:16px; display:inline-block; vertical-align: middle; background:url(../images/icon3.png) no-repeat;}
+.checkboxStyle{background-position:0 0; cursor:pointer;}
+.checkboxDis,.checkboxDis:hover{background-position:0 -16px; cursor: default;}
+.checkboxChecked,.checkboxChecked:hover{background-position:0 -32px;}
+/*} 模拟 复选框 */
+/* 气泡提示框 begin {*/
+.bubble-tips{position: fixed; z-index: 10; width: 230px; font-size: 12px; line-height: 1.8; background: #fff; padding: 10px; -moz-box-shadow: 0 0 5px rgba(72,84,101,.5);-webkit-box-shadow: 0 0 5px rgba(72,84,101,.5);box-shadow: 0 0 5px rgba(72,84,101,.5); border-radius: 5px; white-space:normal; word-wrap:break-word;}
+.bubble-tips:before{position: absolute; left:10px; bottom:-14px; content: ""; width:15px; height:16px; background: url("../images/icon18.png") no-repeat;}
+.bubble-tips.turn:before{left:10px; top:-14px; background: url("../images/icon18_2.png") no-repeat;}
+/*} 气泡提示框 */
+
+/*导航／筛选展开动画 {*/
+.nav-dropDown-menu,.filter-box{visibility: hidden;opacity: 0; height:0; margin-top: -5px;-webkit-transition: visibility .3s, opacity .3s, margin-top .3s;-o-transition: visibility .3s, opacity .3s, margin-top .3s;-moz-transition: visibility .3s, opacity .3s, margin-top .3s;transition: visibility .3s, opacity .3s, margin-top .3s;}
+.nav-item:hover .nav-dropDown-menu,.nav-account:hover>.nav-dropDown-menu,.filter-box.filter-show{visibility: visible;opacity: 1;margin-top: 0; height: auto;}
+/*} 导航／筛选展开动画 */
+/*} basic css end */
+
+.body-template{min-width: 1200px;}
+.body-layout{padding-top: 80px;}
+.header-fixed,.crumbsBar-fixed{position: fixed; right: 0; left: 0; padding-left: 20px; padding-right: 20px;}
+.header-fixed{top: 0; height: 50px; background-color: #4a546c; z-index: 10;}
+.header-left{float: left; width: 200px;}
+.header-brand{display: table-cell; vertical-align: middle; height: 50px;}/* 使logo图片垂直居中显示 */
+.header-brand img{max-width: 200px;}
+.header-right{float: right; position: relative;}
+/*导航样式 begin {*/
+.nav-left,.nav-right,.nav-item{float: left; position: relative;}
+.header-right a,.nav-account-name{color: #fff;}
+.nav-item a,.nav-account-name{display: block; }
+.nav-item>a{padding-left:20px; padding-right: 20px; margin-right:1px; line-height: 50px;}
+.nav-item:hover a,.nav-current a{background-color: #3a4155;}
+.nav-dropItem{background-color: #3a4155;}
+.nav-dropItem a,.nav-account-name{height: 36px; line-height: 36px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis}
+.nav-dropItem a{padding: 0 15px; max-width: 126px;}
+.nav-dropItem a:hover,.nav-item:hover .dropItem-current a{ background-color: #4a546c;}
+.nav-account{width:60px; height:50px; display: table-cell; background-color: #3a4155; vertical-align: middle; text-align: center; cursor: pointer;}
+.nav-account-head img{width:40px; height:40px;}
+.nav-dropDown-menu{position: absolute; top: 50px; left: 1px;}
+.nav-account .nav-dropDown-menu{left:inherit; right:0; text-align: left;}
+.nav-account-name{ cursor: default; padding:0 15px; max-width: 126px; background-color: #323848;}
+/*.nav-account:hover .nav-account-name{background-color: rgba(0,0,0,.3);}*/
+.crumbsBar-fixed{top: 50px;  z-index: 9; height: 30px; background-color: #e6e8ee; line-height: 30px; color:#6b717f;}
+.crumbsBar-fixed a{color:#6b717f;}
+.crumbsBar-fixed a:before{content: " > ";}
+.crumbsBar-fixed a:first-child:before{content: "";}
+.navbar-current {position: absolute; width: 70px; height: 50px; margin-left: 1px; left: 0; bottom: 0;    background: #3a4155; z-index: -1;}
+/*} 导航样式 end */
+
+/* 搜索工具栏 begin {*/
+.toolBar{}
+.list-btnBox{padding: 15px 0 15px 20px; font-size: 0;}
+.list-btnBox .normal-btn{margin-right: 20px;}
+.list-searchBox{padding: 15px 20px 15px 0; font-size: 0;}
+.list-searchBox .normal-btn{margin-left: 20px;}
+.search-box{position: relative; display: inline-block; vertical-align: top;}
+.search-text{height:30px; border:#b4c0ce 1px solid; padding-left:10px; padding-right: 60px;}
+.search-text.long{width:280px;}/* 列表页使用 */
+.search-text.short{width:220px;}/* 弹框页使用 */
+.search-submit{position:absolute; right:0; top:0; width:50px; height:30px; border-radius: 0 3px 3px 0; background: #57678d url("../images/icon2.png") no-repeat center center;}
+.search-submit:hover{background-color: #667bad;}
+.filter-box{text-align: right; font-size:0; padding-right: 20px; padding-top: 5px;}
+.filter-item{display: inline-block;}
+.filter-name{font-size: 12px; padding-left: 20px; padding-right: 10px;}
+.filter-btnBox{padding: 20px 0; font-size: 0;}
+.filter-btnBox button{margin-left: 20px;}
+.list-tabs{ font-size: 0; border-bottom: #e8eaf1 1px solid;}
+.list-tab-item{display: inline-block; min-width:110px; padding: 0 10px; height:60px; line-height: 60px; text-align: center; border-right:#e8eaf1 1px solid; color:#a4a4a4; font-size: 14px; cursor: pointer;}
+.list-tab-item:hover{background-color: #f3f4f9; color:#57678d;}
+.list-tab-item.current{background-color: #57678d; color:#fff;}
+.form-box{border:#e8eaf1 solid; border-width:1px 0; padding-top: 15px; font-size:0;}
+.form-item{display: inline-block; padding-left: 20px; padding-bottom: 15px;}
+.form-name{font-size: 12px; padding-right: 10px; display: inline-block;}
+strong.form-name{padding-left: 10px;}
+.form-name,.form-box .drop-down-box,.form-box .textArea{vertical-align: middle;}
+
+/*} 搜索工具栏 end */
+
+/* 列表样式 ----用于学生系统——反馈 {*/
+.ListDateTable{text-align:left; font-size:12px;}
+.ListDateTable table{width:100%; border-left:#e8eaf1 1px solid; border-right:#e8eaf1 1px solid;}
+.ListDateNoResult{ margin-top:140px; padding-top:124px; padding-bottom: 100px; text-align:center;background:url(../images/list_bg1.png) no-repeat center top; color:#ccc;}
+.ListDateTable th,.ListDate td{text-align:left; height:40px; padding-left:10px;}
+.ListDateTable th{background-color: #e2e5ec; border:#e8eaf1 solid; border-width:1px 0; position: relative;}
+.ListDate:hover td{background:#f2f4f9; cursor:pointer;}
+.ListDate td{color:#616161; border-bottom:#e8eaf1 1px solid;}
+.ListDateTable2 .ListDate td{height:50px; color:#616161;}
+.ListDate td.blankbox,.ListDateTable th.blankbox{width: 30px;text-align: center;}
+.ListDateTipsS1 td{color:#d91d00;}/* 用在tr上整条数据标红 */
+.t_overflow{overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}/* 超过宽度出现省略号... */
+.ListDateTable .t_right{text-align: right; padding-right:20px;}
+.mark-style,.mark-style-min{display:inline-block; text-align: center; color:#fff;}
+.mark-style{ min-width:40px; padding: 0 5px; height:20px; line-height: 20px; border-radius: 10px;}
+.mark-style.type1{background-color: #56bdc6;}
+.mark-style.type2{background-color: #ee817e;}
+.mark-style.type3{background-color: #c9c9c9;}
+.ListDate td .mark-style{vertical-align: middle;}
+.mark-style-min{ min-width:28px; padding: 0 5px; height:13px; line-height: 1.2; border-radius: 6px; background-color: #71ceb1; -webkit-transform : scale(0.84,0.84); transform : scale(0.84,0.84); font-size:12px; position: relative;
+    top:-4px;}
+.list-sort{cursor: pointer; display: inline-block;}
+.icon-sort-normal{position: absolute; margin-left:6px; width:15px; height:14px; background: url("../images/icon5.png") no-repeat;}
+.icon-sort-normal{background-position: 0 0;}
+.icon-sort-up{background-position: 0 -33px;}
+.icon-sort-down{background-position: 0 -66px;}
+.listDate-link{color:#57678d; font-size: 12px; cursor: pointer;}
+.listDate-link:hover{color:#667bad; text-decoration: underline;}
+.listDate-link + .listDate-link{margin-left: 20px;}
+.listDate-link.disabled{color:#a4a4a4;cursor: default;text-decoration: none;}
+.mark-style + .small-btn{margin-left: 5px;}
+.small-btn.disabled{background: #c9c9c9; color: #fff; border-color: #c9c9c9; cursor: default;}
+.line-text{display: block; min-height: 17px;}
+.line-text + .line-text{margin-top: 5px;}
+.line-text:first-child{margin-top: 5px;}
+.line-text:last-child{margin-bottom: 5px;}
+
+/*} 列表样式 */
+
+/* 页码样式 {*/
+.list-pageBox{text-align:center; line-height: 30px; font-size: 0; padding-top: 15px; padding-bottom: 15px;}
+.list-pageBox a,.list-pageBox span{display: inline-block; vertical-align: top;}
+.list-pageBox a{min-width:36px; height:32px; margin: 0 2px; padding: 0 5px; border:#b4c0ce 1px solid; color:#57678d; font-size: 12px;}
+.list-pageBox a:hover{background-color: #f3f4f9;}
+.list-pageBox a.current,.list-pageBox a.current:hover{cursor: default; color:#fff;border-color: #57678d; background-color: #57678d; }
+.list-pageBox a.page-disabled,.list-pageBox a.page-disabled:hover{cursor: default; color: #a4a4a4; background-color: transparent; border-color:#dfdfdf;}
+.list-pageBox .page-num-more{ min-widtH:24px; width:24px; text-align: center; color: #999; font-size: 20px; line-height: 20px; border:none;}
+/*} 页码样式 */
+
+/* 首页 {*/
+.guide-outer{padding: 30px 0; text-align: center;}
+.guide-box{width:1000px; background-color: #f2f4f9; margin: 0 auto; padding-top: 60px; padding-bottom: 45px; border-radius: 5px;}
+.guide-box h1{color:#57678d; font-size:30px; height: 75px;}
+.guide-box h1:before{content: ""; display: inline-block; width:28px; height:36px; margin-right: 10px; background: url("../images/icon16.png") no-repeat; vertical-align: middle;}
+.guide-content{width:430px; margin-left: auto; margin-right: auto;}
+.guide-content dd{padding-bottom: 15px;}
+.guide-content dd > span{display: inline-block; width:300px; vertical-align: middle; text-align: left; font-size: 14px; color:#616161;}
+.guide-content dd > span > em{width:24px; height:24px; display: inline-block; margin-right: 5px; background-color: #57678d; color:#fff; border-radius: 50%; text-align: center; line-height: 24px;}
+.guide-content  .normal-btn{width:124px;}
+
+/*} 首页 */
