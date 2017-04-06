@@ -2,41 +2,25 @@
 
 define([
         "angular",
-        "angularMock",
-        "angularTranslate",
-        "angularTranslateLoaderPartial",
-        "angularTranslateLoaderStaticFiles",
         "uiRouter",
         "ngDialog",
-        "nicescroll",
-        "angularFileUpload",
         "components/nav/app",
         "modules/common-app/controller",
         "modules/index-app/app",
-        "modules/schedule-app/app",
         "modules/class-management-app/app",
-        "modules/course-management-app/app",
         "modules/student-management-app/app",
-        "modules/teacher-management-app/app",
-        "modules/schedule-classroom-app/app",
-        "modules/schedule-time-app/app"
+        "modules/teacher-list-app/app",
 ],
     function (angular) {
         return angular.module("CommonApp", [
                 "ui.router",
                 "ngDialog",
-                "pascalprecht.translate",
-                "Components.uploadEas",
                 "components.nav",
                 "CommonApp.controller",
                 "IndexApp",
-                "ScheduleApp",
                 "ClassManagementApp",
-                "CourseManagementApp",
                 "StudentManagementApp",
-                "TeacherManagementApp",
-                "ScheduleClassroomApp",
-                "ScheduleTimeApp"
+                "TeacherListApp"
             ])
             .config([
                 '$urlRouterProvider', function($urlRouterProvider) {
@@ -51,12 +35,7 @@ define([
                     $rootScope.$stateParams = $stateParams;
                 }
             ])
-            .run(function ($rootScope, $translate) {
-                $rootScope.$on('$translatePartialLoaderStructureChanged', function () {
-                    $translate.refresh();
-                }
-                  );
-            })
+            
             .value("version", "0.1")
             .constant("projectName", "1CourseEas")
             .config([
@@ -168,19 +147,6 @@ define([
                     });
                 }
             ])
-            .config(['$translateProvider', '$translatePartialLoaderProvider', 'isDev', function ($translateProvider, $translatePartialLoaderProvider, isDev) {
-                if (isDev == "true") {
-                    $translateProvider.useLoader('$translatePartialLoader', {
-                        urlTemplate: '/Scripts/app/language/{lang}/{part}.json'
-                    });
-                    $translateProvider.preferredLanguage("cn");
-                } else {
-                    $translateProvider.preferredLanguage("cn");
-                    $translateProvider.useStaticFilesLoader({
-                        prefix: requirejs.s.contexts._.config.baseUrl + 'language/',
-                        suffix: '.json?' + requirejs.s.contexts._.config.urlArgs
-                    });
-                }
-            }]);
+            
     }
 );

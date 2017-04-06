@@ -6,7 +6,6 @@ requirejs.config({
         'jquery': "libs/jquery/dist/jquery.min",
         'sortable': "libs/jquery/dist/jquery-ui-sortable-1.11.2.min",
         'angular': "libs/angular/angular",
-        "angularResource": "libs/angular-resource/angular-resource.min",
         "uiRouter": "libs/angular-ui-router/release/angular-ui-router.min",
         "underscore": "libs/underscore/underscore",
         'ngDialog': "libs/ngDialog/js/ngDialog",
@@ -24,17 +23,8 @@ requirejs.config({
             'deps': ["jquery"],
             'exports': "angular"
         },
-        angularMock: {
-            'deps': ['angular'],
-            'exports': 'angularMock'
-        },
-        angularResource: {
-            'deps': ["angular"],
-            'exports': "angularResource"
-        },
         uiRouter: ["angular"],
         highcharts: ["jquery"],
-        cropper: ["jquery"],
         "highcharts-ng": ["angular", "highcharts"],
         "highcharts-more": ["highcharts"],
         ckeditor: ["jquery"],
@@ -65,31 +55,22 @@ require([
     "app"
 ], function () {
     angular.element(document).ready(function () {
-        var currentUser;
-        var _hmt = _hmt || [];
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?c555cf20d924035b4d329df9e6bacd78";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-
-        $.post('/api/LoginService/GetCurrentUser', function (result) {
-            currentUser = result.data;
+        //$.post('/api/LoginService/GetCurrentUser', function (result) {
+            //currentUser = result.data;
             var temp = angular.module("CommonApp");
-            //var isDev = $("#isDev").val();
             temp.run(['$rootScope', '$state', '$stateParams', 'currentUserService',
                 function ($rootScope, $state, $stateParams, currentUserService) {
-                    //$rootScope.isDev = isDev;
                     $rootScope.$state = $state;
                     $rootScope.$stateParams = $stateParams;
                     //  $rootScope.currentUser = currentUser;
-                    currentUserService.setCurrentUser(currentUser);
+                    //currentUserService.setCurrentUser(currentUser);
                 }
             ])
             //判断是否是开发环境
             //temp.constant("isDev", isDev);
-            temp.constant("currentUser", currentUser);
+            //temp.constant("currentUser", currentUser);
             angular.bootstrap(document, ["CommonApp"]);
         });
 
-    });
+    //});
 });

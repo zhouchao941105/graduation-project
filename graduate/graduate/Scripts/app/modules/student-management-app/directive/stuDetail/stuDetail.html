@@ -1,0 +1,91 @@
+<div ng-if="showDetailPop" class="slide-modal" ng-click="hideDetail()"></div>
+    <div class="slide" ng-class="{'slide-show':showDetailPop,'slide-hide':!showDetailPop}">
+        <div class="slide-title">
+            <span class="title-name">学员详情</span>
+            <span class="title-right" ng-click="hideDetail()"><i class="close-icon"></i></span>
+        </div>
+        <div class="slide-position copyScroll">
+            <div class="slide-block">
+                <p class="level-title1">基本信息</p>
+                <ul class="detail-ul twoColumn">
+                    <!--两列数据时加次类名twoColumn-->
+                    <li>
+                        <label class="label-con-det">用户名： </label>
+                        <span class="detail-con t_overflow" style="width:300px" gint-title="{{student.loginName}}">{{student.loginName}}</span>
+                    </li>
+                    <li>
+                        <label class="label-con-det">姓名： </label>
+                        <span class="detail-con t_overflow" style="width:150px;" gint-title="{{student.name}}">{{student.name}}</span>
+                    </li>
+                    <li>
+                        <label class="label-con-det">性别： </label>
+                        <span class="detail-con">{{student.gender}}</span>
+                    </li>
+                    <li>
+                        <label class="label-con-det">手机号码： </label>
+                        <span class="detail-con">{{student.tel}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="slide-block">
+                <p class="level-title1">报名信息</p>
+                <div class="ListDateTable">
+                    <!-- 列表有数据 {-->
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <th>课程编号</th>
+                                <th>课程名称</th>
+                                <th>班级名称</th>
+                                <th>报名时间</th>
+                                <th>报读课时</th>
+                                <th>已上课时</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            <tr ng-if="list.length!=0" class="ListDate" ng-repeat="item in list">
+                                <!-- 选中增加样式为 checkboxStyle 不可用增加样式为 checkboxDis -->
+                                <td>
+                                    <div gint-title="{{item.courseCode}}" style="max-width: 80px; display: inline-block" class="t_overflow">{{item.courseCode}}</div>
+                                    <span class="mark-style-min" ng-if="item.courseType == 1">1v1</span>
+                                </td>
+                                <td>
+                                    <div class="t_overflow" style="width: 70px" gint-title="{{item.courseName}}">{{item.courseName}}</div>
+                                </td>
+                                <td>
+                                    <div class="t_overflow" style="width: 70px" gint-title="{{item.className}}">{{item.className}}</div>
+                                </td>
+                                <td>{{item.signUpTime|formatJsonDate:'yyyy-MM-dd'}}</td>
+                                <td>{{item.classHours}}课时</td>
+                                <td>{{item.attendHours}}课时</td>
+                                <td>
+                                    <span class="mark-style type1" ng-if="item.signUpState == 0">在读</span>
+                                    <span class="mark-style type2" ng-if="item.signUpState == 1">已退课</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="small-btn cancel" ng-click="checkDropCourse(item)" ng-if="item.signUpState == 0 && outCourse">退课</button>
+                                </td>
+                            </tr>
+                            <tr ng-if="list.length==0">
+                                <td colspan="8">
+                                    <div class="ListDateNoResult">无数据</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!--} 列表有数据 -->
+
+                </div>
+                <div paging page="config.page.pageIndex" page-size="5" total="total" hide-if-empty="true" paging-action="loadList(page)" ng-show="list.length!=0">
+                </div>
+            </div>
+            <div class="schedule-block">
+                <p class="level-title1">
+                    学生课表
+                    <button class="normal-btn next fr" ng-click="excel=true">课表导出</button>
+                </p>
+                <calendar-detail ng-if="showDetailPop" api="getSchedule" type-id="id" type="studentId"></calendar-detail>
+            </div>
+            <export-excel out-put="excel" sche-id="student.id" url="excelstu" type="type"></export-excel>
+        </div>
+    </div>

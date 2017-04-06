@@ -1,5 +1,5 @@
 'use strict';
-define(['angular', 'jquery', 'filters/commonFilter'], function (angular, $) {
+define(['angular', 'jquery'], function (angular, $) {
     angular.module('CommonDirective', ['CommonFilter']).value('uiSortableConfig', {}).directive('placeholder', ['$timeout',
         function ($timeout) {
             return {

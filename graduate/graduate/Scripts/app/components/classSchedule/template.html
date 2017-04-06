@@ -1,0 +1,49 @@
+<style>
+    .popup_heightjs {
+        height:361px;
+    }
+</style>
+<div class="modal" ng-show="classSchedule">
+    <div class="popups-position">
+        <div class="popups-title">
+            <span class="pop-name">提醒</span>
+        </div>
+        <div class="popups-warnBody">
+            <p class="warn-text-tip">该班级已安排课程，是否将学员添加到后续的日程中？</p>
+            <div class="select-list">
+                <div class="select-area-all">
+                    <table class="table-header" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <th width="32"><span class="checkboxStyle" ng-click="selectAll()" ng-class="{'checkboxChecked':checkAll}"></span></th>
+                                <th width="120">科目</th>
+                                <th width="170">日期</th>
+                                <th width="60">教师</th>
+                                <th width="70">教室</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="scroll-height copyScroll"ng-class="{'popup_heightjs':isConflict}">
+                        <table class="list-area-table" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr ng-repeat="item in data" ng-click="select($index)">  <!--checkboxDis 无法选择 checkboxChecked选中-->
+                                    <td width="20"><span class="checkboxStyle" ng-class="{'checkboxChecked':item.check}"></span></td>
+                                    <td width="120"><div class="t_overflow" gint-title="{{item.subjectName}}" style="width:105px">{{item.subjectName}}</div></td>
+                                    <td width="170"><div class="t_overflow" gint-title="{{item.beginTime | formatJsonDate:'yyyy-MM-dd  HH:mm'}}-{{item.endTime | formatJsonDate:'HH:mm'}}" style="width:155px">{{item.beginTime | formatJsonDate:'yyyy-MM-dd  HH:mm'}}-{{item.endTime | formatJsonDate:'HH:mm'}}</div></td>
+                                    <td width="60"><div class="t_overflow" gint-title="{{item.teacherName}}" style="width:45px">{{item.teacherName}}</div></td>
+                                    <td width="70"><div class="t_overflow" gint-title="{{item.classRoomName}}" style="width:55px">{{item.classRoomName}} </div></td>
+                                    <td ng-if="isConflict"><span class="warning-text">学员日程冲突</span> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="notice" style="color:#616161" ng-show="isConflict">提示：冲突日程添加学员之后会处于未生效状态，请注意调整该日程</div>
+        </div>
+        <div class="popups-btnBox clearFix">
+            <button type="button" class="normal-btn cancel fl" ng-click="cancel()">上一步</button>
+            <button type="button" class="normal-btn next fr" ng-click="confirm()">确定</button>
+        </div>
+    </div>
+</div>

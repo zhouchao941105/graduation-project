@@ -1,0 +1,53 @@
+﻿<!--<div class="modal" >
+        <div class="modal-backdrop" style="height:100%;"></div>
+        <div class="modal-dialog-ab modal-content usual-medium">
+            <div class="pop-up-title">课表导出</div>
+            <div class="pop-up-content pop-up-item2">
+                <div class="pop-up-tips">{{tips}}</div>
+                <div class="section-content5 popup-list-box-s1">开始日期&nbsp;&nbsp;
+                        <input type="text" class="WidthSearch" readonly="readonly" datepicker ng-model="startDate">
+                        <input type="text" value="开始日期"  class="normal-input" datepicker ng-model="startDate">
+                        <em class="Date-icon"></em>
+                    </div>
+                <div class="section-content5 popup-list-box-s1">结束日期&nbsp;&nbsp;
+                        <input type="text" class="WidthSearch" readonly="readonly" datepicker ng-model="endDate">
+                        <input type="text" value="结束日期" readonly="readonly" class="normal-input" datepicker ng-model="endDate">
+                        <em class="Date-icon"></em>
+                    </div>
+                
+            </div>
+            <div class="popup-btn-box clearfix">
+                <button type="button" ng-click="cancel()" class="btn-default btn-cancel">取消</button>
+                <button type="button" ng-click="confirm()" class="btn-default btn-sure">确定</button>
+            </div>
+        </div>
+    </div>-->
+    <div class="modal" ng-show="outPut">
+    <div class="warn-position">
+        <div class="warn-title">
+            <span class="pop-name">课表导出</span>
+        </div>
+        <div class="warn">
+            <ul class="popup-list-ul">
+                <li>
+                    <label class="popup-label-name">*开始时间</label>
+                    <span class="normal-Date mr10"><!--mr10 为间距margin-right:10,无其他意义-->
+                        <input type="text" value="2017-08-08" readonly="readonly" datepicker class="normal-input " ng-model="startDate">
+                        <em class="Date-icon"></em>
+                    </span>
+                </li>
+                <li>
+                    <label class="popup-label-name">*结束时间</label>
+                    <span class="normal-Date mr10"><!--mr10 为间距margin-right:10,无其他意义-->
+                        <input type="text" value="2017-08-08" readonly="readonly" datepicker class="normal-input " ng-model="endDate">
+                        <em class="Date-icon"></em>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="warn-btnBox clearFix">
+            <button type="button" ng-click="cancel()" class="normal-btn cancel fl">取消</button>
+            <button type="button" ng-click="confirm()" class="normal-btn next fr">确定</button>
+        </div>
+    </div>
+</div>

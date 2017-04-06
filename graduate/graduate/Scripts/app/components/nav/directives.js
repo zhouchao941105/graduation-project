@@ -5,12 +5,11 @@ define([
     'angular',
     'jquery',
     'services/current-user-service',
-    'components/cropper/directive',
     'components/nav/service',
     'uiRouter',
     'services/dialogService'
 ], function (angular, $) {
-    angular.module('components.nav.directive', ['service.currentUser', 'ui.router', 'Components.cropper', 'components.nav.services',"Dialog.services"])
+    angular.module('components.nav.directive', ['service.currentUser', 'ui.router',  'components.nav.services',"Dialog.services"])
         .directive('gintNav', ['currentUserService', 'rolesService', '$state', '$rootScope', '$timeout', '$http','navNetService','gintDialog',
             function (currentUserService, rolesService, $state, $rootScope, $timeout, $http,navNetService,gintDialog) {
                 function moveToActive(left, width) {

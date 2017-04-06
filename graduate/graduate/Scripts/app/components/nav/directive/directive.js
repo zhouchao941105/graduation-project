@@ -4,9 +4,7 @@ define([
     'angular',
     'services/bounced',
     'services/current-user-service',
-    'components/cropper/directive',
     'services/dialogService',
-    'components/cropper/directive',
     'components/nav/service',
     'services/net/userService'
 ], function (angular) {

@@ -1,0 +1,59 @@
+<!-- 员工详情 滑出框开始-->
+<div ng-if="showContrl" class="slide-modal" ng-click="hideDetail()"></div>
+<div class="slide" ng-class="{'slide-show':showContrl,'slide-hide':!showContrl}">
+    <!--slide-show 为展现时添加类名，slide-hide为隐藏时添加类名-->
+    <div class="slide-title">
+        <!--<span class="title-left"><i class="edit-icon">编辑</i></span>-->
+        <span class="title-name">员工详情</span>
+        <span ng-click="showContrl=false" class="title-right"><i class="close-icon"></i></span>
+    </div>
+    <div class="slide-position copyScroll">
+        <div class="slide-block">
+            <p class="level-title1">基本信息</p>
+            <ul class="detail-ul twoColumn">
+                <!--两列数据时加次类名twoColumn-->
+                <li>
+                    <label class="label-con-det">用户名： </label>
+                    <span class="detail-con t_overflow" style="width:300px" gint-title="{{empInfo.loginName }}">{{empInfo.loginName }}</span>
+                </li>
+                <li>
+                    <label class="label-con-det">姓名： </label>
+                    <span class="detail-con t_overflow" style="width:150px" gint-title="{{empInfo.name }}">{{empInfo.name}}</span>
+                </li>
+                <li>
+                    <label class="label-con-det">性别： </label>
+                    <span class="detail-con">{{empInfo.gender}}</span>
+                </li>
+                <li>
+                    <label class="label-con-det">部门： </label>
+                    <span class="detail-con t_overflow" style="width:150px;" gint-title="{{empInfo.departmentIds }}">{{empInfo.departmentIds}}</span>
+                </li>
+                <li>
+                    <label class="label-con-det">手机号： </label>
+                    <span class="detail-con">{{empInfo.tel }}</span>
+                </li>
+                <li>
+                    <label class="label-con-det">校区权限： </label>
+                    <div class="item-con">
+                        <span ng-repeat="item in empInfo.authoritySchools" class="con-text">{{item.name}}</span>
+                    </div>
+                </li>
+                <li>
+                    <label class="label-con-det">上课校区： </label>
+                    <div class="item-con">
+                        <span ng-repeat="item in empInfo.classSchools " class="con-text">{{item.name}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="schedule-block">
+            <p class="level-title1 clearFix">
+                员工课表
+                <button class="normal-btn next fr" ng-click="excel=true">课表导出</button>
+                </p>
+            <calendar-detail ng-if="showContrl" api="getSchedule" type-id="id" type="teacherIds"></calendar-detail>
+        </div>
+        <export-excel out-put="excel" sche-id="empInfo.id" url="excelemp" type="type"></export-excel>
+    </div>
+</div>
+<!-- 员工详情 滑出框结束-->
