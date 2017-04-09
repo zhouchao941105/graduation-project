@@ -19,12 +19,12 @@ define([
                         if (flg) {
                             break;
                         }
-                        for (var j = 0; j < currentUser.userFunction.length; j++) {
-                            if (permissions[i] == currentUser.userFunction[j]) {
-                                flg = true;
-                                break;
-                            }
-                        }
+                        // for (var j = 0; j < currentUser.userFunction.length; j++) {
+                        //     if (permissions[i] == currentUser.userFunction[j]) {
+                        //         flg = true;
+                        //         break;
+                        //     }
+                        // }
                     }
                     if (flg) {
                         return true;

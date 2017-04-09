@@ -4,8 +4,9 @@ define([
     'components/common/directive',
     'components/multiple-popup/service',
     'services/tagService',
+    'filters/commonFilter'
 ], function (angular, _) {
-    angular.module('Components.multiplePopup', ['Components.multiplePopup.services', 'Components.common', 'Tag.services'])
+    angular.module('Components.multiplePopup', ['Components.multiplePopup.services', 'Components.common', 'Tag.services', 'CommonFilter'])
         .directive('multiplePopup', [
             'tagTreeService', 'tagNetService', '$filter',
             function (tagTreeService, tagNetService, $filter) {

@@ -1,7 +1,7 @@
 ﻿define([
     "angular"
 ], function(angular) {
-    return angular.module("IndexApp.controller", [ "service.currentUser"])
+    return angular.module("IndexApp.controller", [ "CommonFilter","service.currentUser"])
         .controller("IndexAppController", ["$scope", "gridHelper", "$http", "currentUserService", "rolesService", "$location", function ($scope, gridHelper, $http, currentUserService, rolesService, $location) {
             $scope.schedule = currentUserService.hasPermission([rolesService.EasScheduling], false);
             $scope.student = currentUserService.hasPermission([rolesService.EasStudentManage], false);

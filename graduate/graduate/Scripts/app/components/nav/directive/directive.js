@@ -18,7 +18,7 @@ define([
 
             navNetService.uploadUserHead(scope.jsonImageData).then(function (data) {
                 scope.headImgUrl = data;
-                currentUserService.getCurrentUser().userHeadImg = data;
+                // currentUserService.getCurrentUser().userHeadImg = data;
                 scope.changeImgAction({
                     url: data
                 });
@@ -35,7 +35,7 @@ define([
             scope.oldPwd = '';
             scope.newPwd = '';
             scope.comparePwd = '';
-            scope.headImgUrl = currentUserService.getCurrentUser().userHeadImg;
+            // scope.headImgUrl = currentUserService.getCurrentUser().userHeadImg;
         }
 
         return {
@@ -46,7 +46,7 @@ define([
             },
             templateUrl: 'components/nav/directive/template.html',
             link: function (scope, iElement, iAttr) {
-                scope.headImgUrl = currentUserService.getCurrentUser().userHeadImg;
+                // scope.headImgUrl = currentUserService.getCurrentUser().userHeadImg;
                 scope.jsonImageData = {};
                 reset(scope);
 

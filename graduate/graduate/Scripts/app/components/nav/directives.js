@@ -72,12 +72,12 @@ define([
                     },
                     templateUrl: 'components/nav/nav.html',
                     link: function (scope, iElement, iAttr) {
-                        scope.userName=currentUserService.getCurrentUser().userName;
-                        scope.hasCrm=currentUserService.hasPermission([rolesService.Crm,false]);
-                        scope.hasCourse=currentUserService.hasPermission([rolesService.Course,false]);
-                        scope.hasEas=currentUserService.hasPermission([rolesService.Eas,false]);
+                        // scope.userName=currentUserService.getCurrentUser().userName;
+                        // scope.hasCrm=currentUserService.hasPermission([rolesService.Crm,false]);
+                        // scope.hasCourse=currentUserService.hasPermission([rolesService.Course,false]);
+                        // scope.hasEas=currentUserService.hasPermission([rolesService.Eas,false]);
                         scope.isShow=false;
-                        scope.headImgUrl = currentUserService.getCurrentUser().userHeadImg;
+                        // scope.headImgUrl = currentUserService.getCurrentUser().userHeadImg;
                         //修改头像
                         scope.changeImgAction = function (url) {
                             scope.headImgUrl = url;

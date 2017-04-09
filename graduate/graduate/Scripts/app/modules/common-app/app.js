@@ -89,34 +89,34 @@ define([
                                         }
                                     }
                                     return response;
-                                },
-                                responseError: function (response) {
-                                    clearTimeout(response.config.loadingTimer);
-                                    $('.is-show-loading').remove();
-                                    var school = document.cookie.match(/\bschool=([^;]+)/)[1];
-                                    var logoutUrl = document.cookie.replace(/(?:(?:^|.*;\s*)logoutUrl\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-                                    switch (response.status) {
-                                    case 497:
-                                        //alert($translate.instant(90087));
-                                        top.location.href = '/' + school + '/Login';
-                                        break;
-                                    case 498:
-                                        //alert($translate.instant(90088));
-                                        if (logoutUrl && logoutUrl != "") {
-                                            top.location.href = logoutUrl;
-                                        } else {
-                                            top.location.href = '/' + school + '/Login';
-                                        }
-                                        break;
-                                    case 499:
-                                    case 500:
-                                        //alert($translate.instant(90089));
-                                        break;
-                                    default:
-                                        break;
-                                    }
-                                    return $q.reject(response);
                                 }
+                                // responseError: function (response) {
+                                //     clearTimeout(response.config.loadingTimer);
+                                //     $('.is-show-loading').remove();
+                                //     var school = document.cookie.match(/\bschool=([^;]+)/)[1] || "";
+                                //     var logoutUrl = document.cookie.replace(/(?:(?:^|.*;\s*)logoutUrl\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+                                //     switch (response.status) {
+                                //     case 497:
+                                //         //alert($translate.instant(90087));
+                                //         top.location.href = '/' + school + '/Login';
+                                //         break;
+                                //     case 498:
+                                //         //alert($translate.instant(90088));
+                                //         if (logoutUrl && logoutUrl != "") {
+                                //             top.location.href = logoutUrl;
+                                //         } else {
+                                //             top.location.href = '/' + school + '/Login';
+                                //         }
+                                //         break;
+                                //     case 499:
+                                //     case 500:
+                                //         //alert($translate.instant(90089));
+                                //         break;
+                                //     default:
+                                //         break;
+                                //     }
+                                //     return $q.reject(response);
+                                // }
                             };
                         }
                     ]);
