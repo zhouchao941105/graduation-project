@@ -22,5 +22,9 @@ namespace graduate.Controllers
             var b = db.banji.Select(k => k.classId).ToList();
             return View();
         }
+        public ActionResult addclass( string name, int count) {
+
+            return View();
+        }
     }
 }

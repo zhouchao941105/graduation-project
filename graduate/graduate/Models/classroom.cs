@@ -7,15 +7,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace graduate.Models
 {
-    [Table("paike.teacher")]
-    public class teacher
+    [Table("paike.classroom")]
+    public class classroom
     {
-        [Key]
-        public int teacherId { get; set; }
-        public string teacherName { get; set; }
-        public int priority { get; set; }
-        public string prefertime { get; set; }
+        public int classroomId { get; set; }
+        public string classroomName { get; set; }
+        public int capacity { get; set; }
+        public string timeUsed { get; set; }
         public string type { get; set; }
-
     }
 }

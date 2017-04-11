@@ -22,6 +22,11 @@
 
         public virtual DbSet<teacher> teacher { get; set; }
         public virtual DbSet<banji> banji { get; set; }
+        public virtual DbSet<classroom> classroom { get; set; }
+        public virtual DbSet<course> course { get; set; }
+        public virtual DbSet<user> user { get; set; }
+        public virtual DbSet<schedule> schedule { get; set; }
+
 
     }
 

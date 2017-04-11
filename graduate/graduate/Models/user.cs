@@ -4,16 +4,12 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-
 namespace graduate.Models
 {
-    [Table("paike.class")]
-    public class banji
+    [Table("paike.user")]
+    public class user
     {
-        [Key]
-        public int classId { get; set; }
-        public string className { get; set; }
-        public int stucount { get; set; }
-
+        public int userId { get; set; }
+        public string userName { get; set; }
     }
 }
