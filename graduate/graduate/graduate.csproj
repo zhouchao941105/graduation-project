@@ -313,8 +313,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\banji.cs" />
+    <Compile Include="Models\classroom.cs" />
+    <Compile Include="Models\course.cs" />
+    <Compile Include="Models\schedule.cs" />
     <Compile Include="Models\teacher.cs" />
     <Compile Include="Models\database.cs" />
+    <Compile Include="Models\user.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
