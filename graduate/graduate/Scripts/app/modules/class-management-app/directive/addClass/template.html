@@ -8,42 +8,12 @@
             <div class="level-title1">基本信息</div>
             <ul class="pop-ul twoColumn">
                 <li>
-                    <label class="label-con">*班级编号</label>
-                    <input class="normal-input" type="text" placeholder="请输入班级编号" ng-class="{'disabled':relate}" ng-disabled="type==2 || relate" ng-model="addEditInfo.classSerial"  maxlength="100">
-                </li>
-                <li>
                     <label class="label-con">*班级名称</label>
-                    <input class="normal-input" type="text" placeholder="请输入班级名称"  ng-class="{'disabled':relate}" ng-disabled="relate" ng-model="addEditInfo.className"  maxlength="100">
+                    <input class="normal-input" type="text" placeholder="请输入班级名称" ng-class="{'disabled':relate}" ng-disabled="type==2 || relate" ng-model="addEditInfo.className"  maxlength="100">
                 </li>
                 <li>
-                    <label class="label-con">*上课校区</label>
-                    <div class="drop-down-box" ng-class="{'disabled':relate}">
-                        <div ng-click="csCampus()"><input class="normal-input" readonly="readonly" type="text" value="{{addEditInfo.schoolNames?addEditInfo.schoolNames:'请选择'}}"><span class="caret"></span></div>
-                        <ul class="drop-ul copyScroll" ng-show="showDropUl" gint-pagescroll>
-                            <li class="class-campus-js t_overflow" gint-title="{{item.name}}" ng-repeat="item in campus.list" ng-click="chooseCampus(item)">{{item.name}}</li>
-                        </ul>
-                    </div>
-                </li>
-                <li></li>
-                <li>
-                    <label class="label-con">开始时间</label>
-                    <span class="normal-Date mr10">
-                        <!--mr10 为间距margin-right:10,无其他意义-->
-                        <input type="text" datepicker ng-model="addEditInfo.openTime" readonly="readonly" class="normal-input " />
-                        <em class="Date-icon"></em>
-                    </span>
-                </li>
-                <li>
-                    <label class="label-con">结束时间</label>
-                    <span class="normal-Date mr10">
-                        <!--mr10 为间距margin-right:10,无其他意义-->
-                        <input type="text" datepicker ng-model="addEditInfo.closeTime" readonly="readonly" class="normal-input ">
-                        <em class="Date-icon"></em>
-                    </span>
-                </li>
-                <li>
-                    <label class="label-con">*选择课程</label>
-                    <input type="text" class="normal-btn cancel" ng-click="chooseCourse()" ng-disabled="relate" ng-class="{'disabled':relate}" value="{{addEditInfo.courseName?addEditInfo.courseName:'点击选择课程'}}">
+                    <label class="label-con">*班级人数</label>
+                    <input class="normal-input" type="text" placeholder="请输入班级人数"  ng-class="{'disabled':relate}" ng-disabled="relate" ng-model="addEditInfo.classCount"  maxlength="100">
                 </li>
             </ul>
         </div>
@@ -53,5 +23,4 @@
         </div>
     </div>
 </div>
-<single-popup-with-progress ng-if="chooseCourseParam.isShow" is-show='chooseCourseParam.isShow' options='chooseCourseParam.singleOptions' cancle-action='chooseCourseParam.cancleCallback(data)' confirm-action='chooseCourseParam.confirmCallback(data)'></single-popup-with-progress>
 <!--新增班级 弹窗结束-->

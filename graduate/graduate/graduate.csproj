@@ -109,6 +109,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\error.css" />
+    <Content Include="Content\css\login.css" />
     <Content Include="Content\css\module.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\images\bg_login.jpg" />

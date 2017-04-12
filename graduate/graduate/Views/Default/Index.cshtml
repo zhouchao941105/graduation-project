@@ -6,32 +6,19 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    @*<link rel="stylesheet" type="text/css" href="/content/css/.css" />*@
+    <link rel="stylesheet" type="text/css" href="/content/css/error.css" />
     <link rel="stylesheet" type="text/css" href="/content/css/module.css" />
     <link rel="stylesheet" type="text/css" href="/content/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/content/css/login.css" />
     <script src="~/Scripts/app/libs/jquery/dist/jquery.js"></script>
     
 </head>
 <body class="body-template" ng-cloak ng-controller="CommonController">
     <div class="body-layout">
         <!--导航栏-->
-        @*<gint-nav></gint-nav>
-        <div ui-view></div>*@
-        <button id="ti">添加学生</button>
+        <gint-nav></gint-nav>
+        <div ui-view></div>
     </div>
-    <script>
-        $("#ti").click(function () {
-            $.ajax({
-                type: "post",
-                url: "addc",
-                data: {
-                    name: 50,
-                    count:"456"
-                }
-
-            })
-        })
-    </script>
     <script src="/Scripts/app/libs/requirejs/require.js" data-main="/Scripts/app/main"></script>
 </body>
 </html>

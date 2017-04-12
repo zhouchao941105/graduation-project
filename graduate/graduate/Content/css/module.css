@@ -69,7 +69,7 @@
 .cancel:hover{background-color: #f2f4f9;}
 .check{background-color: #478ee7; color: #fff;}
 .check:hover{background-color: #387fd7;}
-.form-item .normal-btn{min-width:170px;}
+.form-item .normal-btn{width:170px;}
 .normal-btn.disabled { background-color: #dcdcdc; border-color: #dcdcdc; color: #404040; cursor: default;}
 /* } 通用按钮-样式结束 */
 
@@ -251,7 +251,7 @@
 .drop-tips .text1,.drop-control .text1{font-style: normal; margin:0 8px 0 5px;}
 .drop-tips .text2,.drop-control .text2{font-style: normal; margin:0 8px 0 0;}
 .drop-tips .checkboxStyle { vertical-align: text-bottom;}
-.textArea{display: inline-block; min-width:170px; max-width: 500px; height: 30px; line-height: 30px;padding: 0 8px; font-size:12px;color:#616161;background: #e8eaf1;border-radius: 4px;}
+.textArea{display: inline-block; width:170px; height: 30px; line-height: 30px;padding: 0 8px; font-size:12px;color:#616161;background: #e8eaf1;border-radius: 4px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
 .operation-con .textArea{vertical-align: top;}
 .conflict,.correct{display: inline-block; height:20px; line-height: 20px; padding-left: 17px;margin-left: 10px; font-size:12px; font-style: normal; color:#ed7656; background: url("../images/icon15.png") no-repeat left center; background-size: 15px auto;}
 .conflict i{ font-style: normal; color:#ed7656; margin-left:2px;}
@@ -290,7 +290,7 @@
 .week-con{ margin-top:10px;}
 .week-con2{ width: 230px;}
 .week-con2 .drop-tips{margin-top:10px;}
-.modular-con .textArea{ min-width:159px; vertical-align: top;}
+.modular-con .textArea{ width:159px; vertical-align: top;}
 .modular-con .conflict{ display: block; margin: 5px 0 0 0;}
 .modular-con .correct{ display: block; margin: 5px 0 0 0;}
 /* } 首页排课-页面 结束 */
@@ -298,8 +298,8 @@
 /* 分步导引遮罩 { */
 .step{position: fixed; opacity: 0; top: 150px; -webkit-transition: visibility .8s, opacity 0.8s;}
 .first{left: 12px;width: 346px;height: 428px;background: url("../images/icon19.png") no-repeat center; padding: 388px 0 0 106px;}
-.second{left: 480px;width: 423px;height: 192px;background: url("../images/icon20.png") no-repeat center; padding: 152px 0 0 22px;}
-.third{left: 759px;width: 391px;height: 477px;background: url("../images/icon21.png") no-repeat center; padding-top: 454px;}
+.second{left: 492px;width: 473px;height: 192px;background: url("../images/icon20.png") no-repeat center; padding: 152px 0 0 22px;}
+.third{left: 821px;width: 441px;height: 477px;background: url("../images/icon21.png") no-repeat center; padding-top: 454px;}
 .step-next,.step-start{font-size: 18px; border-radius: 5px;}
 .step-next{width:150px; height:40px; color:#fff; border:2px #fff solid;}
 .step-start{width:200px; height:50px; color:#57678d; background-color: #fff; margin-left: -272px;}

@@ -21,12 +21,7 @@ define([
                 url: "/class",
                 templateUrl: "modules/class-management-app/template.html",
                 controller: "ClassManagementAppController",
-                title: '班级管理',
-                resolve: {
-                    permission: ["currentUserService", "rolesService", function (currentUserService, rolesService) {
-                        return currentUserService.hasPermission([rolesService.EasClassManage,true]);
-                    }]
-                }
+                title: '班级管理'
             });
         }]);
 });

@@ -128,8 +128,7 @@ strong.form-name{padding-left: 10px;}
 .mark-style.type2{background-color: #ee817e;}
 .mark-style.type3{background-color: #c9c9c9;}
 .ListDate td .mark-style{vertical-align: middle;}
-.mark-style-min{ min-width:28px; padding: 0 5px; height:13px; line-height: 1.2; border-radius: 6px; background-color: #71ceb1; -webkit-transform : scale(0.84,0.84); transform : scale(0.84,0.84); font-size:12px; position: relative;
-    top:-4px;}
+.mark-style-min{ min-width:28px; padding: 0 5px; height:13px; line-height: 1.2; border-radius: 6px; background-color: #71ceb1; -webkit-transform : scale(0.84,0.84); transform : scale(0.84,0.84); font-size:12px; position: relative; top:-4px;}
 .list-sort{cursor: pointer; display: inline-block;}
 .icon-sort-normal{position: absolute; margin-left:6px; width:15px; height:14px; background: url("../images/icon5.png") no-repeat;}
 .icon-sort-normal{background-position: 0 0;}
@@ -145,7 +144,8 @@ strong.form-name{padding-left: 10px;}
 .line-text + .line-text{margin-top: 5px;}
 .line-text:first-child{margin-top: 5px;}
 .line-text:last-child{margin-bottom: 5px;}
-
+.ListDateNoHover .ListDate:hover td{cursor:default; background:none;}/* 改变整个table hover 变手的效果，变成没有手的效果 也没有背景色*/
+.ListDateNoHoverTr:hover td{cursor:default; background:none;}/*改变一行 hover 变手,个别行加此样式，鼠标经过效果变成没有手 也没有背景色*/
 /*} 列表样式 */
 
 /* 页码样式 {*/

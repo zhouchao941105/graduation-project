@@ -17,25 +17,47 @@ namespace graduate.Controllers
         }
         public ActionResult Index()
         {
-            teacher t = new teacher();
-            var q = db.teacher.Select(p => p.teacherId).ToList();
-            var b = db.banji.Select(k => k.classId).ToList();
             return View();
         }
-        public ActionResult addclass( string name, int count) {
+        public ActionResult addclass(string name, int count) {
             banji newclass = new Models.banji();
             newclass.className = name;
             newclass.stucount = count;
             db.banji.Add(newclass);
-            return View();
+            db.SaveChanges();
+            return Json(new object());
         }
-        public ActionResult addc(int name, string count)
+        public ActionResult addclassroom(string name, int count, string timeused,string type)
         {
-            user t = new user();
-            t.userId = name;
-            t.userName = count;
-            db.user.Add(t);
-            return View();
+            classroom clsroom = new classroom();
+            clsroom.classroomName = name;
+            clsroom.capacity = count;
+            clsroom.timeUsed = timeused;
+            clsroom.type = type;
+            db.classroom.Add(clsroom);
+            db.SaveChanges();
+            return Json(new object());
+        }
+        public ActionResult addcourse(string name, string type, string timeperweek, int classid)
+        {
+            course newcourse = new course();
+            newcourse.courseName = name;
+            newcourse.type = type;
+            newcourse.timeperweek = timeperweek;
+            newcourse.classId = classid;
+            db.course.Add(newcourse);
+            db.SaveChanges();
+            return Json(new object());
+        }
+        public ActionResult addteacher(string name, int priority, string perfertime, string type) {
+            teacher newteacher = new teacher();
+            newteacher.teacherName = name;
+            newteacher.priority = priority;
+            newteacher.prefertime = perfertime;
+            newteacher.type = type;
+            db.teacher.Add(newteacher);
+            db.SaveChanges();
+            return Json(new object());
         }
     }
 }

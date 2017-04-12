@@ -62,36 +62,7 @@
                     Asc: false,
                 },
             ];
-            function getClassList() {
-                var classDate = {
-                    key: $scope.searchKey,  //string 关键词  无关键词自动搜索全部
-                    filter: { classState: $scope.chooseIndex },  // int 0 全部班级  1 结班班级  2  运行中班级
-                    order: $scope.order,
-                    page:
-                    {
-                        pageIndex: $scope.listPage.pageIndex,  // 当前请求页码,
-                        pageSize: $scope.listPage.pageSize  // 每页显示条数
-                    }
-                };
-                classManagementServices.getClassList(classDate).success(function (data) {
-                    if (data.status == 1) {
-                        $scope.classList = data.data;
-                        //$scope.classList = data.data;
-                        var length = $scope.classList.list.length;
-                        $scope.classListTotal = data.data.totalCount;
-                        length == 0 ? $scope.isEmpty = true : $scope.isEmpty = false;
-                    }
-                    if (data.status == 0) {
-                        if (data.message) {
-                            gintDialog.error(data.message);
-                        }
-                        else if (data.type) {
-                            gintDialog.error(data.messages[type]);
-                        }
-                    }
-                });
-            }
-            getClassList();
+            
 
 
             //切换tab页
@@ -103,37 +74,14 @@
             };
 
 
-            //更改排序
-            $scope.changeOrder = function (index) {
-                orderLists[index].Asc = !orderLists[index].Asc;
-                orderLists[(index + 1) % 2].Asc = false;
-                $('.icon-sort-js').removeClass('icon-sort-up');
-                $('.icon-sort-js').removeClass('icon-sort-down');
-                if (orderLists[index].Asc) {
-                    $($('.icon-sort-js')[index]).addClass('icon-sort-up')
-                }
-                else {
-                    $($('.icon-sort-js')[index]).addClass('icon-sort-down')
-                }
-                $scope.order = orderLists[index];
-                getClassList();
-            }
 
             //新增班级
             $scope.addClass = function () {
-                getSchoolList(1);
                 $scope.showClassPopup = true;
                 $scope.addEditInfo = {};
                 $scope.type = 1;
                 $scope.relate = false;
             }
-
-            function getSchoolList(page) {
-                classManagementServices.getSchoolList(page).then(function (data) {
-                    $scope.campus = data;
-                });       
-            }
-
 
             //编辑班级
             $scope.editClass = function (id) {
@@ -147,15 +95,11 @@
                 });
                 $scope.type = 2;
                 $scope.showClassPopup = true;
-                getSchoolList(1);
                 classManagementServices.editClass(id).then(function (data) {
                     $scope.addEditInfo = data;
                 });
             }
 
-            $scope.searchClassList = function () {   //搜索班级
-                getClassList();
-            };
 
             //查看班级
             $scope.getClassDetails = function (id,hasCloseClass) {
@@ -183,11 +127,6 @@
 
             
 
-            //分页回调
-            $scope.listPageAction = function (page) {
-                $scope.listPage.pageIndex = page;
-                getClassList();
-            };
 
             //添加或者修改班级
             $scope.addEditClass = function () {
@@ -246,7 +185,6 @@
                 $('.icon-sort-js').removeClass('icon-sort-up');  //筛选条件
                 $('.icon-sort-js').removeClass('icon-sort-down'); //筛选条件
                 $scope.order = null;
-                getClassList();
             }
         }
         ]);
