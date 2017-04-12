@@ -3,7 +3,7 @@
 <div class="toolBar">
     <div class="clearFix">
         <div class="list-btnBox fl">
-            <button type="button" class="normal-btn next"  ng-click="addClass()">新增班级</button>
+            <button type="button" class="normal-btn next"  ng-click="addroom()">新增教室</button>
         </div>
         <div class="list-searchBox fr">
             <!--搜索框 列表页用长搜索框，增加样式 long； 弹框页用短搜索框，增加样式 short {-->
@@ -21,8 +21,8 @@
     <table border="0" cellpadding="0" cellspacing="0">
         <tbody>
             <tr>
-                <th>班级编号</th>
-                <th>班级名称</th>
+                <th>教室名称</th>
+                <th>教室容量</th>
                
                 <th>操作</th>
             </tr>
@@ -46,7 +46,7 @@
 </div>
 
 <!--新增班级 弹框开始-->
-<add-class show-class-popup ="showClassPopup" relate ="relate" type="type" add-edit-info="addEditInfo" show-drop-ul ="showDropUl" campus="campus" add-edit-class="addEditClass()"></add-class>
+<add-room show-p="showClassroom"  ></add-room>
 <!--新增班级 弹窗结束-->
-<upload-eas show-upload="showUpload" excel-url="excelUrl" upload-type="uploadType" callback="callback()"></upload-eas>
+<!--<upload-eas show-upload="showUpload" excel-url="excelUrl" upload-type="uploadType" callback="callback()"></upload-eas>-->
 

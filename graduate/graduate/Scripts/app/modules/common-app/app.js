@@ -8,6 +8,7 @@ define([
         "modules/common-app/controller",
         "modules/index-app/app",
         "modules/class-management-app/app",
+        "modules/classroom/app",
         "modules/student-management-app/app",
         "modules/teacher-list-app/app",
 ],
@@ -19,6 +20,7 @@ define([
                 "CommonApp.controller",
                 "IndexApp",
                 "ClassManagementApp",
+                "classroom-app",
                 "StudentManagementApp",
                 "TeacherListApp"
             ])

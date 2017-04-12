@@ -27,12 +27,12 @@ namespace graduate.Controllers
             db.SaveChanges();
             return Json(new object());
         }
-        public ActionResult addclassroom(string name, int count, string timeused,string type)
+        public ActionResult addclassroom(string name, int count, string type)
         {
             classroom clsroom = new classroom();
             clsroom.classroomName = name;
             clsroom.capacity = count;
-            clsroom.timeUsed = timeused;
+            clsroom.timeUsed = null;
             clsroom.type = type;
             db.classroom.Add(clsroom);
             db.SaveChanges();
