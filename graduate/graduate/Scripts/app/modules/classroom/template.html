@@ -23,17 +23,20 @@
             <tr>
                 <th>教室名称</th>
                 <th>教室容量</th>
-               
+                <th>已占用时段</th>
+                <th>教室类型</th>
                 <th>操作</th>
             </tr>
-            <tr ng-if="classList.list.length == 0">
+            <tr ng-if="list.length == 0">
                 <td colspan="8">
                     <div class="ListDateNoResult">无数据</div>
                 </td>
             </tr>
-            <tr class="ListDate" ng-repeat="item in classList.list" ng-click="getClassDetails(item.classId,item.isOverClass == 1)" ng-show="classList.list.length != 0">
-                <td ><div style="max-width:150px;"  class="t_overflow">{{item.classSerial}}</div></td>
-                <td ><div style="max-width:150px;"  class="t_overflow">{{item.className}}</div></td>
+            <tr class="ListDate" ng-repeat="item in list" ng-click="getClassDetails(item.classId,item.isOverClass == 1)" ng-show="list.length != 0">
+                <td ><div style="max-width:150px;"  class="t_overflow">{{item.classroomName}}</div></td>
+                <td ><div style="max-width:150px;"  class="t_overflow">{{item.capacity}}</div></td>
+                <td ><div style="max-width:150px;"  class="t_overflow">{{item.timeUsed}}</div></td>
+                <td ><div style="max-width:150px;"  class="t_overflow">{{item.type}}</div></td>
                 <td>
                     <button  class="listDate-link" ng-click="editClass(item.classId)" ng-show ="permission.edit">编辑</button>
                     <button  class="listDate-link" ng-show ="permission.closeClass" ng-click="closeClass(item.classId)" ng-disabled="item.isOverClass == 1" ng-class="{'disabled':item.isOverClass == 1}">删除</button>
@@ -46,7 +49,7 @@
 </div>
 
 <!--新增班级 弹框开始-->
-<add-room show-p="showClassroom"  ></add-room>
+<add-room show-p="showClassroom" call-back="init()"></add-room>
 <!--新增班级 弹窗结束-->
 <!--<upload-eas show-upload="showUpload" excel-url="excelUrl" upload-type="uploadType" callback="callback()"></upload-eas>-->
 

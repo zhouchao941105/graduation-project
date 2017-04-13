@@ -6,11 +6,10 @@ define([
         "ngDialog",
         "components/nav/app",
         "modules/common-app/controller",
-        "modules/index-app/app",
         "modules/class-management-app/app",
         "modules/classroom/app",
-        "modules/student-management-app/app",
         "modules/teacher-list-app/app",
+        "modules/course-app/app"
 ],
     function (angular) {
         return angular.module("CommonApp", [
@@ -18,16 +17,15 @@ define([
                 "ngDialog",
                 "components.nav",
                 "CommonApp.controller",
-                "IndexApp",
                 "ClassManagementApp",
                 "classroom-app",
-                "StudentManagementApp",
-                "TeacherListApp"
+                "TeacherListApp",
+                "course.app"
             ])
             .config([
                 '$urlRouterProvider', function($urlRouterProvider) {
                     $urlRouterProvider
-                        .otherwise('/index');
+                        .otherwise('/class');
                 }
             ])
             .run([

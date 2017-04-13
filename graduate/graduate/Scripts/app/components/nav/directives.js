@@ -23,11 +23,12 @@ define([
                 function mouseEnterAction() {
                     var left = $(this).position().left;
                     var width = $(this).width();
+
                     moveToActive(left, width);
                 }
 
                 function mouseLeaveAction() {
-                    var navItems = $('ul.navbar-nav-left li.navbar-nav-item');
+                    var navItems = $('ul.nav-left li.nav-item');
                     for (var i = 0, length = navItems.length; i < length; i++) {
                         if ($(navItems[i]).find('.active').length > 0) {
                             var position = $(navItems[i]).position();
@@ -41,14 +42,16 @@ define([
                 }
 
                 function navDownAction() {
-                    var navItems = $('ul.navbar-nav-left li.navbar-nav-item');
+                    var navItems = $('ul.nav-left li.nav-item li.nav-dropItem');
                     for (var i = 0, length = navItems.length; i < length; i++) {
                         if ($(navItems[i]).find('.active').length > 0) {
-                            $(navItems[i]).addClass('nav-current');
+                            $(navItems[i]).addClass('dropItem-current');
                         } else {
-                            $(navItems[i]).removeClass('nav-current');
+                            $(navItems[i]).removeClass('dropItem-current');
                         }
                     }
+                   
+                    
                 }
 
                 function init(scope) {
@@ -57,10 +60,9 @@ define([
                         $timeout(mouseLeaveAction);
                         $timeout(navDownAction);
                     });
-                    $('ul.navbar-nav-left li.navbar-nav-item').mouseenter(mouseEnterAction);
-                    $("ul.navbar-nav-left").mouseleave(mouseLeaveAction);
+                    $('ul.nav-left li.nav-item').mouseenter(mouseEnterAction);
+                    $("ul.nav-left").mouseleave(mouseLeaveAction);
                 }
-
 
 
                 return {
@@ -85,15 +87,7 @@ define([
                                     gintDialog.error(reason);
                                 });
                         };
-                        // init(scope);
-                        var data={
-                            name:"zhouchao",
-                            count:15
-                        }
-                        scope.add = function () {
-                            $http.post('Default/addclass',data).then(function(){
-                            })
-                        }
+                        init(scope)
                     }
                 };
             }

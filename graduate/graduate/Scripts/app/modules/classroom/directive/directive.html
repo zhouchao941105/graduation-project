@@ -1,8 +1,8 @@
 ﻿
-<div class="modal" ng-show="show">
+<div class="modal" ng-show="showP">
     <div class="popups-position">
         <div class="popups-title">
-            <span class="pop-name">{{type == 1 ?'新增教室':type == 2?'编辑班级':'错误'}}</span>
+            <span class="pop-name">新增教室</span>
         </div>
         <div class="popups-body copyScroll">
             <div class="level-title1">基本信息</div>
@@ -22,8 +22,8 @@
             </ul>
         </div>
         <div class="popups-btnBox clearFix">
-            <button type="button" class="normal-btn cancel fl" ng-click="cancelClass()">取消</button>
-            <button type="button" class="normal-btn next fr" ng-click="classValite()">确定</button>
+            <button type="button" class="normal-btn cancel fl" ng-click="cancel()">取消</button>
+            <button type="button" class="normal-btn next fr" ng-click="confirm()">确定</button>
         </div>
     </div>
 </div>

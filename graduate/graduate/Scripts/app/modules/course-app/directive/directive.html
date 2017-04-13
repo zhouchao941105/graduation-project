@@ -1,0 +1,34 @@
+﻿
+<div class="modal" ng-show="showCourse">
+    <div class="popups-position">
+        <div class="popups-title">
+            <span class="pop-name">新增课程</span>
+        </div>
+        <div class="popups-body copyScroll">
+            <div class="level-title1">基本信息</div>
+            <ul class="pop-ul twoColumn">
+                <li>
+                    <label class="label-con">*课程名称</label>
+                    <input class="normal-input" type="text" placeholder="请输入课程名称" ng-class="{'disabled':relate}"  ng-model="info.name"  maxlength="100">
+                </li>
+                <li>
+                    <label class="label-con">*课程类型</label>
+                    <input class="normal-input" type="text" placeholder="请输入课程类型"  ng-class="{'disabled':relate}"  ng-model="info.type"  maxlength="100">
+                </li>
+                <li>
+                    <label class="label-con">*周课时</label>
+                    <input class="normal-input" type="text" placeholder="请输入课时数"  ng-class="{'disabled':relate}"  ng-model="info.timeperweek"  maxlength="100">
+                </li>
+                <li>
+                    <label class="label-con">上课班级</label>
+                    <!--<input class="normal-input" type="text" placeholder="请输入教室类型"  ng-class="{'disabled':relate}"  ng-model="info.type"  maxlength="100">-->
+                    <select-box selected-data="classdata" select-list-data="classlist" select-filed="className" when-selected-action="selectdCourse(data)"></select-box>
+                </li>
+            </ul>
+        </div>
+        <div class="popups-btnBox clearFix">
+            <button type="button" class="normal-btn cancel fl" ng-click="cancel()">取消</button>
+            <button type="button" class="normal-btn next fr" ng-click="confirm()">确定</button>
+        </div>
+    </div>
+</div>

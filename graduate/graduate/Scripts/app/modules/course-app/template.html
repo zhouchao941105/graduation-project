@@ -1,1 +1,63 @@
-﻿
+﻿<!--} 顶部导航与logo end -->
+<!-- 工具栏 begin {-->
+<div class="toolBar">
+    <div class="clearFix">
+        <div class="list-btnBox fl">
+            <button type="button" class="normal-btn next" ng-click="addcourse()">新增课程</button>
+        </div>
+        <div class="list-searchBox fr">
+            <!--搜索框 列表页用长搜索框，增加样式 long； 弹框页用短搜索框，增加样式 short {-->
+            <div class="search-box">
+                <input class="search-text long" placeholder="请输入班级编号或名称搜索" type="text" ng-model="searchKey" ng-keyup="onSearchKeyPress($event)">
+                <button type="submit" class="search-submit" title="班级编号或名称" ng-click="searchClassList()"></button>
+            </div>
+            <!--} 搜索框-->
+        </div>
+    </div>
+</div>
+<!--} 工具栏 end -->
+<div class="ListDateTable">
+    <!-- 列表有数据-->
+    <table border="0" cellpadding="0" cellspacing="0">
+        <tbody>
+            <tr>
+                <th>课程名称</th>
+                <th>课程类型</th>
+                <th>每周课时</th>
+                <th>上课班级</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-if="list.length == 0">
+                <td colspan="8">
+                    <div class="ListDateNoResult">无数据</div>
+                </td>
+            </tr>
+            <tr class="ListDate" ng-repeat="item in list" ng-click="getClassDetails(item.classId,item.isOverClass == 1)" ng-show="list.length != 0">
+                <td>
+                    <div style="max-width:150px;" class="t_overflow">{{item.courseName}}</div>
+                </td>
+                <td>
+                    <div style="max-width:150px;" class="t_overflow">{{item.type}}</div>
+                </td>
+                <td>
+                    <div style="max-width:150px;" class="t_overflow">{{item.timeperweek}}</div>
+                </td>
+                <td>
+                    <div style="max-width:150px;" class="t_overflow">{{item.classId}}</div>
+                </td>
+                <td>
+                    <button class="listDate-link" ng-click="editClass(item.classId)" ng-show="permission.edit">编辑</button>
+                    <button class="listDate-link" ng-show="permission.closeClass" ng-click="closeClass(item.classId)" ng-disabled="item.isOverClass == 1"
+                        ng-class="{'disabled':item.isOverClass == 1}">删除</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!--} 列表有数据 -->
+
+</div>
+
+<!--新增班级 弹框开始-->
+<add-course show-course="showcourse" call-back="init()"></add-course>
+<!--新增班级 弹窗结束-->
+<!--<upload-eas show-upload="showUpload" excel-url="excelUrl" upload-type="uploadType" callback="callback()"></upload-eas>-->

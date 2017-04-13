@@ -1,118 +1,63 @@
-﻿
-
-<div class="crumbsBar-fixed"><a href="#">员工管理</a><a href="#">员工列表</a>
-</div>
-<div class="toolBar" ng-init="init()">
+﻿<!--} 顶部导航与logo end -->
+<!-- 工具栏 begin {-->
+<div class="toolBar">
     <div class="clearFix">
         <div class="list-btnBox fl">
-            <button ng-click="item.func()" type="button" ng-hide="!item.disable" ng-repeat="item in btns" class="normal-btn next">{{item.text}}</button>
+            <button type="button" class="normal-btn next" ng-click="addteacher()">新增教师</button>
         </div>
         <div class="list-searchBox fr">
             <!--搜索框 列表页用长搜索框，增加样式 long； 弹框页用短搜索框，增加样式 short {-->
             <div class="search-box">
-                <input class="search-text long" ng-keyup="onSearchKeyPress($event)" placeholder="员工姓名／用户名／联系方式" ng-model="filterKey.Now" type="text">
-                <button type="submit" class="search-submit" title="点击搜索" ng-click="searchList()"></button>
+                <input class="search-text long" placeholder="请输入班级编号或名称搜索" type="text" ng-model="searchKey" ng-keyup="onSearchKeyPress($event)">
+                <button type="submit" class="search-submit" title="班级编号或名称" ng-click="searchClassList()"></button>
             </div>
             <!--} 搜索框-->
-            <button type="button" class="normal-btn next" ng-init="isAdvancedQueryVisable = false" ng-click="isAdvancedQueryVisable = !isAdvancedQueryVisable">筛选</button>
         </div>
     </div>
-
-    <!-- 筛选 begin {-->
-    <div class="filter-box " ng-class="{'filter-show':isAdvancedQueryVisable}">
-        <!--默认隐藏，显示dom结构增加样式 filter-show 完整代码：<div class="filter-box filter-show">-->
-        <ul>
-            <li class="filter-item">
-                <label class="filter-name">部门</label>
-                <div class="drop-down-box">
-                    <input class="normal-input" ng-click="MultiplePopup.department.show()" readonly placeholder="员工所属部门" value="{{filterPre.departmentIds.length ? (filterPre.departmentIds.length == 1 ? MultiplePopup.department.departmentName : (filterPre.departmentIds.length + '个部门已选')):''}}" type="text"/>
-                </div>
-            </li>
-
-            <li class="filter-item" ng-init="styleArr = ['short']">
-                <label class="filter-name">状态</label>
-                <select-box  input-style="styleArr" when-selected-action="statusSelect(data)" selected-data="selectBox.Status" select-list-data="empStatus" select-filed="value"></select-box>
-            </li>
-            <li class="filter-item">
-                <label class="filter-name">上课校区</label>
-                <div class="drop-down-box">
-                    <input class="normal-input" ng-click="MultiplePopup.schoolArea.show()" readonly placeholder="全部校区" value="{{filterPre.schoolIds.length ? (filterPre.schoolIds.length == 1 ? MultiplePopup.schoolArea.name : (filterPre.schoolIds.length + '个校区已选')):''}}" type="text" />
-                </div>
-            </li>
-        </ul>
-        <div class="filter-btnBox">
-            <button type="button" class="normal-btn cancel" ng-click="resetSearch()">重置</button>
-            <button type="button" class="normal-btn next" ng-click="searchList()">查询</button>
-        </div>
-    </div>
-    <!--} 筛选 end -->
 </div>
-<div class="section">
-    <!-- 列表无数据时显示内容 {-->
-    <!--} 列表无数据时显示内容 -->
-    <div class="section-normal section-content4">
-
-        <div class="ListDateTable">
-            <table border="0" cellpadding="0" cellspacing="0">
-                <!-- 数据列表{-->
-                <tbody>
-                <tr>
-                    <th class="blankbox" ng-click="selectAll()"><span class="checkboxStyle" ng-class="{'checkboxChecked':isAllSelected}"></span></th>
-                    <th>用户名</th>
-                    <th>姓名</th>
-                    <th>联系方式</th>
-                    <th>部门</th>
-                    <th>状态</th>
-                    <th>上课校区</th>
-                    <th>操作</th>
-                </tr>
-                <tr ng-click='showDetail(item.id)' class="ListDate" ng-if="list.length!=0" ng-repeat="item in list">
-                    <!-- 说明： 每页数据10条-->
-                    <td class="blankbox" ng-click="selectItem(item.id,$event)"><span class="checkboxStyle" ng-class="{'checkboxChecked':selectedKeys[item.id]}"></span></td>
-                    <td><div class="t_overflow" style="width: 150px;" gint-title="{{item.loginName}}">{{item.loginName}}</div></td>
-                    <td><div class="t_overflow" style="width: 150px;" gint-title="{{item.name}}">{{item.name}}</div></td>
-                    <td>{{item.tel}}</td>
-                    <td>
-                        <div class="t_overflow" style="width: 150px;" gint-title="{{item.departments}}">{{item.departments}}</div></td>
-                    <td><span class="mark-style type1" ng-class="{'type1':item.state,'type2':!item.state}">{{item.state?"在职":"离职"}}</span></td>
-                    <td>
-                        <div class="t_overflow" style="width: 150px;" gint-title="{{item.schools}}">{{item.schools}}</div></td>
-                    <td ng-click="edit(item.id)">
-                        <a class="listDate-link" ng-if="isShowEidt">编辑</a>
-                    </td>
-                    <!--<td class="t_right">1200</td>-->
-                </tr>
-                <tr ng-if="list.length==0">
-                    <td colspan="8">
-                        <div class="ListDateNoResult">无数据</div>
-                    </td>
-                </tr>
-                <!-- 以下是数据举例，不做参考 {-->
-                <!--} 以下是数据举例，不做参考 -->
-                <!--}数据列表 -->
-                </tbody>
-            </table>
-        </div>
-
-        <!--} 列表 -->
-        <div class="section-page-bottom">
-            <!-- 页码 {-->
-            <div paging page="page.pageIndex" page-size="10" total="total" hide-if-empty="true" paging-action="changePage(page)" ng-show="list.length!=0">
-            </div>
-        </div>
-        <!--部门多选组件-->
-        <multiple-popup config="MultiplePopup.department"></multiple-popup>
-
-        <!--校区多选组件-->
-        <multiple-popup config="MultiplePopup.schoolArea"></multiple-popup>
-
-    </div>
+<!--} 工具栏 end -->
+<div class="ListDateTable">
+    <!-- 列表有数据-->
+    <table border="0" cellpadding="0" cellspacing="0">
+        <tbody>
+            <tr>
+                <th>教师名称</th>
+                <th>教师优先级</th>
+                <th>时间偏好</th>
+                <th>教师类型</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-if="list.length == 0">
+                <td colspan="8">
+                    <div class="ListDateNoResult">无数据</div>
+                </td>
+            </tr>
+            <tr class="ListDate" ng-repeat="item in list" ng-show="list.length > 0">
+                <td>
+                    <div style="max-width:150px;" class="t_overflow">{{item.teacherName}}</div>
+                </td>
+                <td>
+                    <div style="max-width:150px;" class="t_overflow">{{item.priority}}</div>
+                </td>
+                <td>
+                    <div style="max-width:150px;" class="t_overflow">{{item.prefertime}}</div>
+                </td>
+                <td>
+                    <div style="max-width:150px;" class="t_overflow">{{item.type}}</div>
+                </td>
+                <td>
+                    <button class="listDate-link" ng-click="editClass(item.classId)" ng-show="permission.edit">编辑</button>
+                    <button class="listDate-link" ng-show="permission.closeClass" ng-click="closeClass(item.classId)" ng-disabled="item.isOverClass == 1"
+                        ng-class="{'disabled':item.isOverClass == 1}">删除</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!--} 列表有数据 -->
 
 </div>
-<!--新增编辑员工-->
-<emp-edit show-contrl="showEdit"></emp-edit>
 
-<emp-asyn></emp-asyn>
-
-<!--批量导入-->
-<upload-eas show-upload="showUpload" excel-url="excelUrl" upload-type="uploadType" callback="callback()"></upload-eas>
+<!--新增班级 弹框开始-->
+<add-teacher show-teacher="showteacher" call-back="init()"></add-teacher>
+<!--新增班级 弹窗结束-->
+<!--<upload-eas show-upload="showUpload" excel-url="excelUrl" upload-type="uploadType" callback="callback()"></upload-eas>-->

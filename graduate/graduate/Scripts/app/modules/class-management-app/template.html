@@ -21,22 +21,22 @@
     <table border="0" cellpadding="0" cellspacing="0">
         <tbody>
             <tr>
-                <th>班级编号</th>
                 <th>班级名称</th>
+                <th>学生数量</th>
                
                 <th>操作</th>
             </tr>
-            <tr ng-if="classList.list.length == 0">
+            <tr ng-if="list.length == 0">
                 <td colspan="8">
                     <div class="ListDateNoResult">无数据</div>
                 </td>
             </tr>
-            <tr class="ListDate" ng-repeat="item in classList.list" ng-click="getClassDetails(item.classId,item.isOverClass == 1)" ng-show="classList.list.length != 0">
-                <td ><div style="max-width:150px;"  class="t_overflow">{{item.classSerial}}</div></td>
+            <tr class="ListDate" ng-repeat="item in list" ng-click="getClassDetails(item.classId,item.isOverClass == 1)" ng-show="list.length != 0">
                 <td ><div style="max-width:150px;"  class="t_overflow">{{item.className}}</div></td>
+                <td ><div style="max-width:150px;"  class="t_overflow">{{item.stucount}}</div></td>
                 <td>
-                    <button  class="listDate-link" ng-click="editClass(item.classId)" ng-show ="permission.edit">编辑</button>
-                    <button  class="listDate-link" ng-show ="permission.closeClass" ng-click="closeClass(item.classId)" ng-disabled="item.isOverClass == 1" ng-class="{'disabled':item.isOverClass == 1}">删除</button>
+                    <button  class="listDate-link" ng-click="editClass(item.classId)" >编辑</button>
+                    <button  class="listDate-link" ng-click="closeClass(item.classId)" ng-disabled="item.isOverClass == 1" ng-class="{'disabled':item.isOverClass == 1}">删除</button>
                 </td>
             </tr>
         </tbody>
@@ -46,7 +46,6 @@
 </div>
 
 <!--新增班级 弹框开始-->
-<add-class show-class-popup ="showClassPopup" relate ="relate" type="type" add-edit-info="addEditInfo" show-drop-ul ="showDropUl" campus="campus" add-edit-class="addEditClass()"></add-class>
+<add-class show-class-popup ="showClassPopup" all-info="list" call-back="init()"></add-class>
 <!--新增班级 弹窗结束-->
-<upload-eas show-upload="showUpload" excel-url="excelUrl" upload-type="uploadType" callback="callback()"></upload-eas>
 

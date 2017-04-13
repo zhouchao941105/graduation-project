@@ -32,7 +32,7 @@ namespace graduate.Controllers
             classroom clsroom = new classroom();
             clsroom.classroomName = name;
             clsroom.capacity = count;
-            clsroom.timeUsed = null;
+            clsroom.timeUsed = "";
             clsroom.type = type;
             db.classroom.Add(clsroom);
             db.SaveChanges();
@@ -49,15 +49,31 @@ namespace graduate.Controllers
             db.SaveChanges();
             return Json(new object());
         }
-        public ActionResult addteacher(string name, int priority, string perfertime, string type) {
+        public ActionResult addteacher(string name, int priority, string prefertime, string type) {
             teacher newteacher = new teacher();
             newteacher.teacherName = name;
             newteacher.priority = priority;
-            newteacher.prefertime = perfertime;
+            newteacher.prefertime = prefertime;
             newteacher.type = type;
             db.teacher.Add(newteacher);
             db.SaveChanges();
             return Json(new object());
+        }
+        public ActionResult classlist() {
+            var t = (from d in db.banji select d).ToList();
+            return Json(t);
+        }
+        public ActionResult teacherlist() {
+            var q = (from d in db.teacher select d).ToList();
+            return Json(q);
+        }
+        public ActionResult courselist() {
+            var t = (from d in db.course select d).ToList();
+            return Json(t);
+        }
+        public ActionResult classroomlist() {
+            var q = (from t in db.classroom select t).ToList();
+            return Json(q);
         }
     }
 }

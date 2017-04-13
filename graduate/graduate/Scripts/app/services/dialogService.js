@@ -76,11 +76,6 @@ define(["angular", 'ngDialog'], function (angular) {
                             },
                             overlay:type?false:true
                         });
-                        if (type == ERROR_DIALOG_TYPE.DIALOG) {
-                            setTimeout(function () { $(".Tipsbox_Top").css('top', $('.popups-title:visible').offset().top + 10); $('.ngdialog').css('bottom', ($(document).height() -$('.popups-title:visible').offset().top-50)+"px") }, 30);
-                        }
-                        console.log($('.ngdialog-overlay').data('events'));
-                        $('body').delegate('.ngdialog-overlay', 'click', function overflowHide() { ngDialog.close(); $timeout.cancel(timer) });
                         var timer = $timeout(function () {
                             ngDialog.close();
                         }, duration);
@@ -94,12 +89,9 @@ define(["angular", 'ngDialog'], function (angular) {
                             }
                         });
                         //开启模糊效果
-                        $('.body-layout').addClass("blur");
 
                         $timeout(function () {
                             ngDialog.close();
-                            //移除模糊效果
-                            $('.body-layout').removeClass("blur");
                         }, duration);
                     },
                     //打开新窗口 

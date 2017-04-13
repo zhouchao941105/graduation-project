@@ -3,7 +3,7 @@ define([
     'angular',
     'uiRouter',
     "modules/classroom/controller",
-    "modules/classroom/directive"
+    "modules/classroom/directive/directive"
 ], function(angular) {
     return angular.module('classroom-app',['ui.router','classroom-controller',"addclassroom"])
     .config(["$stateProvider", function ($stateProvider) {
