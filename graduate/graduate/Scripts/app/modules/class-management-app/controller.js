@@ -29,8 +29,11 @@
                         $scope.list.push(data[i])
                     }
                 })
-
-
+            }
+            $scope.initschedule=function(){
+                $http.post('Default/init').success(function(data){
+                    gintDialog.success('success')
+                })
             }
             $scope.init();
 

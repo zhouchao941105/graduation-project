@@ -13,8 +13,8 @@ namespace graduate.Models
         public int scheduleId { get; set; }
         public int courseId { get; set; }
         public int teacherId { get; set; }
-        public string classIds { get; set; }
+        public int classId { get; set; }
         public int classroomId { get; set; }
-        public string time { get; set; }
+        public int time { get; set; }
     }
 }

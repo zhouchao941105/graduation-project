@@ -15,5 +15,6 @@ namespace graduate.Models
         public string type { get; set; }
         public string timeperweek { get; set; }
         public int classId { get; set; }
+        public string roomrequest { get; set; }
     }
 }

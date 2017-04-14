@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using graduate.Models;
+using Dapper;
 
 namespace graduate.Controllers
 {
@@ -116,8 +117,8 @@ namespace graduate.Controllers
             
         }
         public ActionResult teacherlist() {
-            var q = (from d in db.teacher select d).ToList();
-            return Json(q);
+            var q = (from d in db.teacher select d);
+            return Json(q.ToList());
         }
         public ActionResult courselist() {
             var t = (from d in db.course select d).ToList();
@@ -158,5 +159,45 @@ namespace graduate.Controllers
             return Json(new object());
         }
         //初始化
+        public ActionResult init() {
+            var q0 = (from d in db.course select d).ToList();
+            
+            foreach (var item in q0) {
+                schedule t0 = new schedule() { courseId = item.courseId,classId=item.classId };
+                //随机一个teacher
+                var sql = (from d in db.teacher
+                           where d.type == item.type
+                           select d.teacherId);
+                Random rd = new Random(Guid.NewGuid().GetHashCode());
+                int teacherlen = sql.ToList().Count();
+                int n0 = rd.Next(0, teacherlen);
+                t0.teacherId = sql.ToList()[n0];
+                //随机一个classroom
+                var room = from d in db.classroom
+                           where d.type == item.roomrequest
+                           select d.classroomId;
+                int roomlen = room.ToList().Count();
+                int n1 = rd.Next(0, roomlen);
+                t0.classroomId = room.ToList()[n1];
+                //随机一个时间
+                t0.time = rd.Next(1, 26);
+
+                db.schedule.Add(t0);
+            }
+
+            //using (var dbs=new database())
+            //{
+            //    using (var con = dbs.Database.Connection)
+            //    {
+            //        con.Open();
+            //        var tran = dbs.Database.BeginTransaction();
+            //        var sql = @"SELECT teacherId FROM teacher,course where teacher.type=course.type and course.type='数学'";
+            //        var result = con.ExecuteScalar(sql);
+            //    }
+            //}
+            
+            db.SaveChanges();
+            return Json(new object());
+        }
     }
 }
