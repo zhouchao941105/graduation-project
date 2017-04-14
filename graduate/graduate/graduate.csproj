@@ -262,9 +262,6 @@
     <Content Include="Scripts\app\modules\class-management-app\controller.js" />
     <Content Include="Scripts\app\modules\class-management-app\directive\addClass\directive.js" />
     <Content Include="Scripts\app\modules\class-management-app\directive\addClass\template.html" />
-    <Content Include="Scripts\app\modules\class-management-app\directive\addStudents\directive.js" />
-    <Content Include="Scripts\app\modules\class-management-app\directive\addStudents\template.html" />
-    <Content Include="Scripts\app\modules\class-management-app\services.js" />
     <Content Include="Scripts\app\modules\class-management-app\template.html" />
     <Content Include="Scripts\app\modules\classroom\app.js" />
     <Content Include="Scripts\app\modules\classroom\controller.js" />

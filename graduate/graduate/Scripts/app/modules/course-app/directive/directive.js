@@ -6,32 +6,44 @@ define(['angular', 'services/dialogService'], function (angular) {
                 restrict: "E",
                 scope: {
                     showCourse: "=",
-                    callBack: '&'
+                    callBack: '&',
+                    allInfo:'='
                 },
                 templateUrl: "modules/course-app/directive/directive.html",
                 link: function ($scope) {
 
-
+                    $scope.$on('editcourse',function(event,obj){
+                        for(var i=0,l=$scope.allInfo.length;i<l;i++){
+                            if($scope.allInfo[i].courseId==obj.id){
+                                $scope.info=$scope.allInfo[i];
+                            }
+                        }
+                        $scope.currId=obj.id;
+                    })
                     $scope.cancel = function () {
                         $scope.showCourse = false;
                         $scope.info = {};
+                        $scope.currId=0;
+                        $scope.callBack();
                     }
                     $scope.confirm = function () {
                         var data = {
-                            name: $scope.info.name,
+                            name: $scope.info.courseName,
                             type: $scope.info.type,
                             timeperweek: $scope.info.timeperweek,
-                            classid: $scope.info.classid
+                            classid: $scope.info.classId,
+                            currid:$scope.currId||0
                         }
                         $http.post('Default/addcourse', data).success(function () {
                             gintDialog.success('Success!');
                             $scope.showCourse = false;
                             $scope.info = {};
+                            $scope.currId=0
                             $scope.callBack();
                         })
                     }
                     $scope.selectdCourse = function (data) {
-                        $scope.info.classid = data.classId;
+                        $scope.info.classId = data.classId;
                     }
                     $scope.init = function () {
                         $scope.classlist = new Array();

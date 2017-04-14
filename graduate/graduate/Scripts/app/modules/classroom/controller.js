@@ -1,11 +1,22 @@
 ﻿"use strict"
 define([
-    'angular'
+    'angular',
+    "services/dialogService"
 ], function (angular) {
-    return angular.module('classroom-controller', [])
-        .controller('classroom-ctrl', ['$scope', '$http', function ($scope, $http) {
+    return angular.module('classroom-controller', ["Dialog.services"])
+        .controller('classroom-ctrl', ['$scope', '$http',"gintDialog", function ($scope, $http,gintDialog) {
             $scope.addroom = function () {
                 $scope.showClassroom = true;
+            }
+            $scope.editClassroom = function (id) {
+                $scope.showClassroom = true;
+                $scope.$broadcast('editclassroom', { id: id })
+            }
+            $scope.closeClassroom = function (id) {
+                $http.post('Default/delclassroom', { id: id }).success(function () {
+                    gintDialog.success('删除成功')
+                    $scope.init();
+                })
             }
             $scope.init = function () {
                 $scope.showClassroom = false;

@@ -19,49 +19,101 @@ namespace graduate.Controllers
         {
             return View();
         }
-        public ActionResult addclass(string name, int count) {
-            banji newclass = new Models.banji();
-            newclass.className = name;
-            newclass.stucount = count;
-            db.banji.Add(newclass);
-            db.SaveChanges();
+        public ActionResult addclass(string name, int count,int currid) {
+            var t = (from d in db.banji where d.classId == currid select d).ToList();
+            if (!t.Any())
+            {
+                banji newclass = new Models.banji();
+                newclass.className = name;
+                newclass.stucount = count;
+                db.banji.Add(newclass);
+                db.SaveChanges();
+            }
+            else {
+                t.FirstOrDefault().className = name;
+                t.FirstOrDefault().stucount = count;
+                db.SaveChanges();
+            }
+            
             return Json(new object());
         }
-        public ActionResult addclassroom(string name, int count, string type)
+        public ActionResult addclassroom(string name, int count, string type,int currid)
         {
-            classroom clsroom = new classroom();
-            clsroom.classroomName = name;
-            clsroom.capacity = count;
-            clsroom.timeUsed = "";
-            clsroom.type = type;
-            db.classroom.Add(clsroom);
-            db.SaveChanges();
+            var t = from d in db.classroom where d.classroomId == currid select d;
+            if (t.Any())
+            {
+                t.FirstOrDefault().classroomName = name;
+                t.FirstOrDefault().capacity = count;
+                t.FirstOrDefault().type = type;
+                db.SaveChanges();
+            }
+            else {
+                classroom clsroom = new classroom();
+                clsroom.classroomName = name;
+                clsroom.capacity = count;
+                clsroom.timeUsed = "";
+                clsroom.type = type;
+                db.classroom.Add(clsroom);
+                db.SaveChanges();
+            }
+            
             return Json(new object());
         }
-        public ActionResult addcourse(string name, string type, string timeperweek, int classid)
+        public ActionResult addcourse(string name, string type, string timeperweek, int classid,int currid)
         {
-            course newcourse = new course();
-            newcourse.courseName = name;
-            newcourse.type = type;
-            newcourse.timeperweek = timeperweek;
-            newcourse.classId = classid;
-            db.course.Add(newcourse);
+            var t = from d in db.course where d.courseId == currid select d;
+            if (t.Any())
+            {
+                t.FirstOrDefault().courseName = name;
+                t.FirstOrDefault().type = type;
+                t.FirstOrDefault().timeperweek = timeperweek;
+                t.FirstOrDefault().classId = classid;
+                db.SaveChanges();
+            }
+            else {
+                course newcourse = new course();
+                newcourse.courseName = name;
+                newcourse.type = type;
+                newcourse.timeperweek = timeperweek;
+                newcourse.classId = classid;
+                db.course.Add(newcourse);
+                db.SaveChanges();
+            }
+            
+            return Json(new object());
+        }
+        public ActionResult addteacher(string name, int priority, string prefertime, string type,int currid) {
+            var t = from d in db.teacher where d.teacherId == currid select d;
+            if (t.Any())
+            {
+                t.FirstOrDefault().teacherName = name;
+                t.FirstOrDefault().priority = priority;
+                t.FirstOrDefault().prefertime = prefertime;
+                t.FirstOrDefault().type = type;
+            }
+            else {
+                teacher newteacher = new teacher();
+                newteacher.teacherName = name;
+                newteacher.priority = priority;
+                newteacher.prefertime = prefertime;
+                newteacher.type = type;
+                db.teacher.Add(newteacher);
+            }
+            
             db.SaveChanges();
             return Json(new object());
         }
-        public ActionResult addteacher(string name, int priority, string prefertime, string type) {
-            teacher newteacher = new teacher();
-            newteacher.teacherName = name;
-            newteacher.priority = priority;
-            newteacher.prefertime = prefertime;
-            newteacher.type = type;
-            db.teacher.Add(newteacher);
-            db.SaveChanges();
-            return Json(new object());
-        }
-        public ActionResult classlist() {
-            var t = (from d in db.banji select d).ToList();
-            return Json(t);
+        public ActionResult classlist(int? id) {
+            if (id != null)
+            {
+                var t = (from d in db.banji where d.classId == id select d).ToList();
+                return Json(t);
+            }
+            else {
+                var k = (from d in db.banji select d).ToList();
+                return Json(k);
+            }
+            
         }
         public ActionResult teacherlist() {
             var q = (from d in db.teacher select d).ToList();
@@ -75,5 +127,36 @@ namespace graduate.Controllers
             var q = (from t in db.classroom select t).ToList();
             return Json(q);
         }
+        public ActionResult delclass(int id) {
+            banji del=new banji(){classId= id};
+            db.banji.Attach(del);
+            db.banji.Remove(del);
+            db.SaveChanges();
+            return Json(new object());
+        }
+        public ActionResult delclassroom(int id) {
+            classroom del = new classroom() { classroomId = id };
+            db.classroom.Attach(del);
+            db.classroom.Remove(del);
+            db.SaveChanges();
+            return Json(new object());
+        }
+        public ActionResult delcourse(int id)
+        {
+            course del = new course() { courseId = id };
+            db.course.Attach(del);
+            db.course.Remove(del);
+            db.SaveChanges();
+            return Json(new object());
+        }
+        public ActionResult delteacher(int id)
+        {
+            teacher del = new teacher() { teacherId = id };
+            db.teacher.Attach(del);
+            db.teacher.Remove(del);
+            db.SaveChanges();
+            return Json(new object());
+        }
+        //初始化
     }
 }
