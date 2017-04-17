@@ -163,28 +163,101 @@ namespace graduate.Controllers
             var q0 = (from d in db.course select d).ToList();
             
             foreach (var item in q0) {
-                schedule t0 = new schedule() { courseId = item.courseId,classId=item.classId };
-                //随机一个teacher
-                var sql = (from d in db.teacher
-                           where d.type == item.type
-                           select d.teacherId);
-                Random rd = new Random(Guid.NewGuid().GetHashCode());
-                int teacherlen = sql.ToList().Count();
-                int n0 = rd.Next(0, teacherlen);
-                t0.teacherId = sql.ToList()[n0];
-                //随机一个classroom
-                var room = from d in db.classroom
-                           where d.type == item.roomrequest
-                           select d.classroomId;
-                int roomlen = room.ToList().Count();
-                int n1 = rd.Next(0, roomlen);
-                t0.classroomId = room.ToList()[n1];
-                //随机一个时间
-                t0.time = rd.Next(1, 26);
+                if (item.timeperweek == "4") {
+                    for (var j = 0; j < 2; j++) {
+                        schedule t0 = new schedule() { courseId = item.courseId, classId = item.classId };
+                        //随机一个teacher
+                        var sql = (from d in db.teacher
+                                   where d.type == item.type
+                                   select d.teacherId);
+                        Random rd0 = new Random();
+                        int teacherlen = sql.ToList().Count();
+                        int n0 = rd0.Next(0, teacherlen);
+                        t0.teacherId = sql.ToList()[n0];
+                        //随机一个classroom
+                        var room = from d in db.classroom
+                                   where d.type == item.roomrequest
+                                   select d.classroomId;
+                        Random rd1 = new Random(Guid.NewGuid().GetHashCode());
+                        int roomlen = room.ToList().Count();
+                        int n1 = rd1.Next(0, roomlen);
+                        t0.classroomId = room.ToList()[n1];
+                        var usedtime = from d in db.classroom
+                                       where d.classroomId == t0.classroomId
+                                       select d;
 
-                db.schedule.Add(t0);
+                        //随机一个时间
+                        Random rd2 = new Random(Guid.NewGuid().GetHashCode());
+                        var temptime = rd2.Next(1, 26);
+                        var clsroomitem = usedtime.FirstOrDefault();
+                        for (var i = 0; i < 25; i++)
+                        {
+                            if (clsroomitem.timeUsed.Contains(temptime.ToString()))
+                            {
+                                temptime = rd2.Next(1, 26);
+                                //if (i == 24) {
+                                //    return Json(new object() { data:false});
+                                //}
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        t0.time = temptime;
+                        clsroomitem.timeUsed += t0.time.ToString() + ",";
+
+                        db.schedule.Add(t0);
+                    }
+                }
+                else
+                {
+                    schedule t0 = new schedule() { courseId = item.courseId, classId = item.classId };
+                    //随机一个teacher
+                    var sql = (from d in db.teacher
+                               where d.type == item.type
+                               select d.teacherId);
+                    Random rd0 = new Random();
+                    int teacherlen = sql.ToList().Count();
+                    int n0 = rd0.Next(0, teacherlen);
+                    t0.teacherId = sql.ToList()[n0];
+                    //随机一个classroom
+                    var room = from d in db.classroom
+                               where d.type == item.roomrequest
+                               select d.classroomId;
+                    Random rd1 = new Random(Guid.NewGuid().GetHashCode());
+                    int roomlen = room.ToList().Count();
+                    int n1 = rd1.Next(0, roomlen);
+                    t0.classroomId = room.ToList()[n1];
+                    var usedtime = from d in db.classroom
+                                   where d.classroomId == t0.classroomId
+                                   select d;
+
+                    //随机一个时间
+                    Random rd2 = new Random(Guid.NewGuid().GetHashCode());
+                    var temptime = rd2.Next(1, 26);
+                    var clsroomitem = usedtime.FirstOrDefault();
+                    for (var i = 0; i < 25; i++)
+                    {
+                        if (clsroomitem.timeUsed.Contains(temptime.ToString()))
+                        {
+                            temptime = rd2.Next(1, 26);
+                            //if (i == 24) {
+                            //    return Json(new object() { data:false});
+                            //}
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    t0.time = temptime;
+                    clsroomitem.timeUsed += t0.time.ToString() + ",";
+
+                    db.schedule.Add(t0);
+                }
             }
-
+            
             //using (var dbs=new database())
             //{
             //    using (var con = dbs.Database.Connection)
