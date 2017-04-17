@@ -47,8 +47,6 @@ define(['angular', 'services/dialogService'], function (angular) {
                     }
                     $scope.init = function () {
                         $scope.classlist = new Array();
-
-
                     };
                     $scope.$on('getclass', function () {
                         $http.post('Default/classlist').success(function (data) {

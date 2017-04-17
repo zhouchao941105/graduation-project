@@ -1,0 +1,77 @@
+﻿<style>
+    .fc-agenda-view td, th {
+        height: 40px !important;
+    }
+
+    .fc th {
+        vertical-align: middle;
+    }
+
+
+    .curriculum-drop {
+        width: 80px;
+        height: 70px;
+        position: absolute;
+        background-color: #fff;
+        border: #ebebeb 1px solid;
+        top: 0;
+        left: 0;
+        z-index: 100;
+    }
+
+    .btn-drop-s1 {
+        width: 60px;
+        height: 20px;
+        margin: 10px auto 0;
+        display: block;
+        background-color: #069dd5;
+        color: #fff;
+    }
+    .schedule-fix {
+        position: absolute;
+        top:300px;
+        left:49%;
+        z-index:999;
+        width:50%;
+        border: none;
+    }
+    .fc-toolbar .fc-center {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .fc-event .fc-bg {
+        background: none;
+    }
+    .fc-event, .fc-event:hover, .ui-widget .fc-event {
+        border-radius: 6px;
+        color: currentColor;
+    }
+    .fc button {
+        padding: 0;
+    }
+    .fc-row.fc-widget-header .fc-axis:after {
+        content: url(../../../../../Content/images/icon25.png);
+        position: absolute;
+        top:10px;
+        left:10px;
+    }
+    .fc-scroller::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+    }
+    .fc-scroller::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    display: none;
+}
+    .fc-scroller::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+    .fc-scroller::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: rgba(0,0,0,0.3);
+}
+</style>
+
+
+<div ui-calendar="config" class="schedule-table" ng-model="eventSources" calendar="scheduleCalendar"></div>

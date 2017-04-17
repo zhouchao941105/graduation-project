@@ -167,6 +167,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\app\components\calendarDetail\calendar.html" />
+    <Content Include="Scripts\app\components\calendarDetail\calendar.js" />
     <Content Include="Scripts\app\components\classSchedule\directive.js" />
     <Content Include="Scripts\app\components\classSchedule\template.html" />
     <Content Include="Scripts\app\components\common\directive.js" />
@@ -281,6 +283,9 @@
     <Content Include="Scripts\app\modules\course-app\directive\directive.html" />
     <Content Include="Scripts\app\modules\course-app\directive\directive.js" />
     <Content Include="Scripts\app\modules\course-app\template.html" />
+    <Content Include="Scripts\app\modules\schedisplay-app\app.js" />
+    <Content Include="Scripts\app\modules\schedisplay-app\controller.js" />
+    <Content Include="Scripts\app\modules\schedisplay-app\template.html" />
     <Content Include="Scripts\app\modules\teacher-list-app\app.js" />
     <Content Include="Scripts\app\modules\teacher-list-app\controller.js" />
     <Content Include="Scripts\app\modules\teacher-list-app\directive\directive.html" />

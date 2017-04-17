@@ -16,6 +16,7 @@ namespace graduate.Models
         public int priority { get; set; }
         public string prefertime { get; set; }
         public string type { get; set; }
+        public string timeused { get; set; }
 
     }
 }

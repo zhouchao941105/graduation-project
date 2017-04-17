@@ -20,7 +20,8 @@ namespace graduate.Controllers
         {
             return View();
         }
-        public ActionResult addclass(string name, int count,int currid) {
+        public ActionResult addclass(string name, int count, int currid)
+        {
             var t = (from d in db.banji where d.classId == currid select d).ToList();
             if (!t.Any())
             {
@@ -30,15 +31,16 @@ namespace graduate.Controllers
                 db.banji.Add(newclass);
                 db.SaveChanges();
             }
-            else {
+            else
+            {
                 t.FirstOrDefault().className = name;
                 t.FirstOrDefault().stucount = count;
                 db.SaveChanges();
             }
-            
+
             return Json(new object());
         }
-        public ActionResult addclassroom(string name, int count, string type,int currid)
+        public ActionResult addclassroom(string name, int count, string type, int currid)
         {
             var t = from d in db.classroom where d.classroomId == currid select d;
             if (t.Any())
@@ -48,7 +50,8 @@ namespace graduate.Controllers
                 t.FirstOrDefault().type = type;
                 db.SaveChanges();
             }
-            else {
+            else
+            {
                 classroom clsroom = new classroom();
                 clsroom.classroomName = name;
                 clsroom.capacity = count;
@@ -57,10 +60,10 @@ namespace graduate.Controllers
                 db.classroom.Add(clsroom);
                 db.SaveChanges();
             }
-            
+
             return Json(new object());
         }
-        public ActionResult addcourse(string name, string type, string timeperweek, int classid,int currid)
+        public ActionResult addcourse(string name, string type, string timeperweek, int classid, int currid)
         {
             var t = from d in db.course where d.courseId == currid select d;
             if (t.Any())
@@ -71,7 +74,8 @@ namespace graduate.Controllers
                 t.FirstOrDefault().classId = classid;
                 db.SaveChanges();
             }
-            else {
+            else
+            {
                 course newcourse = new course();
                 newcourse.courseName = name;
                 newcourse.type = type;
@@ -80,10 +84,11 @@ namespace graduate.Controllers
                 db.course.Add(newcourse);
                 db.SaveChanges();
             }
-            
+
             return Json(new object());
         }
-        public ActionResult addteacher(string name, int priority, string prefertime, string type,int currid) {
+        public ActionResult addteacher(string name, int priority, string prefertime, string type, int currid)
+        {
             var t = from d in db.teacher where d.teacherId == currid select d;
             if (t.Any())
             {
@@ -92,7 +97,8 @@ namespace graduate.Controllers
                 t.FirstOrDefault().prefertime = prefertime;
                 t.FirstOrDefault().type = type;
             }
-            else {
+            else
+            {
                 teacher newteacher = new teacher();
                 newteacher.teacherName = name;
                 newteacher.priority = priority;
@@ -100,42 +106,49 @@ namespace graduate.Controllers
                 newteacher.type = type;
                 db.teacher.Add(newteacher);
             }
-            
+
             db.SaveChanges();
             return Json(new object());
         }
-        public ActionResult classlist(int? id) {
+        public ActionResult classlist(int? id)
+        {
             if (id != null)
             {
                 var t = (from d in db.banji where d.classId == id select d).ToList();
                 return Json(t);
             }
-            else {
+            else
+            {
                 var k = (from d in db.banji select d).ToList();
                 return Json(k);
             }
-            
+
         }
-        public ActionResult teacherlist() {
+        public ActionResult teacherlist()
+        {
             var q = (from d in db.teacher select d);
             return Json(q.ToList());
         }
-        public ActionResult courselist() {
+        public ActionResult courselist()
+        {
             var t = (from d in db.course select d).ToList();
             return Json(t);
         }
-        public ActionResult classroomlist() {
+        public ActionResult classroomlist()
+        {
             var q = (from t in db.classroom select t).ToList();
             return Json(q);
         }
-        public ActionResult delclass(int id) {
-            banji del=new banji(){classId= id};
+        public ActionResult delclass(int id)
+        {
+            banji del = new banji() { classId = id };
             db.banji.Attach(del);
             db.banji.Remove(del);
             db.SaveChanges();
             return Json(new object());
         }
-        public ActionResult delclassroom(int id) {
+        public ActionResult delclassroom(int id)
+        {
             classroom del = new classroom() { classroomId = id };
             db.classroom.Attach(del);
             db.classroom.Remove(del);
@@ -159,58 +172,18 @@ namespace graduate.Controllers
             return Json(new object());
         }
         //初始化
-        public ActionResult init() {
+        public ActionResult init()
+        {
             var q0 = (from d in db.course select d).ToList();
-            
-            foreach (var item in q0) {
-                if (item.timeperweek == "4") {
-                    for (var j = 0; j < 2; j++) {
-                        schedule t0 = new schedule() { courseId = item.courseId, classId = item.classId };
-                        //随机一个teacher
-                        var sql = (from d in db.teacher
-                                   where d.type == item.type
-                                   select d.teacherId);
-                        Random rd0 = new Random();
-                        int teacherlen = sql.ToList().Count();
-                        int n0 = rd0.Next(0, teacherlen);
-                        t0.teacherId = sql.ToList()[n0];
-                        //随机一个classroom
-                        var room = from d in db.classroom
-                                   where d.type == item.roomrequest
-                                   select d.classroomId;
-                        Random rd1 = new Random(Guid.NewGuid().GetHashCode());
-                        int roomlen = room.ToList().Count();
-                        int n1 = rd1.Next(0, roomlen);
-                        t0.classroomId = room.ToList()[n1];
-                        var usedtime = from d in db.classroom
-                                       where d.classroomId == t0.classroomId
-                                       select d;
 
-                        //随机一个时间
-                        Random rd2 = new Random(Guid.NewGuid().GetHashCode());
-                        var temptime = rd2.Next(1, 26);
-                        var clsroomitem = usedtime.FirstOrDefault();
-                        for (var i = 0; i < 25; i++)
-                        {
-                            if (clsroomitem.timeUsed.Contains(temptime.ToString()))
-                            {
-                                temptime = rd2.Next(1, 26);
-                                //if (i == 24) {
-                                //    return Json(new object() { data:false});
-                                //}
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-                        t0.time = temptime;
-                        clsroomitem.timeUsed += t0.time.ToString() + ",";
-
-                        db.schedule.Add(t0);
-                    }
+            foreach (var item in q0)
+            {
+                var runtime = 1;
+                if (item.timeperweek == "4")
+                {
+                    runtime = 2;
                 }
-                else
+                for (var j = 0; j < runtime; j++)
                 {
                     schedule t0 = new schedule() { courseId = item.courseId, classId = item.classId };
                     //随机一个teacher
@@ -229,22 +202,26 @@ namespace graduate.Controllers
                     int roomlen = room.ToList().Count();
                     int n1 = rd1.Next(0, roomlen);
                     t0.classroomId = room.ToList()[n1];
+                    //随机一个时间
                     var usedtime = from d in db.classroom
                                    where d.classroomId == t0.classroomId
                                    select d;
-
-                    //随机一个时间
+                    var teachertime = from d in db.teacher
+                                      where d.teacherId == t0.teacherId
+                                      select d;
+                    var classtime = from d in db.banji
+                                    where d.classId == t0.classId
+                                    select d;
                     Random rd2 = new Random(Guid.NewGuid().GetHashCode());
                     var temptime = rd2.Next(1, 26);
                     var clsroomitem = usedtime.FirstOrDefault();
+                    var teachertimeitem = teachertime.FirstOrDefault();
+                    var clsitem = classtime.FirstOrDefault();
                     for (var i = 0; i < 25; i++)
                     {
-                        if (clsroomitem.timeUsed.Contains(temptime.ToString()))
+                        if (clsroomitem.timeUsed.Contains(temptime.ToString()) || teachertimeitem.timeused.Contains(temptime.ToString()) || clsitem.timeused.Contains(temptime.ToString()))
                         {
                             temptime = rd2.Next(1, 26);
-                            //if (i == 24) {
-                            //    return Json(new object() { data:false});
-                            //}
                         }
                         else
                         {
@@ -253,11 +230,11 @@ namespace graduate.Controllers
                     }
                     t0.time = temptime;
                     clsroomitem.timeUsed += t0.time.ToString() + ",";
-
+                    teachertimeitem.timeused += t0.time.ToString() + ",";
+                    clsitem.timeused += t0.time.ToString() + ",";
                     db.schedule.Add(t0);
                 }
             }
-            
             //using (var dbs=new database())
             //{
             //    using (var con = dbs.Database.Connection)
@@ -268,9 +245,30 @@ namespace graduate.Controllers
             //        var result = con.ExecuteScalar(sql);
             //    }
             //}
-            
+
             db.SaveChanges();
             return Json(new object());
+        }
+        public ActionResult scheClass(int classId)
+        {
+            var query = from d in db.schedule
+                        where d.classId == classId
+                        select d;
+            return Json(query);
+        }
+        public ActionResult scheClassroom(int classroomId)
+        {
+            var query = from d in db.schedule
+                        where d.classroomId == classroomId
+                        select d;
+            return Json(query);
+        }
+        public ActionResult scheTeacher(int teacherId)
+        {
+            var query = from d in db.schedule
+                        where d.teacherId == teacherId
+                        select d;
+            return Json(query);
         }
     }
 }

@@ -89,3 +89,4 @@ D:\毕设\graduate\graduate\graduate\obj\Debug\graduate.dll
 D:\毕设\graduate\graduate\graduate\obj\Debug\graduate.pdb
 E:\graduation-project\graduate\graduate\bin\Dapper.dll
 E:\graduation-project\graduate\graduate\bin\Dapper.xml
+E:\graduation-project\graduate\graduate\obj\Debug\graduate.csprojResolveAssemblyReference.cache

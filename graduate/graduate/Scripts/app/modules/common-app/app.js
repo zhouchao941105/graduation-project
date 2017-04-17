@@ -9,7 +9,8 @@ define([
         "modules/class-management-app/app",
         "modules/classroom/app",
         "modules/teacher-list-app/app",
-        "modules/course-app/app"
+        "modules/course-app/app",
+        "modules/schedisplay-app/app"
 ],
     function (angular) {
         return angular.module("CommonApp", [
@@ -20,7 +21,8 @@ define([
                 "ClassManagementApp",
                 "classroom-app",
                 "TeacherListApp",
-                "course.app"
+                "course.app",
+                "sche.app"
             ])
             .config([
                 '$urlRouterProvider', function($urlRouterProvider) {

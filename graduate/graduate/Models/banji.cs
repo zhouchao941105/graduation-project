@@ -14,6 +14,7 @@ namespace graduate.Models
         public int classId { get; set; }
         public string className { get; set; }
         public int stucount { get; set; }
+        public string timeused { get; set; }
 
     }
 }
