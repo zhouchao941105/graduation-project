@@ -170,3 +170,5 @@ strong.form-name{padding-left: 10px;}
 .guide-content  .normal-btn{width:124px;}
 
 /*} 首页 */
+.fc-day-header{width: 100px;height: 32px;}
+.fc-widget-content{width: 100px;height: 100px; border: 1px solid #333; text-align: center;}

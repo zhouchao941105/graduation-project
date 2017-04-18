@@ -2,9 +2,10 @@
 define([
     'angular',
     'uiRouter',
-    'modules/schedisplay-app/controller'
+    'modules/schedisplay-app/controller',
+    'modules/schedisplay-app/directive/directive'
 ],function(angular){
-    return angular.module('sche.app',['ui.router','sche.ctrl'])
+    return angular.module('sche.app',['ui.router','sche.ctrl','sche'])
     .config(['$stateProvider',function($stateProvider){
         $stateProvider.state('display',{
             url:"/display",

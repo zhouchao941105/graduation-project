@@ -11,12 +11,13 @@
             var eventSources = [];
             var colorArr = Object.keys(Array.apply(null, { length: 8 })).map(function (v) { return "color_" + (+v + 1) }), i = 0, subject = [];
             list.forEach(function (item) {
+                item.subjectName='111';
                 var event = {
                     id: item.ID,
                     title: "",
                     allDay: false,
-                    start: item.beginTime,
-                    end: item.endTime,
+                    start: new Date(),
+                    end: new Date(),
                     className: subject[item.subjectId] || (subject[item.subjectId] = colorArr[i++]),
                     data: item
                 };
@@ -48,7 +49,7 @@
                     defaultView: 'agendaWeek',
                     locale: 'zh-cn',
                     allDaySlot: false,
-                    timezone: "Asia/Shanghai",
+                    timezone: "Asia/Beijing",
                     buttonIcons: {
                         prev: 'circle-triangle-w',
                         next: 'circle-triangle-e'
@@ -108,17 +109,17 @@
                     if (scope.id <= 0) {
                         return;
                     }
-                    var startTime = start.subtract(8,'h');
-                    var endTime = end.subtract(8, 'h');
-                    var param = {
-                        beginTime: startTime,
-                        endTime: endTime,
-                        isExport: true
-                    }
-                    param[scope.type] = scope.typeId;
-                    console.log(param);
-                    scope.api(param).success(function (data) {
-                        callback(handleResponse(data.data));
+                    // var startTime = start.subtract(8,'h');
+                    // var endTime = end.subtract(8, 'h');
+                    // var param = {
+                    //     beginTime: startTime,
+                    //     endTime: endTime,
+                    //     isExport: true
+                    // }
+                    // param[scope.type] = scope.typeId;
+                    // console.log(param);
+                    scope.api().success(function (data) {
+                        callback(handleResponse(data));
                     }).error(function (data) {
 
                     });

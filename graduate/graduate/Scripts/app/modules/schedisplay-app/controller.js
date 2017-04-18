@@ -1,7 +1,7 @@
 ﻿"use strict"
-define(['angular', 'components/selectBox/directive','services/dialogService'], function (angular) {
-    return angular.module('sche.ctrl', ['Components.selectBox','Dialog.services'])
-        .controller('sche-ctrl', ['$http', '$scope','gintDialog', function ($http, $scope,gintDialog) {
+define(['angular', 'components/selectBox/directive', 'services/dialogService', 'components/calendarDetail/calendar'], function (angular) {
+    return angular.module('sche.ctrl', ['Components.selectBox', 'Dialog.services', 'Components.calendarDetail'])
+        .controller('sche-ctrl', ['$http', '$scope', 'gintDialog', function ($http, $scope, gintDialog) {
             $scope.choosesche = function (type) {
                 if ($scope.schetype == type) return;
                 $scope.schetype = type;
@@ -19,18 +19,19 @@ define(['angular', 'components/selectBox/directive','services/dialogService'], f
             }
             $scope.init = function () {
                 $scope.schetype = 0;
+                $scope.showsche = false;
                 $scope.update();
                 $scope.classlist = new Array();
                 $scope.classroomlist = new Array();
                 $scope.teacherlist = new Array();
-                $scope.info={}
+                $scope.info = {}
             }
             $scope.getclass = function () {
                 $http.post('Default/classlist').success(function (data) {
                     for (var i = 0, l = data.length; i < l; i++) {
                         $scope.classlist.push(data[i])
                     }
-                    $scope.classdata = $scope.classlist[0];
+                    // $scope.classdata = $scope.classlist[0];
                 })
             }
             $scope.getclassroom = function () {
@@ -38,7 +39,7 @@ define(['angular', 'components/selectBox/directive','services/dialogService'], f
                     for (var i = 0, l = data.length; i < l; i++) {
                         $scope.classroomlist.push(data[i])
                     }
-                    $scope.classroomdata = $scope.classroomlist[0];
+                    // $scope.classroomdata = $scope.classroomlist[0];
                 })
             }
             $scope.getteacher = function () {
@@ -46,36 +47,48 @@ define(['angular', 'components/selectBox/directive','services/dialogService'], f
                     for (var i = 0, l = data.length; i < l; i++) {
                         $scope.teacherlist.push(data[i])
                     }
-                    $scope.teacherdata = $scope.teacherlist[0];
+                    // $scope.teacherdata = $scope.teacherlist[0];
                 })
             }
-            $scope.selectdCourse0 = function (data) {
+            $scope.selectedCourse0 = function (data) {
                 $scope.info.classId = data.classId;
-                $scope.info.type='class';
+                $scope.info.type = 'class';
             }
-            $scope.selectdCourse1 = function (data) {
+            $scope.selectedCourse1 = function (data) {
                 $scope.info.classroomId = data.classroomId;
-                $scope.info.type='classroom';
+                $scope.info.type = 'classroom';
             }
-            $scope.selectdCourse2 = function (data) {
+            $scope.selectedCourse2 = function (data) {
                 $scope.info.teacherId = data.teacherId;
-                $scope.info.type='teacher';
+                $scope.info.type = 'teacher';
             }
-            $scope.export=function(){
-                if($scope.info.type=='class'){
-                    $http.post('Default/scheClass',{classId:$scope.info.classId}).success(function(){
-                        gintDialog.success('Success')
-                    })
-                }else if($scope.info.type=='classroom'){
-                    $http.post('Default/scheClassroom',{classroomId:$scope.info.classroomId}).success(function(){
-                        gintDialog.success('Success');
-                    })
-                }else{
-                    $http.post('Default/scheteacher',{teacherId:$scope.info.teacherId}).success(function(){
-                        gintDialog.success('Success');
-                    })
+            $scope.export = function () {
+                
+                if ($scope.info.type == 'class') {
+                    $http.post('Default/scheClass', { classId: $scope.info.classId }).success(function(data){
+                        $scope.list=data;
+                        $scope.showsche=true;
+                    });
+                }
+                else if ($scope.info.type == 'classroom') {
+                    $http.post('Default/scheClassroom', { classroomId: $scope.info.classroomId }).success(function(data){
+                        $scope.list=data;
+                        $scope.showsche=true;
+                    });
+                } else {
+                    $http.post('Default/scheteacher', { teacherId: $scope.info.teacherId }).success(function(data){
+                        $scope.list=data;
+                        $scope.showsche=true;
+                    });
                 }
             }
+
+
+
+
+
+
+
             $scope.init();
         }])
 })
