@@ -13,7 +13,8 @@
                 $scope.datalist.map(function(v){
                     var row=Math.ceil((v.time-1)/5);
                     var line=(v.time-1)%5;
-                    $($('.sche-tr')[line].children).eq(row).html('data')
+                    var innertext=v.teacherId+'<br>'+v.classId;
+                    $($('.sche-tr')[line].children).eq(row).html(innertext);
 
                 })
             }
