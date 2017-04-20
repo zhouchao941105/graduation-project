@@ -4,6 +4,7 @@
     <div class="clearFix">
         <div class="list-btnBox fl">
             <button type="button" class="normal-btn next" ng-click="addcourse()">新增课程</button>
+            <button type="button" class="normal-btn next" ng-click="fitnessFn()">test</button>
         </div>
         <div class="list-searchBox fr">
             <!--搜索框 列表页用长搜索框，增加样式 long； 弹框页用短搜索框，增加样式 short {-->
@@ -32,7 +33,7 @@
                     <div class="ListDateNoResult">无数据</div>
                 </td>
             </tr>
-            <tr class="ListDate" ng-repeat="item in list" ng-click="getClassDetails(item.classId,item.isOverClass == 1)" ng-show="list.length != 0">
+            <tr class="ListDate" ng-repeat="item in list"  ng-show="list.length != 0">
                 <td>
                     <div style="max-width:150px;" class="t_overflow">{{item.courseName}}</div>
                 </td>
@@ -43,7 +44,7 @@
                     <div style="max-width:150px;" class="t_overflow">{{item.timeperweek}}</div>
                 </td>
                 <td>
-                    <div style="max-width:150px;" class="t_overflow">{{item.classId}}</div>
+                    <div style="max-width:150px;" class="t_overflow">{{item.className}}</div>
                 </td>
                 <td>
                     <button class="listDate-link" ng-click="editcourse(item.courseId)" >编辑</button>

@@ -11,9 +11,9 @@
                 console.log($('.sche-tr')[2].children)
 
                 $scope.datalist.map(function(v){
-                    var row=Math.ceil((v.time-1)/5);
+                    var row=Math.floor((v.time-1)/5)+1;
                     var line=(v.time-1)%5;
-                    var innertext=v.teacherId+'<br>'+v.classId;
+                    var innertext=v.courseName+'<br>'+v.className+'<br>'+v.teacherName+'<br>'+v.classroomName;
                     $($('.sche-tr')[line].children).eq(row).html(innertext);
 
                 })

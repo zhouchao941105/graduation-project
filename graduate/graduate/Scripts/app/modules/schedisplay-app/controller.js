@@ -53,32 +53,41 @@ define(['angular', 'components/selectBox/directive', 'services/dialogService', '
             $scope.selectedCourse0 = function (data) {
                 $scope.info.classId = data.classId;
                 $scope.info.type = 'class';
+                $scope.showsche1=false;
+                $scope.showsche2=false;
+                $scope.showsche3=false;
             }
             $scope.selectedCourse1 = function (data) {
                 $scope.info.classroomId = data.classroomId;
                 $scope.info.type = 'classroom';
+                $scope.showsche2=false;
+                $scope.showsche1=false;
+                $scope.showsche3=false;
             }
             $scope.selectedCourse2 = function (data) {
                 $scope.info.teacherId = data.teacherId;
                 $scope.info.type = 'teacher';
+                $scope.showsche3=false;
+                $scope.showsche2=false;
+                $scope.showsche1=false;
             }
             $scope.export = function () {
                 
                 if ($scope.info.type == 'class') {
                     $http.post('Default/scheClass', { classId: $scope.info.classId }).success(function(data){
-                        $scope.list=data;
-                        $scope.showsche=true;
+                        $scope.list1=data;
+                        $scope.showsche1=true;
                     });
                 }
                 else if ($scope.info.type == 'classroom') {
                     $http.post('Default/scheClassroom', { classroomId: $scope.info.classroomId }).success(function(data){
-                        $scope.list=data;
-                        $scope.showsche=true;
+                        $scope.list2=data;
+                        $scope.showsche2=true;
                     });
                 } else {
                     $http.post('Default/scheteacher', { teacherId: $scope.info.teacherId }).success(function(data){
-                        $scope.list=data;
-                        $scope.showsche=true;
+                        $scope.list3=data;
+                        $scope.showsche3=true;
                     });
                 }
             }

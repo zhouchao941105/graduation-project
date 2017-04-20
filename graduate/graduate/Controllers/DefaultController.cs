@@ -63,7 +63,7 @@ namespace graduate.Controllers
 
             return Json(new object());
         }
-        public ActionResult addcourse(string name, string type, string timeperweek, int classid, int currid)
+        public ActionResult addcourse(string name, string type, string timeperweek, int classid, int currid, string roomrequest)
         {
             var t = from d in db.course where d.courseId == currid select d;
             if (t.Any())
@@ -72,6 +72,7 @@ namespace graduate.Controllers
                 t.FirstOrDefault().type = type;
                 t.FirstOrDefault().timeperweek = timeperweek;
                 t.FirstOrDefault().classId = classid;
+                t.FirstOrDefault().roomrequest = roomrequest;
                 db.SaveChanges();
             }
             else
@@ -81,13 +82,14 @@ namespace graduate.Controllers
                 newcourse.type = type;
                 newcourse.timeperweek = timeperweek;
                 newcourse.classId = classid;
+                newcourse.roomrequest = roomrequest;
                 db.course.Add(newcourse);
                 db.SaveChanges();
             }
 
             return Json(new object());
         }
-        public ActionResult addteacher(string name, int priority, string prefertime, string type, int currid)
+        public ActionResult addteacher(string name, int priority, int prefertime, string type, int currid)
         {
             var t = from d in db.teacher where d.teacherId == currid select d;
             if (t.Any())
@@ -131,7 +133,17 @@ namespace graduate.Controllers
         }
         public ActionResult courselist()
         {
-            var t = (from d in db.course select d).ToList();
+            var t = from d in db.course
+                    join c in db.banji on d.classId equals c.classId
+                    select new {
+                        courseId = d.courseId,
+                        courseName=d.courseName,
+                        type=d.type,
+                        timeperweek=d.timeperweek,
+                        classId=d.classId,
+                        roomrequest=d.roomrequest,
+                        className=c.className
+                    };
             return Json(t);
         }
         public ActionResult classroomlist()
@@ -195,8 +207,10 @@ namespace graduate.Controllers
                     int n0 = rd0.Next(0, teacherlen);
                     t0.teacherId = sql.ToList()[n0];
                     //随机一个classroom
-                    var room = from d in db.classroom
-                               where d.type == item.roomrequest
+                    var room = from d in db.classroom 
+                               join cr in db.course on d.type equals cr.roomrequest
+                               join cd in db.banji on cr.classId equals cd.classId
+                               where d.type == item.roomrequest && cd.stucount<d.capacity
                                select d.classroomId;
                     Random rd1 = new Random(Guid.NewGuid().GetHashCode());
                     int roomlen = room.ToList().Count();
@@ -252,23 +266,92 @@ namespace graduate.Controllers
         public ActionResult scheClass(int classId)
         {
             var query = from d in db.schedule
+                        join c in db.teacher on d.teacherId equals c.teacherId
+                        join b in db.banji on d.classId equals b.classId
+                        join a in db.classroom on d.classroomId equals a.classroomId
+                        join e in db.course on d.courseId equals e.courseId
                         where d.classId == classId
-                        select d;
+                        select new sche
+                        {
+                            scheduleId = d.scheduleId,
+                            courseId = d.courseId,
+                            courseName = e.courseName,
+                            teacherId = d.teacherId,
+                            teacherName = c.teacherName,
+                            classId = d.classId,
+                            className = b.className,
+                            classroomId = d.classroomId,
+                            classroomName = a.classroomName,
+                            time = d.time
+                        };
             return Json(query);
         }
         public ActionResult scheClassroom(int classroomId)
         {
             var query = from d in db.schedule
+                        join c in db.teacher on d.teacherId equals c.teacherId
+                        join b in db.banji on d.classId equals b.classId
+                        join a in db.classroom on d.classroomId equals a.classroomId
+                        join e in db.course on d.courseId equals e.courseId
                         where d.classroomId == classroomId
-                        select d;
+                        select new sche
+                        {
+                            scheduleId = d.scheduleId,
+                            courseId = d.courseId,
+                            courseName = e.courseName,
+                            teacherId = d.teacherId,
+                            teacherName = c.teacherName,
+                            classId = d.classId,
+                            className = b.className,
+                            classroomId = d.classroomId,
+                            classroomName = a.classroomName,
+                            time = d.time
+                        };
             return Json(query);
         }
         public ActionResult scheTeacher(int teacherId)
         {
             var query = from d in db.schedule
+                        join c in db.teacher on d.teacherId equals c.teacherId
+                        join b in db.banji on d.classId equals b.classId
+                        join a in db.classroom on d.classroomId equals a.classroomId
+                        join e in db.course on d.courseId equals e.courseId
                         where d.teacherId == teacherId
-                        select d;
+                        select new sche {
+                            scheduleId = d.scheduleId,
+                            courseId=d.courseId,
+                            courseName=e.courseName,
+                            teacherId=d.teacherId,
+                            teacherName=c.teacherName,
+                            classId=d.classId,
+                            className=b.className,
+                            classroomId=d.classroomId,
+                            classroomName=a.classroomName,
+                            time=d.time
+                        };
             return Json(query);
+        }
+        public ActionResult fitnessFn()
+        {
+            var query = from d in db.schedule
+                        join c in db.teacher on d.teacherId equals c.teacherId
+                        select new {
+                            teahcerid=d.teacherId,
+                            priority=c.priority,
+                            prefer=c.prefertime,
+                            time=d.time
+                        };
+            var length = query.ToList().Count();
+            //int[] fitnessArr=new int[4];
+            var diffcount = 0;
+            for(var i = 0; i < length; i++)
+            {
+                var item = query.ToList()[i];
+                var diff = item.priority * System.Math.Abs(item.prefer - item.time % 5);
+                diffcount += diff;
+            }
+            
+            return Json(diffcount);
         }
     }
 }

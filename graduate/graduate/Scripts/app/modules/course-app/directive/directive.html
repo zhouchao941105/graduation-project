@@ -13,16 +13,19 @@
                 </li>
                 <li>
                     <label class="label-con">*课程类型</label>
-                    <input class="normal-input" type="text" placeholder="请输入课程类型"  ng-class="{'disabled':relate}"  ng-model="info.type"  maxlength="100">
+                    <select-box selected-data="courseData" select-list-data="typelist" select-filed="type" when-selected-action="selectdType(data)"></select-box>
                 </li>
                 <li>
                     <label class="label-con">*周课时</label>
-                    <input class="normal-input" type="text" placeholder="请输入课时数"  ng-class="{'disabled':relate}"  ng-model="info.timeperweek"  maxlength="100">
+                    <select-box selected-data="timeData" select-list-data="timelist" select-filed="time" when-selected-action="selectdTime(data)"></select-box>
                 </li>
                 <li>
                     <label class="label-con">上课班级</label>
-                    <!--<input class="normal-input" type="text" placeholder="请输入教室类型"  ng-class="{'disabled':relate}"  ng-model="info.type"  maxlength="100">-->
                     <select-box selected-data="classdata" select-list-data="classlist" select-filed="className" when-selected-action="selectdCourse(data)"></select-box>
+                </li>
+                <li>
+                    <label class="label-con">所需教室类型</label>
+                    <select-box selected-data="roomdata" select-list-data="roomtypelist" select-filed="roomtype" when-selected-action="selectdroomtype(data)"></select-box>
                 </li>
             </ul>
         </div>

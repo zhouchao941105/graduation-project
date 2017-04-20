@@ -14,7 +14,7 @@ namespace graduate.Models
         public int teacherId { get; set; }
         public string teacherName { get; set; }
         public int priority { get; set; }
-        public string prefertime { get; set; }
+        public int prefertime { get; set; }
         public string type { get; set; }
         public string timeused { get; set; }
 

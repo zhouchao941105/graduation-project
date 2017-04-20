@@ -10,7 +10,9 @@
         <select-box ng-show="schetype==1" selected-data="classroomdata" select-list-data="classroomlist" select-filed="classroomName" when-selected-action="selectedCourse1(data)"></select-box>
         <select-box ng-show="schetype==2" selected-data="teacherdata" select-list-data="teacherlist" select-filed="teacherName" when-selected-action="selectedCourse2(data)"></select-box>
         <button type="button" class="normal-btn next" ng-click="export()">查看</button>
-        <calendar-diy ng-if="showsche" datalist="list" ></calendar-diy>
+        <calendar-diy ng-if="showsche1" datalist="list1" ></calendar-diy>
+        <calendar-diy ng-if="showsche2" datalist="list2" ></calendar-diy>
+        <calendar-diy ng-if="showsche3" datalist="list3" ></calendar-diy>
     </div>
 </div>
 <!--} 工具栏 end -->

@@ -401,6 +401,7 @@
     <Compile Include="Models\banji.cs" />
     <Compile Include="Models\classroom.cs" />
     <Compile Include="Models\course.cs" />
+    <Compile Include="Models\sche.cs" />
     <Compile Include="Models\schedule.cs" />
     <Compile Include="Models\teacher.cs" />
     <Compile Include="Models\database.cs" />

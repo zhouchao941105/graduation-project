@@ -28,5 +28,12 @@ define(['angular', 'services/dialogService'], function () {
                 })
             }
             $scope.init();
+
+            $scope.fitnessFn=function(param){
+               $http.post('Default/fitnessFn').success(function(){
+                   gintDialog.success('!!!')
+               })
+
+            }
         }])
 })
