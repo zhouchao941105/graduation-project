@@ -11,5 +11,7 @@ namespace graduate.Models
     {
         public int userId { get; set; }
         public string userName { get; set; }
+        public string password { get; set; }
+        public string permission { get; set; }
     }
 }

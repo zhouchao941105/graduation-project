@@ -20,6 +20,29 @@ namespace graduate.Controllers
         {
             return View();
         }
+        public ActionResult login()
+        {
+            return View();
+            
+        }
+        [HttpPost]
+        public ActionResult check(string name, string password)
+        {
+            var result = new object();
+            var query = from d in db.user where d.userName == name select d;
+            if (query.Any())
+            {
+                if (query.ToList().FirstOrDefault().password == password)
+                {
+                    return RedirectPermanent("../Default/Index");
+                }
+            }
+            else
+            {
+                
+            }
+            return Json(new object());
+        }
         public ActionResult addclass(string name, int count, int currid)
         {
             var t = (from d in db.banji where d.classId == currid select d).ToList();
