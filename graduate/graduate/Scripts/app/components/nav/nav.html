@@ -7,21 +7,22 @@
     <div class="header-right">
         <!-- 导航里面的一级导航 begin {-->
         <ul class="nav-left" >
-            <li class="nav-item">
-                <a ui-sref="class" ui-sref-opts="{reload: true}" ui-sref-active="active">班级管理</a>
-            </li>
-            <li class="nav-item">
-                <a ui-sref="classroom" ui-sref-opts="{reload: true}" ui-sref-active="active">教室管理</a>
-            </li>
-            <li class="nav-item" >
-                <a ui-sref="course" ui-sref-opts="{reload: true}" ui-sref-active="active">课程管理</a>
-            </li>
-            <li class="nav-item" >
-                <a ui-sref="teacher" ui-sref-opts="{reload: true}" ui-sref-active="active">教师管理</a>
-            </li>
             <li class="nav-item" >
                 <a ui-sref="display" ui-sref-opts="{reload: true}" ui-sref-active="active">查看课表</a>
             </li>
+            <li class="nav-item" ng-show="admin">
+                <a ui-sref="class" ui-sref-opts="{reload: true}" ui-sref-active="active" >班级管理</a>
+            </li>
+            <li class="nav-item" ng-show="admin">
+                <a ui-sref="classroom" ui-sref-opts="{reload: true}" ui-sref-active="active" >教室管理</a>
+            </li>
+            <li class="nav-item" ng-show="admin" >
+                <a ui-sref="course" ui-sref-opts="{reload: true}" ui-sref-active="active" >课程管理</a>
+            </li>
+            <li class="nav-item" ng-show="admin" >
+                <a ui-sref="teacher" ui-sref-opts="{reload: true}" ui-sref-active="active" >教师管理</a>
+            </li>
+            
             <li class="navbar-current" style="width:0;top:0px"></li>
             <!-- 此处为当前项与hover项效果交互时顶部的红色边框滑动的效果，预留dom -->
         </ul>
@@ -32,8 +33,8 @@
                 <span class="nav-account-head"><img ng-src="{{headImgUrl}}" class="face-radius"></span>
                 <!-- 账号菜单的弹出菜单 begin  {-->
                 <ul class="nav-dropDown-menu">
-                    <li class="nav-dropItem nav-account-name"><span>{{loginName}}</span></li>
-                    <li class="nav-dropItem" ng-click='openDialog()'><a href="#">个人设置</a></li>
+                    <!--<li class="nav-dropItem nav-account-name"><span>{{loginName}}</span></li>-->
+                    <!--<li class="nav-dropItem" ng-click='openDialog()'><a href="#">个人设置</a></li>-->
                     <li class="nav-dropItem" ng-click='logout()'><a href="#">注销</a></li>
                 </ul>
                 <!--} 账号菜单的弹出菜单 end -->
@@ -42,4 +43,4 @@
         
     </div>
 </div>
-<set-dialog is-show="isShow" change-img-action='changeImgAction(url)'></set-dialog>
+<!--<set-dialog is-show="isShow" change-img-action='changeImgAction(url)'></set-dialog>-->

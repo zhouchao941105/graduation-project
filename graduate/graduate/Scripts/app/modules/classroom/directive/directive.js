@@ -36,7 +36,7 @@ define([
                                 type: $scope.info.type,
                                 currid: $scope.currId||0
                             }
-                            $http.post('Default/addclassroom', data).then(function () {
+                            $http.post('addclassroom', data).then(function () {
                                 gintDialog.success('success');
                                 $scope.showP = false;
                                 $scope.info={};

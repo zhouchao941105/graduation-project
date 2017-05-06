@@ -6,11 +6,12 @@ define([
         "ngDialog",
         "components/nav/app",
         "modules/common-app/controller",
+        "modules/schedisplay-app/app",
         "modules/class-management-app/app",
         "modules/classroom/app",
         "modules/teacher-list-app/app",
-        "modules/course-app/app",
-        "modules/schedisplay-app/app"
+        "modules/course-app/app"
+        
 ],
     function (angular) {
         return angular.module("CommonApp", [
@@ -18,16 +19,17 @@ define([
                 "ngDialog",
                 "components.nav",
                 "CommonApp.controller",
+                "sche.app",
                 "ClassManagementApp",
                 "classroom-app",
                 "TeacherListApp",
-                "course.app",
-                "sche.app"
+                "course.app"
+                
             ])
             .config([
                 '$urlRouterProvider', function($urlRouterProvider) {
                     $urlRouterProvider
-                        .otherwise('/class');
+                        .otherwise('/display');
                 }
             ])
             .run([
@@ -140,7 +142,7 @@ define([
                     $stateProvider.state('base',
                     {
                         abstract: true,
-                        url: '',
+                        url: '/display',
                         // Example of loading a template from a file. This is also a top level state,
                         // so this template file will be loaded and then inserted into the ui-view
                         // within index.html.

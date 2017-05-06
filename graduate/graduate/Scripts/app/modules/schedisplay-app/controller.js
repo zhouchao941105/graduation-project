@@ -27,7 +27,7 @@ define(['angular', 'components/selectBox/directive', 'services/dialogService', '
                 $scope.info = {}
             }
             $scope.getclass = function () {
-                $http.post('Default/classlist').success(function (data) {
+                $http.post('classlist').success(function (data) {
                     for (var i = 0, l = data.length; i < l; i++) {
                         $scope.classlist.push(data[i])
                     }
@@ -35,7 +35,7 @@ define(['angular', 'components/selectBox/directive', 'services/dialogService', '
                 })
             }
             $scope.getclassroom = function () {
-                $http.post('Default/classroomlist').success(function (data) {
+                $http.post('classroomlist').success(function (data) {
                     for (var i = 0, l = data.length; i < l; i++) {
                         $scope.classroomlist.push(data[i])
                     }
@@ -43,7 +43,7 @@ define(['angular', 'components/selectBox/directive', 'services/dialogService', '
                 })
             }
             $scope.getteacher = function () {
-                $http.post('Default/teacherlist').success(function (data) {
+                $http.post('teacherlist').success(function (data) {
                     for (var i = 0, l = data.length; i < l; i++) {
                         $scope.teacherlist.push(data[i])
                     }
@@ -74,18 +74,18 @@ define(['angular', 'components/selectBox/directive', 'services/dialogService', '
             $scope.export = function () {
                 
                 if ($scope.info.type == 'class') {
-                    $http.post('Default/scheClass', { classId: $scope.info.classId }).success(function(data){
+                    $http.post('scheClass', { classId: $scope.info.classId }).success(function(data){
                         $scope.list1=data;
                         $scope.showsche1=true;
                     });
                 }
                 else if ($scope.info.type == 'classroom') {
-                    $http.post('Default/scheClassroom', { classroomId: $scope.info.classroomId }).success(function(data){
+                    $http.post('scheClassroom', { classroomId: $scope.info.classroomId }).success(function(data){
                         $scope.list2=data;
                         $scope.showsche2=true;
                     });
                 } else {
-                    $http.post('Default/scheteacher', { teacherId: $scope.info.teacherId }).success(function(data){
+                    $http.post('scheteacher', { teacherId: $scope.info.teacherId }).success(function(data){
                         $scope.list3=data;
                         $scope.showsche3=true;
                     });

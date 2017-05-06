@@ -13,7 +13,7 @@ define([
                 $scope.$broadcast('editclassroom', { id: id })
             }
             $scope.closeClassroom = function (id) {
-                $http.post('Default/delclassroom', { id: id }).success(function () {
+                $http.post('delclassroom', { id: id }).success(function () {
                     gintDialog.success('删除成功')
                     $scope.init();
                 })
@@ -21,7 +21,7 @@ define([
             $scope.init = function () {
                 $scope.showClassroom = false;
                 $scope.list = [];
-                $http.post('Default/classroomlist').success(function (data) {
+                $http.post('classroomlist').success(function (data) {
                     for (var i = 0, l = data.length; i < l; i++) {
                         $scope.list.push(data[i])
                     }

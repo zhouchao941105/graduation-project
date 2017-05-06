@@ -13,7 +13,7 @@ define(['angular', 'services/dialogService'], function () {
                 $scope.$broadcast('editcourse', { id: id })
             }
             $scope.closecourse = function (id) {
-                $http.post('Default/delcourse', { id: id }).success(function () {
+                $http.post('delcourse', { id: id }).success(function () {
                     gintDialog.success('删除成功')
                     $scope.init();
                 })
@@ -21,7 +21,7 @@ define(['angular', 'services/dialogService'], function () {
             $scope.init = function () {
                 $scope.showcourse = false;
                 $scope.list = [];
-                $http.post('Default/courselist').success(function (data) {
+                $http.post('courselist').success(function (data) {
                     for (var i = 0, l = data.length; i < l; i++) {
                         $scope.list.push(data[i])
                     }
@@ -30,7 +30,7 @@ define(['angular', 'services/dialogService'], function () {
             $scope.init();
 
             $scope.fitnessFn=function(param){
-               $http.post('Default/fitnessFn').success(function(){
+               $http.post('fitnessFn').success(function(){
                    gintDialog.success('!!!')
                })
 

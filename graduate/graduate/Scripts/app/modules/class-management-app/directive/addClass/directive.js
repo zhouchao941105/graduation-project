@@ -32,7 +32,7 @@ define(['angular',
                             count: $scope.info.stucount,
                             currid:$scope.currId||0
                         }
-                        $http.post('Default/addClass', data).success(function () {
+                        $http.post('addClass', data).success(function () {
                             gintDialog.success('保存成功');
                             $scope.showClassPopup = false;
                             $scope.info={};

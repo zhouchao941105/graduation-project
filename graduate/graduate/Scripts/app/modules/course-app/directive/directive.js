@@ -35,7 +35,7 @@ define(['angular', 'services/dialogService'], function (angular) {
                             currid:$scope.currId||0,
                             roomrequest:$scope.info.request||$scope.roomdata.roomtype
                         }
-                        $http.post('Default/addcourse', data).success(function () {
+                        $http.post('addcourse', data).success(function () {
                             gintDialog.success('Success!');
                             $scope.showCourse = false;
                             $scope.info = {};
@@ -67,7 +67,7 @@ define(['angular', 'services/dialogService'], function (angular) {
                         $scope.roomdata=$scope.roomtypelist[0];
                     };
                     $scope.$on('getclass', function () {
-                        $http.post('Default/classlist').success(function (data) {
+                        $http.post('classlist').success(function (data) {
                             for (var i = 0, l = data.length; i < l; i++) {
                                 $scope.classlist.push(data[i])
                             }

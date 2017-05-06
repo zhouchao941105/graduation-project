@@ -1,6 +1,8 @@
-﻿@{
+﻿@{ 
     Layout = null;
+    var ttt = ViewData["msg"];
 }
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -13,7 +15,6 @@
     <link rel="stylesheet" type="text/css" href="/content/css/login.css" />
     <link rel="stylesheet" type="text/css" href="~/Scripts/app/libs/fullcalendar-new/fullcalendar.css" />
     <script src="~/Scripts/app/libs/jquery/dist/jquery.js"></script>
-    
 </head>
 <body class="body-template" ng-cloak >
     <div class="body-layout">
@@ -21,6 +22,7 @@
         <gint-nav></gint-nav>
         <div ui-view></div>
     </div>
+    <input type="hidden" id="hidbox" value="@ttt" />
     <script src="/Scripts/app/libs/requirejs/require.js" data-main="/Scripts/app/main"></script>
 </body>
 </html>

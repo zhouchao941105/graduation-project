@@ -74,19 +74,14 @@ define([
                     },
                     templateUrl: 'components/nav/nav.html',
                     link: function (scope, iElement, iAttr) {
-                        scope.isShow=false;
+                        // scope.isShow=false;
                         scope.openDialog = function () {
                             scope.isShow = true;
                         }
                         scope.logout = function () {
-                            navNetService.logout().then(function () {
-                                var school = document.cookie ? document.cookie.match(/\bschool=([^;]+)/)[1] : null;
-                                location = school ? '/'+ school + '/Login' : "/";
-                            })
-                                .catch(function (reason) {
-                                    gintDialog.error(reason);
-                                });
+                                location.href="/Default/login"
                         };
+                        scope.admin=$rootScope.permission;
                         init(scope)
                     }
                 };

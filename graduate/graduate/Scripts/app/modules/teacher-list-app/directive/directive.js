@@ -27,7 +27,7 @@ define(['angular', 'services/dialogService'], function (angular) {
                             type: $scope.info.type,
                             currid:$scope.currId||0
                         }
-                        $http.post('Default/addteacher', data).success(function (data) {
+                        $http.post('addteacher', data).success(function (data) {
                             gintDialog.success('Success!')
                             $scope.showTeacher = false;
                             $scope.info = {}

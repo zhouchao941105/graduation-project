@@ -56,13 +56,18 @@ require([
     "app"
 ], function () {
     angular.element(document).ready(function () {
-        //$.post('/api/LoginService/GetCurrentUser', function (result) {
-            //currentUser = result.data;
+        // $.post('/api/LoginService/GetCurrentUser', function (result) {
+            // currentUser = result.data;
+            // var t=document.getElementById('hidbox')
+            
+            
             var temp = angular.module("CommonApp");
             temp.run(['$rootScope', '$state', '$stateParams', 'currentUserService',
                 function ($rootScope, $state, $stateParams, currentUserService) {
                     $rootScope.$state = $state;
                     $rootScope.$stateParams = $stateParams;
+                    $rootScope.permission=$('#hidbox').val()==1?true:false;
+                    // console.log($rootScope.permission)
                     //  $rootScope.currentUser = currentUser;
                     //currentUserService.setCurrentUser(currentUser);
                 }

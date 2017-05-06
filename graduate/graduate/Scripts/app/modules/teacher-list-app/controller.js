@@ -11,7 +11,7 @@ define(['angular',"services/dialogService"], function (angular) {
                 $scope.$broadcast('editteacher', { id: id })
             }
             $scope.closeteacher = function (id) {
-                $http.post('Default/delteacher', { id: id }).success(function () {
+                $http.post('delteacher', { id: id }).success(function () {
                     gintDialog.success('删除成功')
                     $scope.init();
                 })
@@ -19,7 +19,7 @@ define(['angular',"services/dialogService"], function (angular) {
             $scope.init = function () {
                 $scope.showteacher = false;
                 $scope.list = [];
-                $http.post('Default/teacherlist').success(function (data) {
+                $http.post('teacherlist').success(function (data) {
                     for (var i = 0, l = data.length; i < l; i++) {
                         $scope.list.push(data[i])
                     }

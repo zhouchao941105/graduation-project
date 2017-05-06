@@ -16,8 +16,16 @@ namespace graduate.Controllers
         {
             this.db = new database();
         }
-        public ActionResult Index()
+        public ActionResult Index(string name)
         {
+            if (name == "admin")
+            {
+                ViewData["msg"] = "1";
+            }
+            else
+            {
+                ViewData["msg"] = "0";
+            }
             return View();
         }
         public ActionResult login()
@@ -28,20 +36,17 @@ namespace graduate.Controllers
         [HttpPost]
         public ActionResult check(string name, string password)
         {
-            var result = new object();
-            var query = from d in db.user where d.userName == name select d;
+            name = Request.Form["name"];
+            password = Request.Form["password"];
+            var query = from d in db.user where d.userName == name && d.password == password select d;
             if (query.Any())
             {
-                if (query.ToList().FirstOrDefault().password == password)
-                {
-                    return RedirectPermanent("../Default/Index");
-                }
+                return RedirectToAction("Index",new { name=name});
             }
             else
             {
-                
+                return Content("密码不正确");
             }
-            return Json(new object());
         }
         public ActionResult addclass(string name, int count, int currid)
         {
@@ -130,6 +135,10 @@ namespace graduate.Controllers
                 newteacher.prefertime = prefertime;
                 newteacher.type = type;
                 db.teacher.Add(newteacher);
+                user newuser = new user();
+                newuser.userName = name;
+                newuser.password = "123456";
+                db.user.Add(newuser);
             }
 
             db.SaveChanges();
@@ -376,5 +385,9 @@ namespace graduate.Controllers
             
             return Json(diffcount);
         }
+        //public ActionResult logout()
+        //{
+        //    return Redirect("login");
+        //}
     }
 }
