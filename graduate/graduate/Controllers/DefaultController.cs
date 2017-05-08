@@ -41,6 +41,7 @@ namespace graduate.Controllers
             var query = from d in db.user where d.userName == name && d.password == password select d;
             if (query.Any())
             {
+                Session["user"] = name;
                 return RedirectToAction("Index",new { name=name});
             }
             else
@@ -293,7 +294,8 @@ namespace graduate.Controllers
             //}
 
             db.SaveChanges();
-            return Json(new object());
+            var result = from d in db.schedule select d;
+            return Json(result);
         }
         public ActionResult scheClass(int classId)
         {
@@ -385,9 +387,16 @@ namespace graduate.Controllers
             
             return Json(diffcount);
         }
-        //public ActionResult logout()
-        //{
-        //    return Redirect("login");
-        //}
+        public ActionResult modpassword(string oldpassword,string newpassword)
+        {
+            string curr = Session["user"].ToString();
+            var query = (from d in db.user where d.userName == curr select d).ToList().FirstOrDefault();
+            if (query.password == oldpassword)
+            {
+                query.password = newpassword;
+            }
+            db.SaveChanges();
+            return Redirect("Index");
+        }
     }
 }

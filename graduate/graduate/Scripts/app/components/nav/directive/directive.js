@@ -31,7 +31,7 @@ define([
         }
 
         function reset(scope) {
-            scope.tabNum = 0;
+            scope.tabNum = 1;
             scope.oldPwd = '';
             scope.newPwd = '';
             scope.comparePwd = '';
@@ -61,24 +61,13 @@ define([
 
                 scope.confirm = function () {
                     if (scope.tabNum === 1) {
-                        navValidator.password(scope.oldPwd, scope.newPwd, scope.comparePwd)
+                        $.post('/Default/modpassword',{"oldpassword":scope.oldPwd,"newpassword": scope.newPwd})
                             .then(function (data) {
-                                return userService.updateUserPwd(data);
+                                gintDialog.success("success")
                             })
                             .then(function () {
                                 scope.isShow = false;
-                                reset(scope);
-                                gintDialog.success('操作成功');
-                            })
-                            .catch(function (reason) {
-                                gintDialog.error(reason, 1);
-                            });
-                    } else if (scope.tabNum === 0) {
-                        saveHeadImg(scope)
-                            .then(function () {
-                                scope.isShow = false;
-                                reset(scope);
-                                gintDialog.success('操作成功');
+                                location.href="/Default/login";
                             })
                             .catch(function (reason) {
                                 gintDialog.error(reason, 1);

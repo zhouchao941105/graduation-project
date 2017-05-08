@@ -4,7 +4,7 @@
         <div class="pop-up-title">个人设置</div>
         <div class="pop-up-content-s1 popup-content-minheight clearfix">
             <dl class="StatisticsTab">
-                <dd class="StatisticsTabItem" ng-class="{'Current':tabNum === 0}" ng-click='switchTab(0)'>更改头像</dd>
+                <!--<dd class="StatisticsTabItem" ng-class="{'Current':tabNum === 0}" ng-click='switchTab(0)'>更改头像</dd>-->
                 <dd class="StatisticsTabItem" ng-class="{'Current':tabNum === 1}" ng-click='switchTab(1)'>修改密码</dd>
                 <!-- 注：1、多个dd间无空格； 2、当前tab的样式增加Current样式 -->
             </dl>
@@ -13,12 +13,12 @@
                 <div class="pop-up-loginbox">
                     <div class="pop-up-logindiv"><label class="pop-up-column">当前密码</label><input type="text" class="popup-input-s pop-up-username" ng-model='oldPwd'></div>
                     <div class="pop-up-logindiv"><label class="pop-up-column">新密码</label><input type="text" class="popup-input-s pop-up-name" ng-model='newPwd'></div>
-                    <div class="pop-up-logindiv "><label class="pop-up-column">确认密码</label><input type="text" class="popup-input-s pop-up-pswd" ng-model='comparePwd'></div>
+                    <!--<div class="pop-up-logindiv "><label class="pop-up-column">确认密码</label><input type="text" class="popup-input-s pop-up-pswd" ng-model='comparePwd'></div>-->
                 </div>
             </div>
-            <div ng-hide='tabNum !== 0'>
+            <!--<div ng-hide='tabNum !== 0'>
                 <croper-photo image-url="headImgUrl" json-image-data="jsonImageData"></croper-photo>
-            </div>
+            </div>-->
 
 
         </div>

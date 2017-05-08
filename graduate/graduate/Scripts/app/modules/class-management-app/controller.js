@@ -32,7 +32,10 @@
             }
             $scope.initschedule=function(){
                 $http.post('init').success(function(data){
-                    gintDialog.success('success')
+                    $scope.datalist=[];
+                    data.map(function(v){
+                        // if(v.courseId.length)
+                    })
                 })
             }
             $scope.init();
