@@ -294,8 +294,13 @@ namespace graduate.Controllers
             //}
 
             db.SaveChanges();
+            return Json(new object());
+        }
+        public ActionResult getlist()
+        {
             var result = from d in db.schedule select d;
             return Json(result);
+
         }
         public ActionResult scheClass(int classId)
         {
@@ -386,6 +391,11 @@ namespace graduate.Controllers
             }
             
             return Json(diffcount);
+        }
+        public ActionResult outputfit()
+        {
+            var query = from d in db.teacher select d;
+            return Json(query);
         }
         public ActionResult modpassword(string oldpassword,string newpassword)
         {
