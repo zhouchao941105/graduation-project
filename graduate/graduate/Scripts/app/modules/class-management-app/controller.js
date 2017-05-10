@@ -33,48 +33,61 @@
             $scope.initschedule = function () {
                 $http.post('init').success(function (data) {
                     $scope.datalist = data;
-                    // data.map(function(v){
-                    //     // if(v.courseId.length)
-                    //     $scope.datalist=data
-                    // })
                     gintDialog.success("success")
                 })
             }
-            $scope.fitnessFn=function(param){
-               $http.post('outputfit').success(function(data){
-                   $scope.fitness=data
-                   console.log($scope.fitness)
-                   gintDialog.success('!!!')
-               })
+            $scope.fitnessFn = function (param) {
+                $http.post('outputfit').success(function (data) {
+                    $scope.fitness = data
+                    console.log($scope.fitness)
+                    gintDialog.success('!!!')
+                })
             }
-            var changeNum=function(num,n){
-                return (Array(n).join(0)+num).slice(-n);
+            var changeNum = function (num, n) {
+                return (Array(n).join(0) + num).slice(-n);
             }
+            var fitArr=[];
+            var scheArr=[];
+
             $scope.getlist = function () {
                 $http.post('getlist').success(function (data) {
                     $scope.data = data;
+                    // scheArr.push(data);
+                    console.log(data)
                 })
             }
-            $scope.calcul=function(){
-                var listmap=[]
-                var fitcount=0;
+            
+            $scope.calcul = function () {
+                var listmap = []
+                var fitcount = 0;
                 $scope.data.map(function (v) {
-                    $scope.fitness.map(function(r){
-                        if(r.teacherId==v.teacherId){
-                            
+                    $scope.fitness.map(function (r) {
+                        if (r.teacherId == v.teacherId) {
+                            fitcount += Math.abs(r.prefertime - v.time % 5) * r.priority
                         }
                     })
-                    listmap.push(changeNum(v.courseId,3)+changeNum(v.teacherId,3)+changeNum(v.classId,3)+changeNum(v.classroomId,2)+changeNum(v.time,2))
+                    listmap.push(changeNum(v.courseId, 3) +','+ changeNum(v.classId, 3) +','+ changeNum(v.teacherId, 3) +','+ changeNum(v.classroomId, 2) +','+ changeNum(v.time, 2))
                 })
-                
+                console.log(fitcount)
+                fitArr.push(fitcount);
+                scheArr.push(listmap);
             }
             $scope.demo = function () {
-                // console.log(changeNum(17,3))
-                var listmap=[]
-                $scope.data.map(function (v) {
-                    listmap.push(changeNum(v.courseId,3)+changeNum(v.teacherId,3)+changeNum(v.classId,3)+changeNum(v.classroomId,2)+changeNum(v.time,2))
+                var d1=scheArr[0];
+                // var d2=scheArr[1];
+                console.log(d1)
+                var t=[];
+                var k=[];
+                d1.map(function(v){
+                    temp=v.split(',')
+                    t.push(temp[2]+','+temp[3]+','+temp[4])
                 })
-                console.log(listmap)
+                console.log(k)
+                //冲突检测
+                t.map(function(item1){
+                    var p=item1.split(',');
+                    k.push(p);
+                })
             }
             $scope.init();
 

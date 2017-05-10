@@ -219,8 +219,29 @@ namespace graduate.Controllers
         //初始化
         public ActionResult init()
         {
+            //清空schedule全有数据
+            var list = (from d in db.schedule select d).ToList();
+            db.schedule.RemoveRange(list);
+            //删除timeused
+            var classused = (from d in db.banji select d).ToList();
+            var roomused = (from d in db.classroom select d).ToList();
+            var teacherused = (from d in db.teacher select d).ToList();
+            //db.banji.RemoveRange(classused);
+            for(int i = 0, l = classused.Count(); i < l; i++)
+            {
+                classused[i].timeused = " ";
+            }
+            for (int i = 0, l = roomused.Count(); i < l; i++)
+            {
+                roomused[i].timeUsed = " ";
+            }
+            for (int i = 0, l = teacherused.Count(); i < l; i++)
+            {
+                teacherused[i].timeused = " ";
+            }
+            db.SaveChanges();
             var q0 = (from d in db.course select d).ToList();
-
+       
             foreach (var item in q0)
             {
                 var runtime = 1;
@@ -296,6 +317,7 @@ namespace graduate.Controllers
             db.SaveChanges();
             return Json(new object());
         }
+
         public ActionResult getlist()
         {
             var result = from d in db.schedule select d;
