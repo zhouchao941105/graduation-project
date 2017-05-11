@@ -46,19 +46,19 @@
             var changeNum = function (num, n) {
                 return (Array(n).join(0) + num).slice(-n);
             }
-            var fitArr=[];
-            var scheArr=[];
-
+            var fitArr = [];
+            var scheArr = [];
+            //获取schedule表的数据
             $scope.getlist = function () {
                 $http.post('getlist').success(function (data) {
                     $scope.data = data;
-                    // scheArr.push(data);
+                    scheArr.push(data);
                     console.log(data)
                 })
             }
-            
+            //计算适应度并进行编码
             $scope.calcul = function () {
-                var listmap = []
+                // var listmap = []
                 var fitcount = 0;
                 $scope.data.map(function (v) {
                     $scope.fitness.map(function (r) {
@@ -66,28 +66,41 @@
                             fitcount += Math.abs(r.prefertime - v.time % 5) * r.priority
                         }
                     })
-                    listmap.push(changeNum(v.courseId, 3) +','+ changeNum(v.classId, 3) +','+ changeNum(v.teacherId, 3) +','+ changeNum(v.classroomId, 2) +','+ changeNum(v.time, 2))
+                    // listmap.push(changeNum(v.courseId, 3) + ',' + changeNum(v.classId, 3) + ',' + changeNum(v.teacherId, 3) + ',' + changeNum(v.classroomId, 2) + ',' + changeNum(v.time, 2))
                 })
                 console.log(fitcount)
                 fitArr.push(fitcount);
-                scheArr.push(listmap);
             }
-            $scope.demo = function () {
-                var d1=scheArr[0];
-                // var d2=scheArr[1];
-                console.log(d1)
-                var t=[];
-                var k=[];
-                d1.map(function(v){
-                    temp=v.split(',')
-                    t.push(temp[2]+','+temp[3]+','+temp[4])
+            //检测是否冲突
+            $scope.errtest = function () {
+                scheArr.map(function (p) {
+                    $scope.error = false;
+                    p.map(function (v) {
+                        p.map(function (i) {
+                            if (v.courseId != i.courseId && v.time == i.time) {
+                                if (v.teacherId == i.teacherId || v.classroomId == i.classroomId) {
+                                    $scope.error = true;
+                                }
+                            }
+                        })
+                    })
+                    // console.log(scheArr)                    
+                    console.log($scope.error)
                 })
-                console.log(k)
-                //冲突检测
-                t.map(function(item1){
-                    var p=item1.split(',');
-                    k.push(p);
-                })
+            }
+            //交叉操作   todo:变异
+            $scope.mix=function(){
+                var len=scheArr[0].length;
+                var temp=0;
+                for(var i=0;i<len;i++){
+                    temp=scheArr[0][i].time;
+                    scheArr[0][i].time=scheArr[1][i].time;
+                    scheArr[1][i].time=temp;
+                }
+                $scope.errtest()
+                if($scope.error){
+                    //纠错
+                }
             }
             $scope.init();
 
