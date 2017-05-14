@@ -244,6 +244,7 @@ namespace graduate.Controllers
        
             foreach (var item in q0)
             {
+                int tempid = 0;
                 var runtime = 1;
                 if (item.timeperweek == "4")
                 {
@@ -256,10 +257,18 @@ namespace graduate.Controllers
                     var sql = (from d in db.teacher
                                where d.type == item.type
                                select d.teacherId);
-                    Random rd0 = new Random();
-                    int teacherlen = sql.ToList().Count();
-                    int n0 = rd0.Next(0, teacherlen);
-                    t0.teacherId = sql.ToList()[n0];
+                    
+                    if (j == 0)
+                    {
+                        Random rd0 = new Random();
+                        int teacherlen = sql.ToList().Count();
+                        int n0 = rd0.Next(0, teacherlen);
+                        t0.teacherId = sql.ToList()[n0];
+                        tempid = t0.teacherId;
+                    }else
+                    {
+                        t0.teacherId = tempid;
+                    }
                     //随机一个classroom
                     var room = from d in db.classroom 
                                join cr in db.course on d.type equals cr.roomrequest

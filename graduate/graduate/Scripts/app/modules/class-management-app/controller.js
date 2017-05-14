@@ -39,7 +39,6 @@
             $scope.fitnessFn = function (param) {
                 $http.post('outputfit').success(function (data) {
                     $scope.fitness = data
-                    console.log($scope.fitness)
                     gintDialog.success('!!!')
                 })
             }
@@ -59,48 +58,57 @@
             //计算适应度并进行编码
             $scope.calcul = function () {
                 // var listmap = []
-                var fitcount = 0;
-                $scope.data.map(function (v) {
-                    $scope.fitness.map(function (r) {
-                        if (r.teacherId == v.teacherId) {
-                            fitcount += Math.abs(r.prefertime - v.time % 5) * r.priority
-                        }
+                scheArr.map(function (item) {
+                    $scope.fitcount = 0;
+                    item.map(function (v) {
+                        $scope.fitness.map(function (r) {
+                            if (r.teacherId == v.teacherId) {
+                                $scope.fitcount += Math.abs(r.prefertime - v.time % 5) * r.priority
+                            }
+                        })
+                        // listmap.push(changeNum(v.courseId, 3) + ',' + changeNum(v.classId, 3) + ',' + changeNum(v.teacherId, 3) + ',' + changeNum(v.classroomId, 2) + ',' + changeNum(v.time, 2))
                     })
-                    // listmap.push(changeNum(v.courseId, 3) + ',' + changeNum(v.classId, 3) + ',' + changeNum(v.teacherId, 3) + ',' + changeNum(v.classroomId, 2) + ',' + changeNum(v.time, 2))
+
+                    console.log($scope.fitcount)
                 })
-                console.log(fitcount)
-                fitArr.push(fitcount);
+
+                fitArr.push($scope.fitcount);
             }
             //检测是否冲突
             $scope.errtest = function () {
                 scheArr.map(function (p) {
-                    $scope.error = false;
                     p.map(function (v) {
                         p.map(function (i) {
                             if (v.courseId != i.courseId && v.time == i.time) {
                                 if (v.teacherId == i.teacherId || v.classroomId == i.classroomId) {
-                                    $scope.error = true;
+                                    i.time = (i.time + 5) % 25;
+                                    $scope.errtest();
                                 }
                             }
                         })
                     })
-                    // console.log(scheArr)                    
-                    console.log($scope.error)
                 })
             }
             //交叉操作   todo:变异
-            $scope.mix=function(){
-                var len=scheArr[0].length;
-                var temp=0;
-                for(var i=0;i<len;i++){
-                    temp=scheArr[0][i].time;
-                    scheArr[0][i].time=scheArr[1][i].time;
-                    scheArr[1][i].time=temp;
+            $scope.mix = function () {
+                var len = scheArr[0].length;
+                var temp = 0;
+                for (var i = 0; i < len; i++) {
+                    var r0 = Math.random()
+                    var r1 = Math.random();
+                    if (r0 > 0.3) {
+                        temp = scheArr[0][i].time;
+                        scheArr[0][i].time = scheArr[1][i].time;
+                        scheArr[1][i].time = temp;
+                    }
+                    if (r1 > 0.9) {
+                        scheArr[0][i].time += (scheArr[0][i].time + 1) % 25;
+                        scheArr[1][i].time += (scheArr[1][i].time + 1) % 25;
+                    }
+
                 }
                 $scope.errtest()
-                if($scope.error){
-                    //纠错
-                }
+                $scope.calcul();
             }
             $scope.init();
 
