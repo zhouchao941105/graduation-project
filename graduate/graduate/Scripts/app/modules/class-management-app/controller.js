@@ -33,31 +33,33 @@
             $scope.initschedule = function () {
                 $http.post('init').success(function (data) {
                     $scope.datalist = data;
-                    gintDialog.success("success")
+                    $scope.getlist()
+
+                    // $scope.fitnessFn()
+                    // gintDialog.success("success")
                 })
             }
             $scope.fitnessFn = function (param) {
                 $http.post('outputfit').success(function (data) {
                     $scope.fitness = data
-                    gintDialog.success('!!!')
+                    // gintDialog.success('!!!')
                 })
             }
             var changeNum = function (num, n) {
                 return (Array(n).join(0) + num).slice(-n);
             }
-            var fitArr = [];
             var scheArr = [];
             //获取schedule表的数据
             $scope.getlist = function () {
                 $http.post('getlist').success(function (data) {
                     $scope.data = data;
                     scheArr.push(data);
-                    console.log(data)
                 })
             }
-            //计算适应度并进行编码
+            //计算适应度
             $scope.calcul = function () {
-                // var listmap = []
+                $scope.fitArr = [];
+                var sum=0;
                 scheArr.map(function (item) {
                     $scope.fitcount = 0;
                     item.map(function (v) {
@@ -68,11 +70,15 @@
                         })
                         // listmap.push(changeNum(v.courseId, 3) + ',' + changeNum(v.classId, 3) + ',' + changeNum(v.teacherId, 3) + ',' + changeNum(v.classroomId, 2) + ',' + changeNum(v.time, 2))
                     })
-
                     console.log($scope.fitcount)
+                    $scope.fitArr.push($scope.fitcount);
+                    sum+=$scope.fitcount;
                 })
-
-                fitArr.push($scope.fitcount);
+                // $scope.fitArr.map(function(v){
+                //     sum+=v;
+                // })
+                
+                console.log("总和:"+sum);
             }
             //检测是否冲突
             $scope.errtest = function () {
@@ -89,26 +95,70 @@
                     })
                 })
             }
-            //交叉操作   todo:变异
+            //交叉操作   
             $scope.mix = function () {
+                var rangeArr = [];
+                $scope.fitArr.map(function (v, idx) {
+                    var tempcount = 0;
+                    var equalcount=0;
+                    $scope.fitArr.map(function (k) {
+                        if (k>v) {
+                            tempcount += 1;
+                        }
+                        if(k==v){
+                            equalcount+=1;
+                        }
+                    })
+                    if (tempcount+equalcount<=8 ) {
+                        rangeArr.push(scheArr[idx])
+                    }
+                    if(tempcount<8&&tempcount+equalcount>8){
+                        rangeArr.push(scheArr[idx])
+                    }
+                })
+                rangeArr.slice(0,7);
+                
                 var len = scheArr[0].length;
                 var temp = 0;
-                for (var i = 0; i < len; i++) {
-                    var r0 = Math.random()
-                    var r1 = Math.random();
-                    if (r0 > 0.3) {
-                        temp = scheArr[0][i].time;
-                        scheArr[0][i].time = scheArr[1][i].time;
-                        scheArr[1][i].time = temp;
-                    }
-                    if (r1 > 0.9) {
-                        scheArr[0][i].time += (scheArr[0][i].time + 1) % 25;
-                        scheArr[1][i].time += (scheArr[1][i].time + 1) % 25;
-                    }
+                for (var ti = 0; ti < 7; ti += 2) {
+                    for (var i = 0; i < len; i++) {
+                        var r0 = Math.random()
+                        var r1 = Math.random();
+                        if (r0 > 0.3) {
+                            temp = rangeArr[ti][i].time;
+                            rangeArr[ti][i].time = rangeArr[ti + 1][i].time;
+                            rangeArr[ti + 1][i].time = temp;
+                        }
+                        if (r1 > 0.9) {
+                            rangeArr[ti][i].time += rangeArr[ti][i].time + 1;
+                            rangeArr[ti + 1][i].time += rangeArr[ti + 1][i].time + 1;
+                            rangeArr[ti][i].time=rangeArr[ti][i].time % 25;
+                            rangeArr[ti+1][i].time=rangeArr[ti+1][i].time % 25;
+                            
+                        }
 
+                    }
                 }
                 $scope.errtest()
                 $scope.calcul();
+            }
+            $scope.testzc = function () {
+                $scope.initschedule()
+            }
+            // $scope.outputsche=[];
+            $scope.set=function(){
+                $scope.fitArr.map(function(v,idx){
+                    var flag=false;
+                    $scope.fitArr.map(function(r){
+                        if(r>v){
+                            flag=true;
+                        }
+                    })
+                    if(!flag){
+                        $scope.outputsche=scheArr[idx];
+                    }
+                })
+                console.log($scope.outputsche)
             }
             $scope.init();
 
