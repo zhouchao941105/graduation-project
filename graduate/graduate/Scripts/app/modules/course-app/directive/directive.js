@@ -68,6 +68,7 @@ define(['angular', 'services/dialogService'], function (angular) {
                     };
                     $scope.$on('getclass', function () {
                         $http.post('classlist').success(function (data) {
+                            $scope.classlist=[];
                             for (var i = 0, l = data.length; i < l; i++) {
                                 $scope.classlist.push(data[i])
                             }

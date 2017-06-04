@@ -53,3 +53,32 @@ body{font-family:Arial, "Microsoft Yahei"; font-size:12px; text-align:center}
 /*} 弹框- 提醒 */
 
 /*} 缩放提醒和chorme提醒弹框样式 */
+
+
+.inputIcon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    background: url("../images/loginIcon.png") no-repeat;
+}
+.user{
+    background-position: 0 0;
+}
+.passw{
+    background-position:  0 -20px;
+}
+.loginTit {
+    font-size: 24px;
+    color: #4a546c;
+    text-align: center;
+    font-weight: normal;
+    letter-spacing: 9px;
+}
+.inputError {
+    padding-left: 18px;
+    margin-top: 7px;
+    font-size: 12px;
+    color: #e63320;
+    background: url("../images/warnIcon.png") no-repeat left center;
+}

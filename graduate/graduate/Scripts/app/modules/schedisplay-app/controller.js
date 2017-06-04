@@ -21,12 +21,11 @@ define(['angular', 'components/selectBox/directive', 'services/dialogService', '
                 $scope.schetype = 0;
                 $scope.showsche = false;
                 $scope.update();
-                $scope.classlist = new Array();
-                $scope.classroomlist = new Array();
-                $scope.teacherlist = new Array();
+                
                 $scope.info = {}
             }
             $scope.getclass = function () {
+                $scope.classlist = new Array();
                 $http.post('classlist').success(function (data) {
                     for (var i = 0, l = data.length; i < l; i++) {
                         $scope.classlist.push(data[i])
@@ -35,6 +34,7 @@ define(['angular', 'components/selectBox/directive', 'services/dialogService', '
                 })
             }
             $scope.getclassroom = function () {
+                $scope.classroomlist = new Array();
                 $http.post('classroomlist').success(function (data) {
                     for (var i = 0, l = data.length; i < l; i++) {
                         $scope.classroomlist.push(data[i])
@@ -43,6 +43,7 @@ define(['angular', 'components/selectBox/directive', 'services/dialogService', '
                 })
             }
             $scope.getteacher = function () {
+                $scope.teacherlist = new Array();
                 $http.post('teacherlist').success(function (data) {
                     for (var i = 0, l = data.length; i < l; i++) {
                         $scope.teacherlist.push(data[i])

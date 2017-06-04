@@ -16,8 +16,10 @@ namespace graduate.Controllers
         {
             this.db = new database();
         }
-        public ActionResult Index(string name)
+        [myfilter]
+        public ViewResult Index(string name)
         {
+            //var name = Session["user"].ToString();
             if (name == "admin")
             {
                 ViewData["msg"] = "1";
@@ -33,20 +35,20 @@ namespace graduate.Controllers
             return View();
             
         }
-        [HttpPost]
         public ActionResult check(string name, string password)
         {
-            name = Request.Form["name"];
-            password = Request.Form["password"];
+            //name = Request.Form["name"];
+            //password = Request.Form["password"];
             var query = from d in db.user where d.userName == name && d.password == password select d;
             if (query.Any())
             {
                 Session["user"] = name;
-                return RedirectToAction("Index",new { name=name});
+                var t = 0;
+                return Json(t);
             }
             else
             {
-                return Content("密码不正确");
+                return Json(new object());
             }
         }
         public ActionResult addclass(string name, int count, int currid)
@@ -273,7 +275,7 @@ namespace graduate.Controllers
                     var room = from d in db.classroom 
                                join cr in db.course on d.type equals cr.roomrequest
                                join cd in db.banji on cr.classId equals cd.classId
-                               where d.type == item.roomrequest && cd.stucount<d.capacity
+                               where d.type == item.roomrequest && cr.classId==item.classId && cd.stucount<d.capacity
                                select d.classroomId;
                     Random rd1 = new Random(Guid.NewGuid().GetHashCode());
                     int roomlen = room.ToList().Count();
@@ -326,7 +328,21 @@ namespace graduate.Controllers
             db.SaveChanges();
             return Json(new object());
         }
-
+        public ActionResult setsche(List<schedule> t)
+        {
+            //清空schedule全有数据
+            var list = (from d in db.schedule select d).ToList();
+            db.schedule.RemoveRange(list);
+            for (var i = 0; i < t.Count(); i++)
+            {
+                //var query = from d in db.schedule where d.scheduleId == t[i].scheduleId select d;
+                
+                schedule t0 = new schedule() { courseId = t[i].courseId, teacherId=t[i].teacherId, classId = t[i].classId,classroomId=t[i].classroomId,time=t[i].time };
+                db.schedule.Add(t0);
+            }
+            db.SaveChanges();
+            return Json(new object());
+        }
         public ActionResult getlist()
         {
             var result = from d in db.schedule select d;

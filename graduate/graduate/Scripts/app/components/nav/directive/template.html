@@ -1,31 +1,26 @@
 ﻿<div class="modal" ng-show="isShow">
-    <div class="modal-backdrop" style="height:100%;"></div>
-    <div class="modal-dialog-ab modal-content usual-large" >
-        <div class="pop-up-title">个人设置</div>
-        <div class="pop-up-content-s1 popup-content-minheight clearfix">
-            <dl class="StatisticsTab">
-                <!--<dd class="StatisticsTabItem" ng-class="{'Current':tabNum === 0}" ng-click='switchTab(0)'>更改头像</dd>-->
-                <dd class="StatisticsTabItem" ng-class="{'Current':tabNum === 1}" ng-click='switchTab(1)'>修改密码</dd>
-                <!-- 注：1、多个dd间无空格； 2、当前tab的样式增加Current样式 -->
-            </dl>
-            <!--更换密码-->
-            <div class="account-edit-pswd" ng-show='tabNum === 1'>
-                <div class="pop-up-loginbox">
-                    <div class="pop-up-logindiv"><label class="pop-up-column">当前密码</label><input type="text" class="popup-input-s pop-up-username" ng-model='oldPwd'></div>
-                    <div class="pop-up-logindiv"><label class="pop-up-column">新密码</label><input type="text" class="popup-input-s pop-up-name" ng-model='newPwd'></div>
-                    <!--<div class="pop-up-logindiv "><label class="pop-up-column">确认密码</label><input type="text" class="popup-input-s pop-up-pswd" ng-model='comparePwd'></div>-->
-                </div>
+    <div class="popups-position">
+            <div class="popups-title">
+                <span class="pop-name">修改密码</span>
             </div>
-            <!--<div ng-hide='tabNum !== 0'>
-                <croper-photo image-url="headImgUrl" json-image-data="jsonImageData"></croper-photo>
-            </div>-->
+            <div class="popups-body">
+                <!--更换密码-->
+                <div class="account-edit-pswd" ng-show='tabNum === 1'>
+                    <div class="pop-up-loginbox">
+                        <div class="pop-up-loginCon"><label class="pop-up-column">当前密码</label><input type="password" class="popup-input-s pop-up-passWord"
+                                ng-model='oldPwd'></div>
+                        <div class="pop-up-loginCon"><label class="pop-up-column">新密码</label><input type="password" class="popup-input-s pop-up-passWord"
+                                ng-model='newPwd'></div>
+                    </div>
+                </div>
+               
 
 
-        </div>
-        <div class="popup-btn-box clearfix">
-            <button type="button" class="btn-default btn-cancel" ng-click='cancle()'>取消</button>
-            <button type="button" class="btn-default btn-sure" ng-click='confirm()'>确定</button>
-        </div>
+            </div>
+            <div class="popups-btnBox clearfix">
+                <button type="button" class="normal-btn cancel fl" ng-click='cancle()'>取消</button>
+                <button type="button" class="normal-btn next fr" ng-click='confirm()'>确定</button>
+            </div>
 
     </div>
 </div>

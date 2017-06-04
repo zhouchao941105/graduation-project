@@ -17,7 +17,7 @@ requirejs.config({
         'jqueryUI': "libs/fullcalendar/lib/jquery-ui-1.11.2.min",
         'fullCalendarLocale': "libs/fullcalendar-new/locale-all",
         'fullCalendarCustom': "libs/fullcalendar/fullcalendar-custom",
-
+        'echarts':'libs/echarts'
     },
     shim: {
         angular: {

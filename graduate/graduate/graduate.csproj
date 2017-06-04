@@ -158,12 +158,15 @@
     <Content Include="Content\images\icon_btn5_1.png" />
     <Content Include="Content\images\icon_task9.png" />
     <Content Include="Content\images\icon_tips1.png" />
+    <Content Include="Content\images\indexls.jpg" />
     <Content Include="Content\images\list_bg1.png" />
     <Content Include="Content\images\Loading.gif" />
+    <Content Include="Content\images\loginIcon.png" />
     <Content Include="Content\images\logo01.png" />
     <Content Include="Content\images\logo_org.png" />
     <Content Include="Content\images\pic_head3.jpg" />
     <Content Include="Content\images\ReportLogo1_1.png" />
+    <Content Include="Content\images\warnIcon.png" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -395,6 +398,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Filter\myfilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

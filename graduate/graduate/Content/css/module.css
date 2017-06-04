@@ -6,7 +6,7 @@
 .popups-position{position:absolute; top:50%; left:50%;width:600px;display: inline-block; background: #fff; border-radius: 5px; margin:-300px 0 0 -300px; text-align: center;}
 .popups-warnBody{padding:0 20px;}/*有翻页的底部时使用*/
 .popups-title{height:50px;margin:0 7px;text-align: center;border-bottom:1px #e8eaf1 solid;}
-.popups-body{height: 480px;padding: 0 20px;}
+.popups-body{height: 200px;padding: 0 20px;}
 .popups-btnBox{ padding:20px;}
 /* } 弹窗-基础样式结束 */
 
