@@ -241,9 +241,63 @@ namespace graduate.Controllers
             {
                 teacherused[i].timeused = " ";
             }
-            db.SaveChanges();
+            //db.SaveChanges();
             var q0 = (from d in db.course select d).ToList();
-       
+            var sql0 = (from d in db.teacher
+                       where d.type == "语文"
+                       select d.teacherId);
+            var sql1 = (from d in db.teacher
+                        where d.type == "数学"
+                        select d.teacherId);
+            var sql2 = (from d in db.teacher
+                        where d.type == "英语"
+                        select d.teacherId);
+            var sql3 = (from d in db.teacher
+                        where d.type == "物理"
+                        select d.teacherId);
+            var sql4 = (from d in db.teacher
+                        where d.type == "化学"
+                        select d.teacherId);
+            var sql5 = (from d in db.teacher
+                        where d.type == "生物"
+                        select d.teacherId);
+            var sql6 = (from d in db.teacher
+                        where d.type == "体育"
+                        select d.teacherId);
+            var sql7 = (from d in db.teacher
+                        where d.type == "实验"
+                        select d.teacherId);
+            var sql8 = (from d in db.teacher
+                        where d.type == "历史"
+                        select d.teacherId);
+            var sql9 = (from d in db.teacher
+                        where d.type == "政治"
+                        select d.teacherId);
+            var sql10 = (from d in db.teacher
+                        where d.type == "地理"
+                        select d.teacherId);
+            int l0 = sql0.ToList().Count;
+            int l1 = sql1.ToList().Count;
+            int l2 = sql2.ToList().Count;
+            int l3 = sql3.ToList().Count;
+            int l4 = sql4.ToList().Count;
+            int l5 = sql5.ToList().Count;
+            int l6 = sql6.ToList().Count;
+            int l7 = sql7.ToList().Count;
+            int l8 = sql8.ToList().Count;
+            int l9 = sql9.ToList().Count;
+            int l10 = sql10.ToList().Count;
+            int n0 = 0;
+            int n11 = 0;
+            int n12 = 0;
+            int n3 = 0;
+            int n4 = 0;
+            int n5 = 0;
+            int n6 = 0;
+            int n7 = 0;
+            int n8 = 0;
+            int n9 = 0;
+            int n10 = 0;
             foreach (var item in q0)
             {
                 int tempid = 0;
@@ -256,18 +310,117 @@ namespace graduate.Controllers
                 {
                     schedule t0 = new schedule() { courseId = item.courseId, classId = item.classId };
                     //随机一个teacher
-                    var sql = (from d in db.teacher
-                               where d.type == item.type
-                               select d.teacherId);
                     
+
                     if (j == 0)
                     {
-                        Random rd0 = new Random();
-                        int teacherlen = sql.ToList().Count();
-                        int n0 = rd0.Next(0, teacherlen);
-                        t0.teacherId = sql.ToList()[n0];
+                        //int teacherlen = sql.ToList().Count();
+                        //int n0 = rd0.Next(0, teacherlen);
+                        if (item.type == "语文")
+                        {
+                            //Random rd0 = new Random(Guid.NewGuid().GetHashCode());
+                            //int n0 = rd0.Next(0, l0);
+
+                            if (n0 >= l0)
+                            {
+                                n0 = n0 - l0;
+                            }
+                            t0.teacherId = sql0.ToList()[n0];
+                            n0++;
+                        }
+                        else if (item.type == "数学")
+                        {
+                            if (n11 >= l1)
+                            {
+                                n11 = n11 - l1;
+                            }
+                            t0.teacherId = sql1.ToList()[n11];
+                            n11++;
+                        }
+                        else if (item.type == "英语")
+                        {
+                            if (n12 >= l2)
+                            {
+                                n12 = n12 - l2;
+                            }
+                            t0.teacherId = sql2.ToList()[n12];
+                            n12++;
+                        }
+                        else if (item.type == "物理")
+                        {
+                            if (n3 >= l3)
+                            {
+                                n3 = n3 - l3;
+                            }
+                            t0.teacherId = sql3.ToList()[n3];
+                            n3++;
+                        }
+                        else if (item.type == "化学")
+                        {
+                            if (n4 >= l4)
+                            {
+                                n4 = n4 - l4;
+                            }
+                            t0.teacherId = sql4.ToList()[n4];
+                            n4++;
+                        }
+                        else if (item.type == "生物")
+                        {
+                            if (n5 >= l5)
+                            {
+                                n5 = n5 - l5;
+                            }
+                            t0.teacherId = sql5.ToList()[n5];
+                            n5++;
+                        }
+                        else if (item.type == "体育")
+                        {
+                            if (n6 >= l6)
+                            {
+                                n6 = n6 - l6;
+                            }
+                            t0.teacherId = sql6.ToList()[n6];
+                            n6++;
+                        }
+                        else if (item.type == "实验")
+                        {
+                            if (n7 >= l7)
+                            {
+                                n7 = n7 - l7;
+                            }
+                            t0.teacherId = sql7.ToList()[n7];
+                            n7++;
+                        }
+                        else if (item.type == "历史")
+                        {
+                            if (n8 >= l8)
+                            {
+                                n8 = n8 - l8;
+                            }
+                            t0.teacherId = sql8.ToList()[n8];
+                            n8++;
+                        }
+                        else if (item.type == "政治")
+                        {
+                            if (n9 >= l9)
+                            {
+                                n9 = n9 - l9;
+                            }
+                            t0.teacherId = sql9.ToList()[n9];
+                            n9++;
+                        }
+                        else if (item.type == "地理")
+                        {
+                            if (n10 >= l10)
+                            {
+                                n10 = n10 - l10;
+                            }
+                            t0.teacherId = sql10.ToList()[n10];
+                            n10++;
+                        }
+
                         tempid = t0.teacherId;
-                    }else
+                    }else if(j==1&&tempid!=0)
                     {
                         t0.teacherId = tempid;
                     }
@@ -300,7 +453,7 @@ namespace graduate.Controllers
                     {
                         if (clsroomitem.timeUsed.Contains(temptime.ToString()) || teachertimeitem.timeused.Contains(temptime.ToString()) || clsitem.timeused.Contains(temptime.ToString()))
                         {
-                            temptime = rd2.Next(1, 26);
+                            temptime = 25-i;
                         }
                         else
                         {
@@ -308,9 +461,9 @@ namespace graduate.Controllers
                         }
                     }
                     t0.time = temptime;
-                    clsroomitem.timeUsed += t0.time.ToString() + ",";
-                    teachertimeitem.timeused += t0.time.ToString() + ",";
-                    clsitem.timeused += t0.time.ToString() + ",";
+                    clsroomitem.timeUsed += temptime.ToString() + ",";
+                    teachertimeitem.timeused += temptime.ToString() + ",";
+                    clsitem.timeused += temptime.ToString() + ",";
                     db.schedule.Add(t0);
                 }
             }
