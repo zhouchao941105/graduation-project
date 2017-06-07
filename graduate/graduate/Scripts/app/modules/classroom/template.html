@@ -8,8 +8,8 @@
         <div class="list-searchBox fr">
             <!--搜索框 列表页用长搜索框，增加样式 long； 弹框页用短搜索框，增加样式 short {-->
             <div class="search-box">
-                <input class="search-text long" placeholder="请输入班级编号或名称搜索" type="text" ng-model="searchKey" ng-keyup="onSearchKeyPress($event)">
-                <button type="submit" class="search-submit" title="班级编号或名称" ng-click="searchClassList()"></button>
+                <input class="search-text long" placeholder="请输入教室名称搜索" type="text" ng-model="searchKey" ng-keyup="onSearchKeyPress($event)">
+                <button type="submit" class="search-submit" title="教室名称" ng-click="searchClassList()"></button>
             </div>
             <!--} 搜索框-->
         </div>
@@ -23,7 +23,7 @@
             <tr>
                 <th>教室名称</th>
                 <th>教室容量</th>
-                <th>已占用时段</th>
+                <!--<th>已占用时段</th>-->
                 <th>教室类型</th>
                 <th>操作</th>
             </tr>
@@ -35,7 +35,7 @@
             <tr class="ListDate" ng-repeat="item in list" ng-click="getClassDetails(item.classId,item.isOverClass == 1)" ng-show="list.length != 0">
                 <td ><div style="max-width:150px;"  class="t_overflow">{{item.classroomName}}</div></td>
                 <td ><div style="max-width:150px;"  class="t_overflow">{{item.capacity}}</div></td>
-                <td ><div style="max-width:150px;"  class="t_overflow">{{item.timeUsed}}</div></td>
+                <!--<td ><div style="max-width:150px;"  class="t_overflow">{{item.timeUsed}}</div></td>-->
                 <td ><div style="max-width:150px;"  class="t_overflow">{{item.type}}</div></td>
                 <td>
                     <button  class="listDate-link" ng-click="editClassroom(item.classroomId)" >编辑</button>
@@ -49,7 +49,7 @@
 </div>
 
 <!--新增班级 弹框开始-->
-<add-room show-p="showClassroom" all-info="list" call-back="init()"></add-room>
+<add-room show-p="showClassroom" all-info="list" call-back="init()" search-key="searchKey"></add-room>
 <!--新增班级 弹窗结束-->
 <!--<upload-eas show-upload="showUpload" excel-url="excelUrl" upload-type="uploadType" callback="callback()"></upload-eas>-->
 

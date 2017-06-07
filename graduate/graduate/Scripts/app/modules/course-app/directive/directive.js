@@ -7,7 +7,8 @@ define(['angular', 'services/dialogService'], function (angular) {
                 scope: {
                     showCourse: "=",
                     callBack: '&',
-                    allInfo:'='
+                    allInfo:'=',
+                    searchKey:'='
                 },
                 templateUrl: "modules/course-app/directive/directive.html",
                 link: function ($scope) {
@@ -23,6 +24,7 @@ define(['angular', 'services/dialogService'], function (angular) {
                     $scope.cancel = function () {
                         $scope.showCourse = false;
                         $scope.info = {};
+                            $scope.searchKey='';
                         $scope.currId=0;
                         $scope.callBack();
                     }
@@ -39,7 +41,8 @@ define(['angular', 'services/dialogService'], function (angular) {
                             gintDialog.success('Success!');
                             $scope.showCourse = false;
                             $scope.info = {};
-                            $scope.currId=0
+                            $scope.currId=0;
+                            $scope.searchKey='';
                             $scope.callBack();
                         })
                     }

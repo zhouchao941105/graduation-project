@@ -8,8 +8,8 @@
         <div class="list-searchBox fr">
             <!--搜索框 列表页用长搜索框，增加样式 long； 弹框页用短搜索框，增加样式 short {-->
             <div class="search-box">
-                <input class="search-text long" placeholder="请输入班级编号或名称搜索" type="text" ng-model="searchKey" ng-keyup="onSearchKeyPress($event)">
-                <button type="submit" class="search-submit" title="班级编号或名称" ng-click="searchClassList()"></button>
+                <input class="search-text long" placeholder="请输入教师名称搜索" type="text" ng-model="searchKey" ng-keyup="onSearchKeyPress($event)">
+                <button type="submit" class="search-submit" title="教师名称" ng-click="searchClassList()"></button>
             </div>
             <!--} 搜索框-->
         </div>
@@ -55,4 +55,4 @@
     <!--} 列表有数据 -->
 
 </div>
-<add-teacher show-teacher="showteacher" all-info="list" call-back="init()"></add-teacher>
+<add-teacher show-teacher="showteacher" all-info="list" call-back="init()" search-key="searchKey"></add-teacher>

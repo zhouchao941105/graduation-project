@@ -1,11 +1,11 @@
 ﻿<!-- 工具栏 begin {-->
 <div class="toolBar">
-    <div class="list-tabs" ng-init="schetype = 0" style="text-align: left">
+    <div class="list-tabs" ng-init="schetype = 0" style="text-align: left; ">
         <a  class="list-tab-item " ng-click="choosesche(0)" ng-class="{current:schetype == 0}">班级课表</a>
         <a  class="list-tab-item" ng-click="choosesche(1)" ng-class="{current:schetype == 1}">教室课表</a>
         <a  class="list-tab-item" ng-click="choosesche(2)" ng-class="{current:schetype == 2}">教师课表</a>
     </div>
-    <div style="text-align: left">
+    <div style="text-align: left;margin-top:30px;">
         <select-box ng-show="schetype==0" selected-data="classdata" select-list-data="classlist" select-filed="className" when-selected-action="selectedCourse0(data)"></select-box>
         <select-box ng-show="schetype==1" selected-data="classroomdata" select-list-data="classroomlist" select-filed="classroomName" when-selected-action="selectedCourse1(data)"></select-box>
         <select-box ng-show="schetype==2" selected-data="teacherdata" select-list-data="teacherlist" select-filed="teacherName" when-selected-action="selectedCourse2(data)"></select-box>

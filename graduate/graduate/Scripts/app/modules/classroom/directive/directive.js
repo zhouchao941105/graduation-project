@@ -11,7 +11,8 @@ define([
                     scope: {
                         showP: "=",
                         callBack: '&',
-                        allInfo:"="
+                        allInfo:"=",
+                        searchKey:'='
                     },
                     templateUrl: "modules/classroom/directive/directive.html",
                     link: function ($scope, element, attrs) {
@@ -27,6 +28,8 @@ define([
                             $scope.showP = false;
                             $scope.info={};
                             $scope.currId=0;
+                                $scope.searchKey=''
+                            
                             $scope.callBack();
                         }
                         $scope.confirm = function () {
@@ -41,6 +44,7 @@ define([
                                 $scope.showP = false;
                                 $scope.info={};
                                 $scope.currId=0;
+                                $scope.searchKey=''
                                 $scope.callBack();
                             })
                         }

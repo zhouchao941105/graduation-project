@@ -12,8 +12,8 @@
         <div class="list-searchBox fr">
             <!--搜索框 列表页用长搜索框，增加样式 long； 弹框页用短搜索框，增加样式 short {-->
             <div class="search-box">
-                <input class="search-text long" placeholder="请输入班级编号或名称搜索" type="text" ng-model="searchKey" ng-keyup="onSearchKeyPress($event)">
-                <button type="submit" class="search-submit" title="班级编号或名称" ng-click="searchClassList()"></button>
+                <input class="search-text long" placeholder="请输入班级名称搜索" type="text" ng-model="searchKey" ng-keyup="onSearchKeyPress($event)">
+                <button type="submit" class="search-submit" title="班级名称" ng-click="searchClassList()"></button>
             </div>
             <!--} 搜索框-->
         </div>
@@ -47,6 +47,6 @@
     <!--} 列表有数据 -->
 </div>
 <!--新增班级 弹框开始-->
-<add-class show-class-popup ="showClassPopup" all-info="list" call-back="init()"></add-class>
+<add-class show-class-popup ="showClassPopup" all-info="list" call-back="init()" search-key="searchKey"></add-class>
 <!--新增班级 弹窗结束-->
 

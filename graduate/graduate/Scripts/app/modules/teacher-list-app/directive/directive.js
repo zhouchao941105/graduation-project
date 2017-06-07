@@ -7,7 +7,8 @@ define(['angular', 'services/dialogService'], function (angular) {
                 scope: {
                     showTeacher: '=',
                     callBack: '&',
-                    allInfo:'='
+                    allInfo:'=',
+                    searchKey:'='
                 },
                 templateUrl: 'modules/teacher-list-app/directive/directive.html',
                 link: function ($scope) {
@@ -32,12 +33,14 @@ define(['angular', 'services/dialogService'], function (angular) {
                             $scope.showTeacher = false;
                             $scope.info = {}
                             $scope.currId=0;
+                            $scope.searchKey='';
                             $scope.callBack();
                         })
                     }
                     $scope.cancel = function () {
                         $scope.showTeacher = false;
                         $scope.info = {}
+                            $scope.searchKey='';
                         $scope.currId=0;
                         $scope.callBack();
                     }

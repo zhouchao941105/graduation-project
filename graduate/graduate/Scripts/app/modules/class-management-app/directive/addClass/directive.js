@@ -13,7 +13,8 @@ define(['angular',
                 scope: {
                     showClassPopup: '=',
                     callBack: '&',
-                    allInfo:"="
+                    allInfo:"=",
+                    searchKey:'='
                 },
                 templateUrl: 'modules/class-management-app/directive/addClass/template.html',
                 link: function ($scope, element, attrs) {
@@ -37,6 +38,7 @@ define(['angular',
                             $scope.showClassPopup = false;
                             $scope.info={};
                             $scope.currId=0;
+                            $scope.searchKey='';
                             $scope.callBack();
                         });
                     }
@@ -44,6 +46,8 @@ define(['angular',
                         $scope.info={};
                         $scope.showClassPopup = false;
                         $scope.currId=0;
+                            $scope.searchKey='';
+                        
                         $scope.callBack();
                     }
                 }

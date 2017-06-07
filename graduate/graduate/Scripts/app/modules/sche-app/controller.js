@@ -6,7 +6,7 @@ define([
     return angular.module('sche-controller', ["Dialog.services"])
         .controller('sche-ctrller', ['$scope', '$http', "gintDialog", "$timeout", "$q", function ($scope, $http, gintDialog, $timeout, $q) {
             function onClick(params) {
-                console.log(params);
+                console.log(params.value);
             };
             $scope.lineConfig = {
                 theme: 'default',
@@ -24,13 +24,13 @@ define([
                 //     data: ['最高气温', '最低气温']
                 // },
                 toolbox: {
-                    show: true,
+                    // show: true,
                     feature: {
-                        mark: { show: true },
-                        dataView: { show: true, readOnly: false },
-                        magicType: { show: true, type: ['line', 'bar'] },
-                        restore: { show: true },
-                        saveAsImage: { show: true }
+                        // mark: { show: true },
+                        // dataView: { show: true, readOnly: false },
+                        // magicType: { show: true, type: ['line', 'bar'] },
+                        // restore: { show: true },
+                        // saveAsImage: { show: true }
                     }
                 },
                 calculable: true,
@@ -56,8 +56,8 @@ define([
                             //     }
                             // }
                         },
-                        min: 7500,
-                        max: 7900
+                        min: 7000,
+                        max: 7800
                     }
                 ],
                 series: [
@@ -99,6 +99,7 @@ define([
             $scope.initschedule = function () {
                 $http.post('init').success(function (data) {
                     // $scope.datalist = data;
+                    gintDialog.success("第" + (9 - $scope.calcount) + "张课表生成成功！")
                     if ($scope.calcount > 0) {
                         $scope.getlist()
                     }
@@ -154,7 +155,7 @@ define([
                         })
                         item.map(function (t) {
                             if (t.courseId == v.courseId) {
-                                if (10 < Math.abs(t.time - v.time) < 16) {
+                                if (10 < Math.abs(t.time - v.time) < 15) {
                                     $scope.fitcount += 1
                                 } else {
                                     $scope.fitcount += 40
@@ -163,68 +164,121 @@ define([
                         })
                         // listmap.push(changeNum(v.courseId, 3) + ',' + changeNum(v.classId, 3) + ',' + changeNum(v.teacherId, 3) + ',' + changeNum(v.classroomId, 2) + ',' + changeNum(v.time, 2))
                     })
-                    console.log($scope.fitcount)
-                    sum += $scope.fitcount;
-                    count++
+                    // console.log($scope.fitcount)
+                    // sum += $scope.fitcount;
+                    // count++
                     $scope.fitArr.push($scope.fitcount);
                 })
                 console.log($scope.fitArr)
-                $scope.fitAvg.push(sum / count);
+                Array.min = function (array) { return Math.min.apply(Math, array); };
+                $scope.fitAvg.push(Array.min($scope.fitArr));
                 $scope.xA.push(++time)
-                $scope.lineOption.series[0].data = $scope.fitAvg
-                $scope.lineOption.xAxis[0].data = $scope.xA
+
                 // $scope.fitArr.map(function(v){
                 //     sum+=v;
                 // })
+                // "均值:" + sum / count + ' ' +
+                console.log("代数：" + time);
+                if ($scope.mixCount !== undefined) {
+                    $scope.mixCount--;
+                    if ($scope.mixCount > 0) {
+                        console.log(++calcultime)
+                        $scope.mix();
+                    } else {
+                        $scope.lineOption.series[0].data = $scope.fitAvg
+                        $scope.lineOption.xAxis[0].data = $scope.xA
+                    }
+                } else {
+                    $scope.lineOption.series[0].data = $scope.fitAvg
+                    $scope.lineOption.xAxis[0].data = $scope.xA
+                }
 
-                console.log("均值:" + sum / count);
+                // return false
             }
+            var calcultime = 0;
             //检测是否冲突并解决
             $scope.errtest = function (testArr, idx) {
                 var defer = $q.defer();
                 var promise = defer.promise;
                 // var flg = false;
                 promise.then(function () {
+                    var flg = false;
+                    var tempflg = false;
                     for (var v = 0; v < testArr.length; v++) {
                         for (var k = 0; k < testArr.length; k++) {
                             if (testArr[v].scheduleId != testArr[k].scheduleId && testArr[v].time == testArr[k].time) {
                                 if (testArr[v].teacherId == testArr[k].teacherId || testArr[v].classroomId == testArr[k].classroomId) {
-                                    testArr[k].time = testArr[k].time + Math.ceil(Math.random() * 5);
+                                    if(k&2==0){
+                                        testArr[k].time = testArr[k].time + Math.ceil(Math.random() * 5);
+                                    }else{
+                                        testArr[k].time = testArr[k].time - Math.ceil(Math.random() * 5);                                        
+                                    }
                                     if (testArr[k].time > 25) {
                                         testArr[k].time = testArr[k].time - 25
+                                    }else if(testArr[k].time<0){
+                                        testArr[k].time = testArr[k].time + 25
                                     }
                                     $scope.errtest(testArr, idx);
-                                    
-                                    // flg = true;
+                                    testArr.state = 'wrong'
+                                    tempflg = true;
+                                    break;
                                 }
                             }
                         }
-                    }
-                    // if (flg) {
-                        // $scope.tii++;                        
-                    // } else 
-                    if (idx == scheArr.length - 1) {
-                        $scope.calcul();
-                        // $scope.mixCount--;
-                        // if ($scope.mixCount > 0) {
-                        //     $scope.mix();
+                        // if ( tempflg == false) {
                         // }
+                        if (v == testArr.length - 1 && tempflg == false) {
+                            testArr.state = 'fixed'
+
+                            if ($scope.scheN < 3) {
+                                $scope.scheN++
+                                $scope.errtest($scope.rangeArr[$scope.scheN], $scope.scheN)
+                            }
+                        }
+
                     }
+                    // testArr.state="fixed";                    
+                    for (var y = 0; y < $scope.rangeArr.length; y++) {
+                        if ($scope.rangeArr[y].state != "fixed") {
+                            flg = true;
+                        }
+                    }
+
+                    if (flg == false && idx == $scope.rangeArr.length - 1) {
+                        $scope.alwayszero++;
+                        if ($scope.alwayszero == 1) {
+                            $scope.calcul()
+                        }
+                    }
+                    $scope.tii++;                        
                 })
 
                 defer.resolve();
             }
+            $scope.tii=0;
+            $scope.mixcu=0;
             $scope.testfun = function () {
-                $scope.tii = 0
-                scheArr.map(function (item, idx) {
-                    // $timeout($scope.errtest(item), 10000)
-                    $scope.errtest(item, idx)
-                })
+                // $scope.rangeArr.map(function (item, idx) {
+                // console.log(idx)
+                // if(idx>3){
+                //     debugger
+                // }
+                // $scope.errtest(item, idx)
+                
+                // if(idx==scheArr.length-1&&$scope.calflg==false){
+                //     debugger
+                //     $scope.calcul();
+                // }
+                // $scope.$on('needcal',function(){alert(1)})
+
+                // })
             }
 
             //交叉&变异操作   
             $scope.mix = function () {
-                var rangeArr = [];
+                $scope.mixcu++;
+                $scope.alwayszero = 0;
+                $scope.rangeArr = new Array();
                 $scope.fitArr.map(function (v, idx) {
                     var tempcount = 0;
                     var equalcount = 0;
@@ -237,42 +291,46 @@ define([
                         }
                     })
                     if (tempcount + equalcount <= 4) {
-                        rangeArr.push(scheArr[idx])
+                        $scope.rangeArr.push(scheArr[idx])
+                        console.log('位置：' + idx)
                     }
                     if (tempcount < 4 && tempcount + equalcount > 4) {
-                        rangeArr.push(scheArr[idx])
+                        $scope.rangeArr.push(scheArr[idx])
+                        console.log('位置：' + idx)
                     }
                 })
-                rangeArr.slice(0, 3);
+                $scope.rangeArr.slice(0, 3);
                 var len = scheArr[0].length;
                 var temp = 0;
                 for (var ti = 0; ti < 3; ti += 2) {
                     for (var i = 0; i < len; i++) {
                         var r0 = Math.random()
                         var r1 = Math.random();
-                        if (r0 > 0.5) {
-                            temp = rangeArr[ti][i].time;
-                            rangeArr[ti][i].time = rangeArr[ti + 1][i].time;
-                            rangeArr[ti + 1][i].time = temp;
+                        if (r0 > 0.3) {
+                            temp = $scope.rangeArr[ti][i].time;
+                            $scope.rangeArr[ti][i].time = $scope.rangeArr[ti + 1][i].time;
+                            $scope.rangeArr[ti + 1][i].time = temp;
                         }
                         if (r1 > 0.9) {
-                            rangeArr[ti][i].time = rangeArr[ti][i].time + Math.ceil(Math.random() * 5);
-                            rangeArr[ti + 1][i].time = rangeArr[ti + 1][i].time + Math.ceil(Math.random() * 5);
-                            if (rangeArr[ti][i].time > 25) {
-                                rangeArr[ti][i].time = rangeArr[ti][i].time - 25
+                            $scope.rangeArr[ti][i].time = $scope.rangeArr[ti][i].time - Math.ceil(Math.random() * 5);
+                            $scope.rangeArr[ti + 1][i].time = $scope.rangeArr[ti + 1][i].time - Math.ceil(Math.random() * 5);
+                            if ($scope.rangeArr[ti][i].time < 0) {
+                                $scope.rangeArr[ti][i].time = $scope.rangeArr[ti][i].time + 25
                             }
-                            if (rangeArr[ti + 1][i].time > 25) {
-                                rangeArr[ti + 1][i].time = rangeArr[ti + 1][i].time - 25
+                            if ($scope.rangeArr[ti + 1][i].time < 0) {
+                                $scope.rangeArr[ti + 1][i].time = $scope.rangeArr[ti + 1][i].time + 25
                             }
                             // rangeArr[ti][i].time = rangeArr[ti][i].time % 25;
                             // rangeArr[ti + 1][i].time = rangeArr[ti + 1][i].time % 25;
                         }
                     }
                 }
-                $scope.testfun()
+                // $scope.testfun()
+                $scope.scheN = 0
+                $scope.errtest($scope.rangeArr[$scope.scheN], $scope.scheN)
             }
             $scope.mix2 = function () {
-                $scope.mixCount = 500;
+                $scope.mixCount = 50;
                 $scope.mix();
             }
             // 得到最优解，将课表输出
