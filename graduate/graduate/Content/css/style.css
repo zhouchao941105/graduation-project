@@ -50,7 +50,7 @@ input,button,textarea{border: 0;outline: none; font-size:12px; font-family: "Mic
 /*} basic css end */
 
 .body-template{min-width: 1200px;}
-.body-layout{padding-top: 80px;}
+.body-layout{padding-top: 55px;}
 .header-fixed,.crumbsBar-fixed{position: fixed; right: 0; left: 0; padding-left: 20px; padding-right: 20px;}
 .header-fixed{top: 0; height: 50px; background-color: #4a546c; z-index: 10;}
 .header-left{float: left; width: 200px;}
@@ -98,7 +98,7 @@ input,button,textarea{border: 0;outline: none; font-size:12px; font-family: "Mic
 .filter-btnBox{padding: 20px 0; font-size: 0;}
 .filter-btnBox button{margin-left: 20px;}
 .list-tabs{ font-size: 0; border-bottom: #e8eaf1 1px solid;}
-.list-tab-item{display: inline-block; min-width:110px; padding: 0 10px; height:60px; line-height: 60px; text-align: center; border-right:#e8eaf1 1px solid; color:#a4a4a4; font-size: 14px; cursor: pointer;}
+.list-tab-item{display: inline-block; min-width:110px; padding: 0 10px; height:40px; line-height: 40px; text-align: center; border-right:#e8eaf1 1px solid; color:#a4a4a4; font-size: 14px; cursor: pointer;}
 .list-tab-item:hover{background-color: #f3f4f9; color:#57678d;}
 .list-tab-item.current{background-color: #57678d; color:#fff;}
 .form-box{border:#e8eaf1 solid; border-width:1px 0; padding-top: 15px; font-size:0;}
@@ -170,5 +170,5 @@ strong.form-name{padding-left: 10px;}
 .guide-content  .normal-btn{width:124px;}
 
 /*} 首页 */
-.fc-day-header{width: 150px;height: 32px; text-align: center;}
-.fc-widget-content{width: 150px;height: 130px; border: 1px solid #333; text-align: center;}
+.fc-day-header{width: 120px;height: 32px; text-align: center;}
+.fc-widget-content{width: 120px;height: 90px; border: 1px solid #333; text-align: center;}

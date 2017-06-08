@@ -453,7 +453,7 @@ namespace graduate.Controllers
                     {
                         if (clsroomitem.timeUsed.Contains(temptime.ToString()) || teachertimeitem.timeused.Contains(temptime.ToString()) || clsitem.timeused.Contains(temptime.ToString()))
                         {
-                            temptime = 25-i;
+                            temptime = rd2.Next(1, 26);
                         }
                         else
                         {

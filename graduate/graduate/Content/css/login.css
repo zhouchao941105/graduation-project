@@ -4,7 +4,7 @@
 html,body,div,dl,dt,dd,span,h1,form,label,input,button,img{margin:0;padding:0;border:0;}
 input,textarea,button{outline:none; font-family:Arial, "Microsoft Yahei"; font-size:12px;}
 body{font-family:Arial, "Microsoft Yahei"; font-size:12px; text-align:center}
-.LoginBg{width:100%; height:100%; min-width:840px; min-height:620px; position:absolute; z-index:-1; top:0; left:0; background:no-repeat center top; -webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover;}/*关于背景：支持css3属性的浏览器显示为100%平铺效果；ie8则顶部对齐居中，只显示原图大小*/
+.LoginBg{width:100%; height:100%; min-width:840px; min-height:620px; position:absolute; z-index:-1; top:0; left:0; background:url(../images/bg_login.jpg) no-repeat center top; -webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover;}/*关于背景：支持css3属性的浏览器显示为100%平铺效果；ie8则顶部对齐居中，只显示原图大小*/
 .footer{position:absolute; width:840px; bottom:0; left:50%; margin-left:-420px; height:37px; color:#ddd;}
 .LoginOuter{width:840px; margin:0 auto;}
 .LoginInner{margin:180px 0 0 600px; width:240px; padding:30px 0 30px; position:relative; -moz-box-shadow:0px 3px 6px rgba(0,0,0,.5); -webkit-box-shadow:0px 3px 6px rgba(0,0,0,.5); box-shadow:0px 3px 6px rgba(0,0,0,.5); background:#fff;}

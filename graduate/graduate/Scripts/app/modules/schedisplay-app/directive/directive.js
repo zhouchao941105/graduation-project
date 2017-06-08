@@ -19,7 +19,7 @@
                     $($('.sche-tr')[line].children).eq(row).css('background-color',colorarr[n]).html(innertext);
                     n++;
                     if(n>5){
-                        n-=5;
+                        n=n-5;
                     }
 
                 })
