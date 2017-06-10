@@ -20,7 +20,7 @@ input,button,textarea{border: 0;outline: none; font-size:12px; font-family: "Mic
 .clearFix:after{clear: both;}
 .fl{float: left;}
 .fr{float: right;}
-.face-radius{border-radius:50%;}
+.face-radius{border-radius:50%; background:url(../images/icon11.png) center center}
 .search-text,.list-pageBox a,.small-btn{border-radius:3px;}
 
 /*模拟 滚动条 begin {*/

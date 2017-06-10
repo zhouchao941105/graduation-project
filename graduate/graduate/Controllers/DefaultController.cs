@@ -216,6 +216,14 @@ namespace graduate.Controllers
             db.teacher.Attach(del);
             db.teacher.Remove(del);
             db.SaveChanges();
+            //var sql = from d in db.teacher where d.teacherId == id select d;
+            //var one = sql.ToList().FirstOrDefault();
+            //var sql2 = from d in db.user where d.userName == one.teacherName select d;
+            //var uid = sql2.ToList().FirstOrDefault();
+            //user i = new user() { userId = uid.userId };
+            //db.user.Attach(i);
+            //db.user.Remove(i);
+            db.SaveChanges();
             return Json(new object());
         }
         //初始化

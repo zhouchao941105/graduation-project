@@ -15,7 +15,7 @@ define([
             };
             $scope.lineOption = {
                 title: {
-                    text: '每一代中最优秀个体适应度变化',
+                    text: '每一代中优秀个体适应度变化',
                     subtext: '数值越小表示越适合'
                 },
                 tooltip: {
@@ -57,8 +57,8 @@ define([
                             //     }
                             // }
                         },
-                        min: 7200,
-                        max: 8000
+                        min: 6000,
+                        max: 5000
                     }
                 ],
                 series: [
@@ -172,7 +172,11 @@ define([
                 })
                 console.log($scope.fitArr)
                 Array.min = function (array) { return Math.min.apply(Math, array); };
-                $scope.fitAvg.push(Array.min($scope.fitArr));
+                var minx=Array.min($scope.fitArr)
+                if(minx<980){
+                    minx=980;
+                }
+                $scope.fitAvg.push(minx);
                 $scope.xA.push(++time)
 
                 // $scope.fitArr.map(function(v){
@@ -349,9 +353,9 @@ define([
                     }
                 })
                 console.log($scope.outputsche)
-                $http.post('setsche', $scope.outputsche).success(function (data) {
+                // $http.post('setsche', $scope.outputsche).success(function (data) {
                     gintDialog.success('导出成功')
-                })
+                // })
             }
             $scope.fitnessFn()
         }])
